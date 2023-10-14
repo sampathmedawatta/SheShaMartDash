@@ -2,7 +2,7 @@
 import axios from "axios";
 
 const axiosInstance = axios.create({
-  baseURL: "",
+  baseURL: "http://136.186.108.239:4001",
   withCredentials: false, // Allow cookies to be sent with requests (if applicable)
 });
 
