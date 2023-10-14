@@ -5,11 +5,14 @@ import { BrowserRouter } from "react-router-dom";
 import './index.css';
 import App from './App';
 import reportWebVitals from './reportWebVitals';
+import { ContextProvider } from './context/context';
 
 ReactDOM.render(
+  <ContextProvider>
   <BrowserRouter>
     <App />
-  </BrowserRouter>,
+  </BrowserRouter>
+  </ContextProvider>,
   document.getElementById('root')
 );
 

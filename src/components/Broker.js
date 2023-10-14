@@ -1,10 +1,15 @@
-import React, { useState, useEffect, useRef } from "react";
+import React, { useState, useEffect, useRef, useContext } from "react";
 import BrokerService from "../services/broker.service";
+import Grid from "./UI/Grid/Table";
+import { Context } from "../context/context";
 
 const Broker = () => {
   const registerBroker = useState([]);
 
   const [rewardAmount, setRewardAmount] = useState("");
+  const [registeredBrokers, setRegisteredBrokers] = useState(null);
+  const { setBroks } = useContext(Context);
+
   const handleRewardAmountChange = (event) => {
     setRewardAmount(event.target.value);
     console.log("value is:", event.target.value);
@@ -38,11 +43,14 @@ const Broker = () => {
     console.log(registerBroker);
   };
 
-  const getBrokers = () => {
-   const registeredBrokers = BrokerService.getBrokers();
-    console.log(registeredBrokers);
+  const getBrokers = async () => {
+    const getList = BrokerService.getBrokers();
+    if(getList !== null){
+      setRegisteredBrokers(getList);
+      setBroks(getList);
+    }
   };
-
+  console.log(registeredBrokers);
   //const registeredBrokers = useState([]);
 
   // useEffect(() => {
@@ -53,6 +61,7 @@ const Broker = () => {
   // }, []);
 
   return (
+    <div>
     <div className="container">
       <header className="jumbotron">
         <h3>Broker</h3>
@@ -118,6 +127,8 @@ const Broker = () => {
           </div>
         </div>
       </div>
+    </div>
+    {registeredBrokers !== null && <Grid brokerList={registeredBrokers}/>}
     </div>
   );
 };

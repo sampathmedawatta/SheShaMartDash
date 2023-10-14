@@ -1,4 +1,4 @@
-import React, { useState, useEffect } from "react";
+import React, { useState, useEffect, useContext } from "react";
 import { Routes, Route, Link } from "react-router-dom";
 import "bootstrap/dist/css/bootstrap.min.css";
 import "./App.css";
@@ -12,10 +12,14 @@ import User from "./components/User";
 import Broker from "./components/Broker";
 import Sensor from "./components/Sensor";
 import EventBus from "./common/EventBus";
+import BrokerDetails from "./components/BrokerDetails";
+import { Context } from "./context/context";
+import Yasg from "./components/Yasg";
 
 const App = () => {
   
   const [currentUser, setCurrentUser] = useState(undefined);
+  const { broks } = useContext(Context);
 
   useEffect(() => {
     const user = AuthService.getCurrentUser();
@@ -50,7 +54,6 @@ const App = () => {
               Home
             </Link>
           </li>
-
           <li className="nav-item">
             <Link to={"/user"} className="nav-link">
               User
@@ -64,6 +67,11 @@ const App = () => {
           <li className="nav-item">
             <Link to={"/sensor"} className="nav-link">
               Sensor
+            </Link>
+          </li>
+          <li className="nav-item">
+            <Link to={"/query"} className="nav-link">
+              Yash
             </Link>
           </li>
         </div>
@@ -101,6 +109,11 @@ const App = () => {
           <Route exact path="/user" element={<User />} />
           <Route exact path="/broker" element={<Broker />} />
           <Route exact path="/sensor" element={<Sensor />} />
+          <Route exact path="/query" element={<Yasg />} />
+          <Route
+            path="/BrokerDetails/:id"
+            element={<BrokerDetails data={broks} />}
+          />
         </Routes>
       </div>
     </div>
