@@ -51,14 +51,6 @@ const Broker = () => {
     }
   };
   console.log(registeredBrokers);
-  //const registeredBrokers = useState([]);
-
-  // useEffect(() => {
-  //   async function fetchData() {
-  //     registeredBrokers = BrokerService.getBrokers();
-  //   }
-  //   fetchData();
-  // }, []);
 
   return (
     <div>

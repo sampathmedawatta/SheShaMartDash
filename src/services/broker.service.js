@@ -7,14 +7,15 @@ const headers = {
 };
 
 const getBrokers = () => {
-
-      // return axios
-      //   .get("/Brokers", {
-      //     headers,
-      //   })
-      //   .then((response) => {
-      //     return response.data;
-      //   });
+    // return axios
+    //     .get("/Brokers")
+    //     .then((response) => {
+    //     return response.data;
+    //     })
+    //     .catch((error) => {
+    //     console.error(error);
+    //     });
+    // };
       return {
         "broker1": {
             "input": "045ffacf3070fd25c2b848300cfbf09fe793f1a5e312da1b2d15eca3fab844684f6c1543ff793eefbc1e2bb8418d2e907f73af54360d433ad57e2c86df95a77a15",
@@ -154,15 +155,11 @@ const getBrokers = () => {
     }
 };
 
-const registerBroker = (parms) => {
-  // return axios
-  //   .post("/BrokerRegistration", parms, {
-  //     headers,
-  //   })
-  //   .then((response) => {
-  //     return response.data;
-  //   });
-  
+const registerBroker = (params) => {
+  return axios.post("/BrokerRegistration", params).then((response) => {
+    console.log(params);
+    return response.data;
+  });
 };
 
 const BrokerService = {

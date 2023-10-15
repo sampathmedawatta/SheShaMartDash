@@ -5,13 +5,15 @@ const headers = {
   //Authorization: "Bearer your-access-token", // Add any custom headers as needed
 };
 const getSensors = () => {
-  // return axios
-  //   .get("/Sensors", {
-  //     headers,
-  //   })
-  //   .then((response) => {
-  //     return response.data;
-  //   });
+    //  return axios
+    //     .get("/Sensors")
+    //     .then((response) => {
+    //       return response.data;
+    //     })
+    //     .catch((error) => {
+    //       console.error(error);
+    //     });
+    // };
   return {
     "Temperature Sensor 1": {
         "input": "045ffacf3070fd25c2b848300cfbf09fe793f1a5e312da1b2d15eca3fab844684f6c1543ff793eefbc1e2bb8418d2e907f73af54360d433ad57e2c86df95a77a15",
@@ -429,22 +431,18 @@ const getSensors = () => {
 }
 };
 
-const parms = {
-  rewardAmount: 0,
-  sensorName: "TDP Sensor with meta",
-  costPerMinute: 1,
-  costPerKB: 2,
-  integrationBroker: "broker1",
-};
+// const parms = {
+//   rewardAmount: 0,
+//   sensorName: "TDP Sensor with meta",
+//   costPerMinute: 1,
+//   costPerKB: 2,
+//   integrationBroker: "broker1",
+// };
 
-const registerSensor = () => {
-  // return axios
-  //   .post("/SensorRegistration", parms, {
-  //     headers,
-  //   })
-  //   .then((response) => {
-  //     return response.data;
-  //   });
+const registerSensor = (parms) => {
+  return axios.post("/sensorRegistration", parms).then((response) => {
+    return response.data;
+  });
 };
 
 const SensorService = {
