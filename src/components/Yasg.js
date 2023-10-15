@@ -16,7 +16,7 @@ const Yasg = () => {
       const yasgui = new Yasgui(document.getElementById("yasgui"), {
         requestConfig: { endpoint: "http://136.186.108.239:4001/sparql" },
 
-        copyEndpointOnNewTab: false,
+        copyEndpointOnNewTab: true,
       });
 
       // Add an event listener to capture the query and print it to the console

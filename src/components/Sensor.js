@@ -59,14 +59,6 @@ const Sensor = () => {
     console.log(registeredSensors);
   };
 
-  //const registeredBrokers = useState([]);
-  // useEffect(() => {
-  //   async function fetchData() {
-  //     registeredBrokers = BrokerService.getSensors();
-  //   }
-  //   fetchData();
-  // }, []);
-
   return (
     <div className="container">
       <header className="jumbotron">
