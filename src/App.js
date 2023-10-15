@@ -7,7 +7,7 @@ import "./App.css";
 import Sidebar from "./components/UI/Sidebar";
 import Home from "./components/Home";
 import Broker from "./components/Broker";
-import Sensor from "./components/Sensor";
+import Provider from "./components/Provider";
 import EventBus from "./common/EventBus";
 import BrokerDetails from "./components/BrokerDetails";
 import { Context } from "./context/context";
@@ -57,7 +57,7 @@ const App = () => {
               <Route exact path={"/"} element={<Home />} />
               <Route exact path={"/home"} element={<Home />} />
               <Route exact path="/broker" element={<Broker />} />
-              <Route exact path="/provider" element={<Sensor />} />
+              <Route exact path="/provider" element={<Provider />} />
               <Route exact path="/client" element={<Client />} />
               <Route
                 path="/BrokerDetails/:id"
