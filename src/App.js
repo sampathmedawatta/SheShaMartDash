@@ -9,13 +9,16 @@ import Home from "./components/Home";
 import Broker from "./components/Broker";
 import Provider from "./components/Provider";
 import EventBus from "./common/EventBus";
+import BrokerList from "./components/BrokerList";
 import BrokerDetails from "./components/BrokerDetails";
+import Sensor from "./components/Sensor";
+import SensorList from "./components/SensorList";
 import { Context } from "./context/context";
 import Client from "./components/Client";
 
 const App = () => {
   const [currentUser, setCurrentUser] = useState(undefined);
-  const { broks } = useContext(Context);
+  const { broks, sensors } = useContext(Context);
 
   return (
     <div>
@@ -45,6 +48,11 @@ const App = () => {
                       </Link>
                     </li>
                     <li className="nav-item">
+                      <Link to={"/sensor"} className="nav-link">
+                        Sensor
+                      </Link>
+                    </li>
+                    <li className="nav-item">
                       <Link to={"/client"} className="nav-link">
                         Client
                       </Link>
@@ -58,11 +66,15 @@ const App = () => {
               <Route exact path={"/home"} element={<Home />} />
               <Route exact path="/broker" element={<Broker />} />
               <Route exact path="/provider" element={<Provider />} />
+              <Route exact path="/sensor" element={<Sensor />} />
+
               <Route exact path="/client" element={<Client />} />
               <Route
                 path="/BrokerDetails/:id"
                 element={<BrokerDetails data={broks} />}
               />
+              <Route path="/brokerList" element={<BrokerList />} />
+              <Route path="/sensorList" element={<SensorList />} />
             </Routes>
           </div>
         </div>
