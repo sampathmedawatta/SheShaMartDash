@@ -2,6 +2,7 @@ import React, { useState, useEffect, useRef, useContext } from "react";
 import BrokerService from "../services/broker.service";
 import Grid from "./UI/Grid/Table";
 import { Context } from "../context/context";
+import { Link } from "react-router-dom";
 
 const Broker = () => {
   const registerBroker = useState([]);
@@ -61,12 +62,15 @@ const Broker = () => {
           </div>
           <div className="col-4 my-3">
             <div className="form-group">
-              <button
+              <Link className="btn btn-primary btn-block" to={`/brokerList`}>
+                Get Broker List
+              </Link>
+              {/* <button
                 className="btn btn-primary btn-block"
                 onClick={getBrokers}
               >
                 Get Broker List
-              </button>
+              </button> */}
             </div>
           </div>
         </div>
