@@ -1,4 +1,4 @@
-import React, { useState, useContext } from "react";
+import React, { useState, useEffect, useContext } from "react";
 import SensorService from "../services/sensor.service";
 import { Context } from "../context/context";
 import Grid from "./UI/Grid/TableSensor";
@@ -6,6 +6,17 @@ import Grid from "./UI/Grid/TableSensor";
 function SensorList() {
   const { setSensors } = useContext(Context);
   const [registeredSensors, setRegisteredSensors] = useState(null);
+
+  useEffect(() => {
+    async function fetchData() {
+      const registeredSensors = SensorService.getSensors();
+      if (registeredSensors !== null) {
+        setRegisteredSensors(registeredSensors);
+        setSensors(registeredSensors);
+      }
+    }
+    fetchData();
+  }, []);
 
   const getSensors = () => {
     const registeredSensors = SensorService.getSensors();
@@ -19,7 +30,6 @@ function SensorList() {
   };
 
   return (
-   
     <div className="container-fluid">
       <div className="row">
         <div className="col-8 my-3">
@@ -27,9 +37,9 @@ function SensorList() {
         </div>
         <div className="col-4 my-3">
           <div className="form-group">
-            <button className="btn btn-primary btn-block" onClick={getSensors}>
+            {/* <button className="btn btn-primary btn-block" onClick={getSensors}>
               Get Sensor List
-            </button>
+            </button> */}
           </div>
         </div>
 
