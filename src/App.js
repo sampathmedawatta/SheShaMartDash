@@ -1,64 +1,71 @@
 import React, { useState, useEffect, useContext } from "react";
 import { Routes, Route, Link } from "react-router-dom";
 import "bootstrap/dist/css/bootstrap.min.css";
+import "bootstrap-icons/font/bootstrap-icons.css";
 import "./App.css";
 
+import Sidebar from "./components/UI/Sidebar";
 import Home from "./components/Home";
 import Broker from "./components/Broker";
 import Sensor from "./components/Sensor";
 import EventBus from "./common/EventBus";
 import BrokerDetails from "./components/BrokerDetails";
 import { Context } from "./context/context";
-import Yasg from "./components/Yasg";
+import Client from "./components/Client";
 
 const App = () => {
-  
   const [currentUser, setCurrentUser] = useState(undefined);
   const { broks } = useContext(Context);
 
   return (
     <div>
-      <nav className="navbar navbar-expand navbar-dark bg-dark">
-        <Link to={"/"} className="navbar-brand">
-          LOGO
-        </Link>
-        <div className="navbar-nav mr-auto">
-          <li className="nav-item">
-            <Link to={"/home"} className="nav-link">
-              Home
-            </Link>
-          </li>
-          <li className="nav-item">
-            <Link to={"/broker"} className="nav-link">
-              Broker
-            </Link>
-          </li>
-          <li className="nav-item">
-            <Link to={"/sensor"} className="nav-link">
-              Sensor
-            </Link>
-          </li>
-          <li className="nav-item">
-            <Link to={"/query"} className="nav-link">
-              Yash
-            </Link>
-          </li>
+      <div className="container-fluid bg-color min-vh-100">
+        <div className="row">
+          <div className="col-2 sidebar vh-100">
+            <Sidebar />
+          </div>
+          <div className="col-10">
+            <div className="row">
+              <div className="col-12">
+                <nav className="navbar navbar-expand navbar-white bg-white">
+                  <div className="navbar-nav mr-auto">
+                    <li className="nav-item">
+                      <Link to={"/home"} className="nav-link">
+                        Home
+                      </Link>
+                    </li>
+                    <li className="nav-item">
+                      <Link to={"/broker"} className="nav-link">
+                        Broker
+                      </Link>
+                    </li>
+                    <li className="nav-item">
+                      <Link to={"/provider"} className="nav-link">
+                        Provider
+                      </Link>
+                    </li>
+                    <li className="nav-item">
+                      <Link to={"/client"} className="nav-link">
+                        Client
+                      </Link>
+                    </li>
+                  </div>
+                </nav>
+              </div>
+            </div>
+            <Routes>
+              <Route exact path={"/"} element={<Home />} />
+              <Route exact path={"/home"} element={<Home />} />
+              <Route exact path="/broker" element={<Broker />} />
+              <Route exact path="/provider" element={<Sensor />} />
+              <Route exact path="/client" element={<Client />} />
+              <Route
+                path="/BrokerDetails/:id"
+                element={<BrokerDetails data={broks} />}
+              />
+            </Routes>
+          </div>
         </div>
-
-      </nav>
-
-      <div className="container mt-3">
-        <Routes>
-          <Route exact path={"/"} element={<Home />} />
-          <Route exact path={"/home"} element={<Home />} />
-          <Route exact path="/broker" element={<Broker />} />
-          <Route exact path="/sensor" element={<Sensor />} />
-          <Route exact path="/query" element={<Yasg />} />
-          <Route
-            path="/BrokerDetails/:id"
-            element={<BrokerDetails data={broks} />}
-          />
-        </Routes>
       </div>
     </div>
   );

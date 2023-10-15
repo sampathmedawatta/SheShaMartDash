@@ -3,6 +3,9 @@ label {
   margin-top: 10px;
 }
 
+.bg-color {
+background-color: #e7f2ff;
+}
 .card-container.card {
   max-width: 350px !important;
   padding: 40px 40px;
@@ -29,4 +32,24 @@ label {
   -moz-border-radius: 50%;
   -webkit-border-radius: 50%;
   border-radius: 50%;
+}
+
+.sidebar{
+
+  background-color: #235165;
+}
+
+.list-group-item{
+  background-color: #235165;
+}
+
+.list-group a {
+  color: white;
+}
+
+.list-group a:hover{
+  background-color: #0b7fb0;
+color: white;
+cursor: pointer;
+text-decoration: none;
 }
