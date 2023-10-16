@@ -439,8 +439,19 @@ const getSensors = () => {
 //   integrationBroker: "broker1",
 // };
 
-const registerSensor = (parms) => {
-  return axios.post("/sensorRegistration", parms).then((response) => {
+const querySensor = (payload) => {
+
+    const params = {
+      query: payload,
+    };
+
+  return axios.post("/sparql", params).then((response) => {
+    return response.data;
+  });
+};
+
+const registerSensor = (params) => {
+  return axios.post("/sensorRegistration", params).then((response) => {
     return response.data;
   });
 };
@@ -448,6 +459,7 @@ const registerSensor = (parms) => {
 const SensorService = {
   getSensors,
   registerSensor,
+  querySensor,
 };
 
 export default SensorService;

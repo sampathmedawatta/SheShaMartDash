@@ -2,6 +2,8 @@ import React, { useEffect, useState, useContext } from "react";
 import Yasgui from "@triply/yasgui";
 import { Context } from "../context/context";
 import "@triply/yasgui/build/yasgui.min.css";
+import ProviderSubMenu from "../components/ProviderSubMenu";
+import SensorService from "../services/sensor.service";
 
 const SensorQuery = () => {
   const [showAlert, setShowAlert] = useState(false);
@@ -35,13 +37,9 @@ const SensorQuery = () => {
           setShowAlert(true);
         } else {
           inputQuery = instance.getValue();
-          console.log("query", instance.getValue());
-          const payload = {
-            query: inputQuery,
-          };
-          const queryPayload = JSON.stringify(payload);
-          console.log(queryPayload);
-          setJsonPayload(queryPayload)
+          const res = SensorService.querySensor(inputQuery);
+          
+          setJsonPayload(inputQuery)
           setShowAlert(false);
         }
       });
@@ -55,20 +53,25 @@ const SensorQuery = () => {
   }, []);
 
   return (
-    <div>
-      <div id="yasgui"></div>
-      <div id="result">
-        {showAlert ? (
-          <div className="alert alert-danger" role="alert">
-            SPARQL compiler Error. Please fix the SPARQL query!
+    <div className="container-fluid">
+      <ProviderSubMenu></ProviderSubMenu>
+      <div className="row">
+        <div className="col-12">
+          <div id="yasgui"></div>
+          <div id="result">
+            {showAlert ? (
+              <div className="alert alert-danger" role="alert">
+                SPARQL compiler Error. Please fix the SPARQL query!
+              </div>
+            ) : (
+              <div className="alert alert-success" role="alert">
+                <pre>{jsonPayload}</pre>
+              </div>
+            )}
+            {}
           </div>
-        ) : (
-          <div className="alert alert-success" role="alert">
-          <pre>{jsonPayload}</pre></div>
-        )}
-        {}
+        </div>
       </div>
-      
     </div>
   );
 };

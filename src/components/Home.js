@@ -9,7 +9,7 @@ const Home = () => {
           <Link to={"/provider"} className="nav-link">
             <div className="provider shadow-sm d-flex justify-content-around align-items-center">
               <h1 className="fs-2">Provider</h1>
-              <img class="icon-1" alt="" src="/icon-1.svg"></img>
+              <img className="icon-1" alt="" src="/icon-1.svg"></img>
             </div>
           </Link>
         </div>
@@ -17,7 +17,7 @@ const Home = () => {
           <Link to={"/broker"} className="nav-link">
             <div className="broker shadow-sm d-flex justify-content-around align-items-center">
               <h1 className="fs-2">Broker</h1>
-              <img class="icon-3" alt="" src="/icon-3.svg"></img>
+              <img className="icon-3" alt="" src="/icon-3.svg"></img>
             </div>
           </Link>
         </div>
@@ -25,7 +25,7 @@ const Home = () => {
           <Link to={"/client"} className="nav-link">
             <div className="client shadow-sm d-flex justify-content-around align-items-center">
               <h1 className="fs-2 white">Client</h1>
-              <img class="icon-4" alt="" src="/icon-4.svg"></img>
+              <img className="icon-4" alt="" src="/icon-4.svg"></img>
             </div>
           </Link>
         </div>
