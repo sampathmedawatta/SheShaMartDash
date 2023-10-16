@@ -2,6 +2,7 @@ import React, { useState, useEffect, useRef } from "react";
 import SensorService from "../services/sensor.service";
 import { Context } from "../context/context";
 import { Link } from "react-router-dom";
+import ProviderSubMenu from "../components/ProviderSubMenu";
 
 const Sensor = () => {
   const registerSensor = useState([]);
@@ -64,16 +65,17 @@ const Sensor = () => {
   return (
     <div>
       <div className="container-fluid">
+        <ProviderSubMenu></ProviderSubMenu>
         <div className="row">
           <div className="col-8 my-3">
             <h3>Sensor</h3>
           </div>
           <div className="col-4 my-3">
             <div className="form-group">
-              <Link className="btn btn-primary btn-block" to={`/sensorList`}>
+              {/*  <Link className="btn btn-primary btn-block" to={`/sensorList`}>
                 Get Sensor List
               </Link>
-              {/* <div className="form-group">
+             <div className="form-group">
                 <button
                   className="btn btn-primary btn-block"
                   onClick={getSensors}
