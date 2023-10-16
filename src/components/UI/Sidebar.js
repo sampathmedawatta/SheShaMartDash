@@ -2,7 +2,7 @@ function Sidebar() {
   return (
     <div className="sidebar p-2">
       <div className="m-2">
-        <span className="brand-name fs-5">SenShaMart Dashboard</span>
+        <span className="brand-name title fs-5">SenShaMart Dashboard</span>
       </div>
       <hr className="text-dark"></hr>
       <div className="list-group sidebar list-group-flush">
