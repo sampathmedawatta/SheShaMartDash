@@ -8,7 +8,48 @@ background-color: #e7f2ff;
 }
 .card-container.card {
   max-width: 350px !important;
-  padding: 40px 40px;
+  
+}
+
+.provider{
+  background-color: #74cb97;
+  color: white;
+  border-radius: 30px;
+  padding-bottom: 2rem;
+  padding-top: 2rem;
+}
+.provider a{
+  color: white;
+  font-size: 3.5rem;
+}
+
+.broker {
+  background-color: #47c4df;
+  color: white;
+  border-radius: 30px;
+  padding-bottom: 2rem;
+  padding-top: 2rem;
+}
+
+.broker a {
+  color: white;
+  font-size: 3.5rem;
+}
+
+.client{
+  background-color: #808fe1;
+  color: white;
+  border-radius: 30px;
+  padding-bottom: 2rem;
+  padding-top: 2rem;
+}
+.client a {
+  color: white;
+  font-size: 3.5rem;
+}
+
+.provider:hover, .broker:hover, .client:hover{
+  background-color: #ffd700;;
 }
 
 .card {
@@ -34,6 +75,10 @@ background-color: #e7f2ff;
   border-radius: 50%;
 }
 
+.title{
+  color: white;
+  font-size: 2.5rem;
+}
 .sidebar{
 
   background-color: #235165;
