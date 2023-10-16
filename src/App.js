@@ -12,6 +12,7 @@ import EventBus from "./common/EventBus";
 import BrokerList from "./components/BrokerList";
 import BrokerDetails from "./components/BrokerDetails";
 import Sensor from "./components/Sensor";
+import SensorQuery from "./components/SensorQuery";
 import SensorList from "./components/SensorList";
 import { Context } from "./context/context";
 import Client from "./components/Client";
@@ -53,6 +54,11 @@ const App = () => {
                       </Link>
                     </li>
                     <li className="nav-item">
+                      <Link to={"/sensorquery"} className="nav-link">
+                        Sensor Query
+                      </Link>
+                    </li>
+                    <li className="nav-item">
                       <Link to={"/client"} className="nav-link">
                         Client
                       </Link>
@@ -67,6 +73,7 @@ const App = () => {
               <Route exact path="/broker" element={<Broker />} />
               <Route exact path="/provider" element={<Provider />} />
               <Route exact path="/sensor" element={<Sensor />} />
+              <Route exact path="/sensorquery" element={<SensorQuery />} />
 
               <Route exact path="/client" element={<Client />} />
               <Route
