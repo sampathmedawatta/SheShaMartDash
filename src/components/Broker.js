@@ -3,6 +3,7 @@ import BrokerService from "../services/broker.service";
 import Grid from "./UI/Grid/Table";
 import { Context } from "../context/context";
 import { Link } from "react-router-dom";
+import BrokerSubMenu from "../components/BrokerSubMenu";
 
 const Broker = () => {
   const registerBroker = useState([]);
@@ -55,18 +56,18 @@ const Broker = () => {
 
   return (
     <div>
-    
       <div className="container-fluid">
+        <BrokerSubMenu />
         <div className="row">
           <div className="col-8 my-3">
             <h3>Broker</h3>
           </div>
           <div className="col-4 my-3">
             <div className="form-group">
-              <Link className="btn btn-primary btn-block" to={`/brokerList`}>
+              {/* <Link className="btn btn-primary btn-block" to={`/brokerList`}>
                 Get Broker List
               </Link>
-              {/* <button
+              <button
                 className="btn btn-primary btn-block"
                 onClick={getBrokers}
               >
@@ -74,11 +75,7 @@ const Broker = () => {
               </button> */}
             </div>
           </div>
-          <div className="">
-            <div className="form-group">
-              <button className="btn btn-primary mr-1">Broker Registration</button>
-            </div>
-          </div>
+          
         </div>
         <div className="row">
           <div className="col-12">

@@ -2,12 +2,16 @@ body{
 font-family: "Plus Jakarta Sans", sans-serif;
 line-height: 1;
 }
+
+.home-icon{
+  margin-top: 10rem!important;;
+}
 .provider{
   background-color: #74cb97;
   color: white;
   border-radius: 30px;
-  padding-bottom: 2rem;
-  padding-top: 2rem;
+  padding-bottom: 5rem;
+  padding-top: 5rem;
 }
 .provider a{
   color: white;
@@ -26,8 +30,8 @@ line-height: 1;
   background-color: #47c4df;
   color: white;
   border-radius: 30px;
-  padding-bottom: 2rem;
-  padding-top: 2rem;
+  padding-bottom: 5rem;
+  padding-top: 5rem;
 }
 
 .broker a {
@@ -39,8 +43,8 @@ line-height: 1;
   background-color: #808fe1;
   color: white;
   border-radius: 30px;
-  padding-bottom: 2rem;
-  padding-top: 2rem;
+  padding-bottom: 5rem;
+  padding-top: 5rem;
 }
 .client a {
   color: white;

@@ -68,11 +68,11 @@ function Provider() {
           <h3>Provider</h3>
         </div>
         <div className="col-4 my-3">
-          <div className="form-group">
+          {/* <div className="form-group">
             <button className="btn btn-primary btn-block" onClick={getSensors}>
               Get Sensor List
             </button>
-          </div>
+          </div> */}
         </div>
       </div>
       <div className="row">

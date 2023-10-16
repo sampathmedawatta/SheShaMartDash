@@ -2,6 +2,7 @@ import React, { useState, useEffect, useContext } from "react";
 import BrokerService from "../services/broker.service";
 import { Context } from "../context/context";
 import Grid from "./UI/Grid/Table";
+import BrokerSubMenu from "../components/BrokerSubMenu";
 
 function BrokerList() {
   const { setBroks } = useContext(Context);
@@ -30,6 +31,7 @@ const [registeredBrokers, setRegisteredBrokers] = useState(null);
 
   return (
     <div className="container-fluid">
+      <BrokerSubMenu />
       <div className="row">
         <div className="col-8 my-3">
           <h3>Broker List</h3>
