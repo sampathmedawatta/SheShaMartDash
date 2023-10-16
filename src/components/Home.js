@@ -8,6 +8,7 @@ const Home = () => {
         <div className="col-md-3 p-1">
             <Link to={"/provider"} className="nav-link">
              <div className="provider shadow-sm d-flex justify-content-around align-items-center">
+            <i></i>
                 <h1 className="fs-2">Provider</h1>
               </div>
             </Link>

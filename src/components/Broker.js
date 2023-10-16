@@ -55,6 +55,7 @@ const Broker = () => {
 
   return (
     <div>
+    
       <div className="container-fluid">
         <div className="row">
           <div className="col-8 my-3">
@@ -71,6 +72,11 @@ const Broker = () => {
               >
                 Get Broker List
               </button> */}
+            </div>
+          </div>
+          <div className="">
+            <div className="form-group">
+              <button className="btn btn-primary mr-1">Broker Registration</button>
             </div>
           </div>
         </div>
@@ -115,7 +121,7 @@ const Broker = () => {
                   autoComplete="off"
                 />
               </div>
-              <div className="form-group">
+              <div className="form-group col-3 mt-3">
                 <button
                   className="btn btn-primary btn-block"
                   onClick={brokerRegister}

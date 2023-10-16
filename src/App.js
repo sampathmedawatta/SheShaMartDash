@@ -31,7 +31,7 @@ const App = () => {
           <div className="col-10">
             <div className="row">
               <div className="col-12">
-                <nav className="navbar navbar-expand navbar-white bg-white">
+                {/* <nav className="navbar navbar-expand navbar-white bg-white">
                   <div className="navbar-nav mr-auto">
                     <li className="nav-item">
                       <Link to={"/home"} className="nav-link">
@@ -64,7 +64,7 @@ const App = () => {
                       </Link>
                     </li>
                   </div>
-                </nav>
+                </nav> */}
               </div>
             </div>
             <Routes>

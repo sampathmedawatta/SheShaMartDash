@@ -2,6 +2,7 @@ import React, { useState, useEffect, useContext } from "react";
 import SensorService from "../services/sensor.service";
 import { Context } from "../context/context";
 import Grid from "./UI/Grid/TableSensor";
+import ProviderSubMenu from "../components/ProviderSubMenu";
 
 function SensorList() {
   const { setSensors } = useContext(Context);
@@ -31,6 +32,7 @@ function SensorList() {
 
   return (
     <div className="container-fluid">
+      <ProviderSubMenu></ProviderSubMenu>
       <div className="row">
         <div className="col-8 my-3">
           <h3>Sensor List</h3>

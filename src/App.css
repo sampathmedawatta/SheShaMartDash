@@ -1,16 +1,7 @@
-label {
-  display: block;
-  margin-top: 10px;
+body{
+font-family: "Plus Jakarta Sans", sans-serif;
+line-height: 1;
 }
-
-.bg-color {
-background-color: #e7f2ff;
-}
-.card-container.card {
-  max-width: 350px !important;
-  
-}
-
 .provider{
   background-color: #74cb97;
   color: white;
@@ -23,6 +14,14 @@ background-color: #e7f2ff;
   font-size: 3.5rem;
 }
 
+.Provider-submenu{
+  background-color:#235165;
+}
+
+.Provider-submenu a{
+  color: white;
+  font-weight: bold;
+}
 .broker {
   background-color: #47c4df;
   color: white;
