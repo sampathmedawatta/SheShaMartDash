@@ -11,7 +11,7 @@ function ProviderSubMenu() {
               Home
             </Link>
             <Link to={"/sensor"} className="nav-link ">
-              Registor Sensor
+              Register Sensor
             </Link>
             <Link to={"/sensorList"} className="nav-link ">
               List Sensors
