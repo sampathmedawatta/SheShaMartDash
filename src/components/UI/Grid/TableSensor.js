@@ -1,5 +1,4 @@
 import React from "react";
-import styles from "./Table.module.css";
 import { Link } from "react-router-dom";
 
 const TableSensor = ({ sensorList }) => (

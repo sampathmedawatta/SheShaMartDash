@@ -39,6 +39,14 @@ line-height: 1;
   font-size: 3.5rem;
 }
 
+.broker-sub-menu{
+  background-color:#47c4df;
+  color: white;
+  border-radius: 15px;
+  padding-bottom: 1rem;
+  padding-top: 1rem;
+
+}
 .client{
   background-color: #808fe1;
   color: white;
