@@ -68,7 +68,7 @@ const Sensor = () => {
         <ProviderSubMenu></ProviderSubMenu>
         <div className="row">
           <div className="col-8 my-3">
-            <h3>Sensor</h3>
+            <div class="title-heders">Sensor</div>
           </div>
           <div className="col-4 my-3">
             <div className="form-group">
