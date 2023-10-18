@@ -1,6 +1,6 @@
 import React, { useState, useEffect, useRef } from "react";
 import SensorService from "../services/sensor.service";
-import ProviderSubMenu from "../components/ProviderSubMenu";
+import ProviderSubMenu from "../components/UI/SubMenu/ProviderSubMenu";
 
 function Provider() {
  const registerSensor = useState([]);

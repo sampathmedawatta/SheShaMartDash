@@ -2,7 +2,7 @@ import React, { useEffect, useState, useContext } from "react";
 import Yasgui from "@triply/yasgui";
 import { Context } from "../context/context";
 import "@triply/yasgui/build/yasgui.min.css";
-import ProviderSubMenu from "../components/ProviderSubMenu";
+import ProviderSubMenu from "../components/UI/SubMenu/ProviderSubMenu";
 import SensorService from "../services/sensor.service";
 
 const SensorQuery = () => {

@@ -3,7 +3,7 @@ import BrokerService from "../services/broker.service";
 import Grid from "./UI/Grid/Table";
 import { Context } from "../context/context";
 import { Link } from "react-router-dom";
-import BrokerSubMenu from "../components/BrokerSubMenu";
+import BrokerSubMenu from "../components/UI/SubMenu/BrokerSubMenu";
 
 const Broker = () => {
   const registerBroker = useState([]);

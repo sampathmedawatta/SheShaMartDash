@@ -2,7 +2,7 @@ import React, { useState, useEffect, useContext } from "react";
 import SensorService from "../services/sensor.service";
 import { Context } from "../context/context";
 import Grid from "./UI/Grid/TableSensor";
-import ProviderSubMenu from "../components/ProviderSubMenu";
+import ProviderSubMenu from "../components/UI/SubMenu/ProviderSubMenu";
 
 function SensorList() {
   const { setSensors } = useContext(Context);

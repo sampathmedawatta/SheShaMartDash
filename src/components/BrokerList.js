@@ -2,7 +2,7 @@ import React, { useState, useEffect, useContext } from "react";
 import BrokerService from "../services/broker.service";
 import { Context } from "../context/context";
 import Grid from "./UI/Grid/Table";
-import BrokerSubMenu from "../components/BrokerSubMenu";
+import BrokerSubMenu from "../components/UI/SubMenu/BrokerSubMenu";
 
 function BrokerList() {
   const { setBroks } = useContext(Context);

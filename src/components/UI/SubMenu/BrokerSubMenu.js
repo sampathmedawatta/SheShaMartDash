@@ -13,6 +13,9 @@ function BrokerSubMenu() {
             <Link to={"/broker"} className="nav-link ">
               Register Broker
             </Link>
+            <Link to={"/brokerList"} className="nav-link ">
+              Broker List
+            </Link>
           </ul>
         </div>
       </div>
