@@ -1,5 +1,6 @@
 import React, { useState, useEffect, useRef, useContext } from "react";
 import BrokerService from "../services/broker.service";
+
 import { Context } from "../context/context";
 
 import BrokerSubMenu from "../components/UI/SubMenu/BrokerSubMenu";
@@ -60,6 +61,7 @@ const Broker = () => {
                   onChange={handleRewardAmountChange}
                   value={rewardAmount}
                   autoComplete="off"
+                  required
                 />{" "}
               </div>
               <div className="form-group">
@@ -72,6 +74,7 @@ const Broker = () => {
                   onChange={handleBrokerNameChange}
                   value={brokerName}
                   autoComplete="off"
+                  required
                 />
               </div>
               <div className="form-group">
@@ -84,6 +87,7 @@ const Broker = () => {
                   onChange={handleEndpointChange}
                   value={endpoint}
                   autoComplete="off"
+                  required
                 />
               </div>
               <div className="form-group col-3 mt-3">
