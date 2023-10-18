@@ -1,10 +1,10 @@
 body{
 font-family: "Plus Jakarta Sans", sans-serif;
-line-height: 1;
+font-size: 14px;
 }
 
 .home-icon{
-  margin-top: 10rem!important;;
+ margin-top: 10rem!important;;
 }
 .provider{
   background-color: #74cb97;
@@ -109,3 +109,37 @@ color: white;
 cursor: pointer;
 text-decoration: none;
 }
+.table thead th {
+  vertical-align: bottom;
+  border-bottom: 2px solid #dee2e6;
+  background: #235165;
+  color: white;
+  font-weight: bolder;
+}
+tbody td {
+font-weight: 500;
+color: #696767;
+text-transform: capitalize;
+border-bottom: 1px solid #dee2e6 !important;
+}
+.title-heders{
+  font-weight: bold;
+  text-transform: capitalize;
+  font-size: 1.50rem;
+  border-bottom: 2px solid #dee2e6;
+  padding-top: 0.5em;
+}
+.table tr th {
+  vertical-align: bottom;
+  border-bottom: 2px solid #dee2e6;
+  background: #235165;
+  color: white;
+  font-weight: bolder;
+  
+}
+tr td {
+  font-weight: 500;
+  color: #696767;
+  text-transform: capitalize;
+  border-bottom: 1px solid #dee2e6 !important;
+  }

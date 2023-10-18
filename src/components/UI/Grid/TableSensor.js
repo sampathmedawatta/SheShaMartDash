@@ -3,7 +3,7 @@ import { Link } from "react-router-dom";
 
 const TableSensor = ({ sensorList }) => (
   <div className="table-responsive">
-    <table className="table table-striped table-sm">
+    <table className="table table-light">
       <tr>
         <th>Name</th>
         <th>Cost Per Minute</th>

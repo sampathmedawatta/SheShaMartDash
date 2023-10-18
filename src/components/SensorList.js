@@ -33,11 +33,11 @@ function SensorList() {
   return (
     <div className="container-fluid">
       <ProviderSubMenu></ProviderSubMenu>
-      <div className="row">
-        <div className="col-8 my-3">
-          <h3>Sensor List</h3>
+      <div className="row-8">
+        <div>
+        <div class="title-heders">Sensor List</div>
         </div>
-        <div className="col-4 my-3">
+        <div>
           <div className="form-group">
             {/* <button className="btn btn-primary btn-block" onClick={getSensors}>
               Get Sensor List
