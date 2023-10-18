@@ -444,70 +444,11 @@ const querySensor = (payload) => {
     const params = {
       query: payload,
     };
-const tempres={
-    "result": true,
+const tempres=
+    {
+        "result": true,
         "values": [
             {
-                
-                "lat": {
-                    "termType": "Literal",
-                    "value": "-37.821658",
-                    "language": "",
-                    "datatype": {
-                        "termType": "NamedNode",
-                        "value": "http://www.w3.org/2001/XMLSchema#string"
-                    }
-                },
-                "long": {
-                    "termType": "Literal",
-                    "value": "145.03904",
-                    "language": "",
-                    "datatype": {
-                        "termType": "NamedNode",
-                        "value": "http://www.w3.org/2001/XMLSchema#string"
-                    }
-                },
-            },
-                    {
-                "measures": {
-                    "termType": "Literal",
-                    "value": "video",
-                    "language": "",
-                    "datatype": {
-                        "termType": "NamedNode",
-                        "value": "http://www.w3.org/2001/XMLSchema#string"
-                    }
-                },
-                "lat": {
-                    "termType": "Literal",
-                    "value": "-37.821658",
-                    "language": "",
-                    "datatype": {
-                        "termType": "NamedNode",
-                        "value": "http://www.w3.org/2001/XMLSchema#string"
-                    }
-                },
-            
-                "lat": {
-                    "termType": "Literal",
-                    "value": "-37.821658",
-                    "language": "",
-                    "datatype": {
-                        "termType": "NamedNode",
-                        "value": "http://www.w3.org/2001/XMLSchema#string"
-                    }
-                },
-                "long": {
-                    "termType": "Literal",
-                    "value": "145.03904",
-                    "language": "",
-                    "datatype": {
-                        "termType": "NamedNode",
-                        "value": "http://www.w3.org/2001/XMLSchema#string"
-                    }
-                },
-            },
-                    {
                 "measures": {
                     "termType": "Literal",
                     "value": "video",
@@ -535,121 +476,10 @@ const tempres={
                         "value": "http://www.w3.org/2001/XMLSchema#string"
                     }
                 },
-            },
-                    {
-                "measures": {
-                    "termType": "Literal",
-                    "value": "video",
-                    "language": "",
-                    "datatype": {
-                        "termType": "NamedNode",
-                        "value": "http://www.w3.org/2001/XMLSchema#string"
-                    }
-                },
-                "lat": {
-                    "termType": "Literal",
-                    "value": "-37.821658",
-                    "language": "",
-                    "datatype": {
-                        "termType": "NamedNode",
-                        "value": "http://www.w3.org/2001/XMLSchema#string"
-                    }
-                },
-                "long": {
-                    "termType": "Literal",
-                    "value": "145.03904",
-                    "language": "",
-                    "datatype": {
-                        "termType": "NamedNode",
-                        "value": "http://www.w3.org/2001/XMLSchema#string"
-                    }
-                },
-            },
-                    {
-                "measures": {
-                    "termType": "Literal",
-                    "value": "video",
-                    "language": "",
-                    "datatype": {
-                        "termType": "NamedNode",
-                        "value": "http://www.w3.org/2001/XMLSchema#string"
-                    }
-                },
-                "lat": {
-                    "termType": "Literal",
-                    "value": "-37.821658",
-                    "language": "",
-                    "datatype": {
-                        "termType": "NamedNode",
-                        "value": "http://www.w3.org/2001/XMLSchema#string"
-                    }
-                },
-                "long": {
-                    "termType": "Literal",
-                    "value": "145.03904",
-                    "language": "",
-                    "datatype": {
-                        "termType": "NamedNode",
-                        "value": "http://www.w3.org/2001/XMLSchema#string"
-                    }
-                },
-            },
-                    {
-                "measures": {
-                    "termType": "Literal",
-                    "value": "video",
-                    "language": "",
-                    "datatype": {
-                        "termType": "NamedNode",
-                        "value": "http://www.w3.org/2001/XMLSchema#string"
-                    }
-                },
-                "lat": {
-                    "termType": "Literal",
-                    "value": "-37.821658",
-                    "language": "",
-                    "datatype": {
-                        "termType": "NamedNode",
-                        "value": "http://www.w3.org/2001/XMLSchema#string"
-                    }
-                },
-                "long": {
-                    "termType": "Literal",
-                    "value": "145.03904",
-                    "language": "",
-                    "datatype": {
-                        "termType": "NamedNode",
-                        "value": "http://www.w3.org/2001/XMLSchema#string"
-                    }
-                },
-            },        {
-                "measures": {
-                    "termType": "Literal",
-                    "value": "video",
-                    "language": "",
-                    "datatype": {
-                        "termType": "NamedNode",
-                        "value": "http://www.w3.org/2001/XMLSchema#string"
-                    }
-                },
-                "lat": {
-                    "termType": "Literal",
-                    "value": "-37.821658",
-                    "language": "",
-                    "datatype": {
-                        "termType": "NamedNode",
-                        "value": "http://www.w3.org/2001/XMLSchema#string"
-                    }
-                },
-                "long": {
-                    "termType": "Literal",
-                    "value": "145.03904",
-                    "language": "",
-                    "datatype": {
-                        "termType": "NamedNode",
-                        "value": "http://www.w3.org/2001/XMLSchema#string"
-                    }
-                },
+                "sensor": {
+                    "termType": "NamedNode",
+                    "value": "metaSample"
+                }
             },
             {
                 "measures": {
@@ -712,9 +542,13 @@ const tempres={
                         "value": "http://www.w3.org/2001/XMLSchema#string"
                     }
                 },
-     
+                "sensor": {
+                    "termType": "NamedNode",
+                    "value": "test sensor "
+                }
             }
         ]
+    
 }
   //return axios.post("/sparql", params).then((response) => {
     //retur9n response.data; 
