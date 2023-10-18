@@ -13,9 +13,7 @@ function ClientSubMenu() {
             <Link to={"/sensorquery"} className="nav-link">
               Sensor Query
             </Link>
-            <Link to={"/sensorList"} className="nav-link ">
-              List Sensors
-            </Link>
+           
             <Link to={"/sensorHistory"} className="nav-link ">
               Sensor History
             </Link>
