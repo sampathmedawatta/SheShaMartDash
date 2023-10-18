@@ -16,12 +16,6 @@ function ProviderSubMenu() {
             <Link to={"/sensorList"} className="nav-link ">
               List Sensors
             </Link>
-            <Link to={"/sensorquery"} className="nav-link">
-              Sensor Query
-            </Link>
-            <Link to={"/broker"} className="nav-link ">
-              Register Broker
-            </Link>
           </ul>
         </div>
       </div>

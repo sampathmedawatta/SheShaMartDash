@@ -1,7 +1,7 @@
-import React from "react";
+import React from 'react'
 import { Link } from "react-router-dom";
 
-function BrokerSubMenu() {
+function ClientSubMenu() {
   return (
     <nav className="navbar navbar-expand-lg navbar-dark Provider-submenu">
       <div className="container-fluid">
@@ -10,8 +10,12 @@ function BrokerSubMenu() {
             <Link to={"/"} className="nav-link ">
               Home
             </Link>
-            <Link to={"/broker"} className="nav-link ">
-              Register Broker
+            <Link to={"/sensorquery"} className="nav-link">
+              Sensor Query
+            </Link>
+           
+            <Link to={"/sensorHistory"} className="nav-link ">
+              Sensor History
             </Link>
           </ul>
         </div>
@@ -20,4 +24,4 @@ function BrokerSubMenu() {
   );
 }
 
-export default BrokerSubMenu;
+export default ClientSubMenu

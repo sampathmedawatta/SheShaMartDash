@@ -1,34 +1,26 @@
 import React, { useState, useEffect, useRef, useContext } from "react";
 import BrokerService from "../services/broker.service";
-import Grid from "./UI/Grid/Table";
+
 import { Context } from "../context/context";
-import { Link } from "react-router-dom";
-import BrokerSubMenu from "../components/BrokerSubMenu";
+
+import BrokerSubMenu from "../components/UI/SubMenu/BrokerSubMenu";
 
 const Broker = () => {
   const registerBroker = useState([]);
 
   const [rewardAmount, setRewardAmount] = useState("");
-  const [registeredBrokers, setRegisteredBrokers] = useState(null);
-  const { setBroks } = useContext(Context);
-
   const handleRewardAmountChange = (event) => {
     setRewardAmount(event.target.value);
-    console.log("value is:", event.target.value);
   };
 
   const [brokerName, setBrokerName] = useState("");
   const handleBrokerNameChange = (event) => {
     setBrokerName(event.target.value);
-
-    console.log("value is:", event.target.value);
   };
 
   const [endpoint, setEndpoint] = useState("");
   const handleEndpointChange = (event) => {
     setEndpoint(event.target.value);
-
-    console.log("value is:", event.target.value);
   };
 
   const brokerRegister = (e) => {
@@ -40,47 +32,24 @@ const Broker = () => {
       endpoint: endpoint,
     };
 
-    console.log(params);
     registerBroker = BrokerService.registerBroker(params);
-    console.log(registerBroker);
-  };
 
-  const getBrokers = async () => {
-    const getList = BrokerService.getBrokers();
-    if(getList !== null){
-      setRegisteredBrokers(getList);
-      setBroks(getList);
-    }
   };
-  console.log(registeredBrokers);
 
   return (
     <div>
       <div className="container-fluid">
-        <BrokerSubMenu />
         <div className="row">
           <div className="col-8 my-3">
             <h3>Broker</h3>
           </div>
-          <div className="col-4 my-3">
-            <div className="form-group">
-              {/* <Link className="btn btn-primary btn-block" to={`/brokerList`}>
-                Get Broker List
-              </Link>
-              <button
-                className="btn btn-primary btn-block"
-                onClick={getBrokers}
-              >
-                Get Broker List
-              </button> */}
-            </div>
-          </div>
-          
         </div>
+        <BrokerSubMenu />
         <div className="row">
           <div className="col-12">
             <div className="card">
               <h3>Register Broker</h3>
+              <br />
               <div className="form-group">
                 <label htmlFor="rewardAmount">Reward Amount</label>
                 <input
@@ -92,6 +61,7 @@ const Broker = () => {
                   onChange={handleRewardAmountChange}
                   value={rewardAmount}
                   autoComplete="off"
+                  required
                 />{" "}
               </div>
               <div className="form-group">
@@ -104,6 +74,7 @@ const Broker = () => {
                   onChange={handleBrokerNameChange}
                   value={brokerName}
                   autoComplete="off"
+                  required
                 />
               </div>
               <div className="form-group">
@@ -116,6 +87,7 @@ const Broker = () => {
                   onChange={handleEndpointChange}
                   value={endpoint}
                   autoComplete="off"
+                  required
                 />
               </div>
               <div className="form-group col-3 mt-3">
@@ -125,19 +97,11 @@ const Broker = () => {
                 >
                   Click
                 </button>
-                {/* <br></br>
-                <span>rewardAmount: {rewardAmount}</span> <br></br>
-                <span>brokerName: {brokerName}</span>
-                <br></br>
-                <span>endpoint: {endpoint}</span>
-                <br></br> */}
               </div>
             </div>
           </div>
         </div>
       </div>
-
-      {registeredBrokers !== null && <Grid brokerList={registeredBrokers} />}
     </div>
   );
 };

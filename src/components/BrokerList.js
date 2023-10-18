@@ -1,8 +1,8 @@
 import React, { useState, useEffect, useContext } from "react";
 import BrokerService from "../services/broker.service";
 import { Context } from "../context/context";
-import Grid from "./UI/Grid/Table";
-import BrokerSubMenu from "../components/BrokerSubMenu";
+import { Link } from "react-router-dom";
+import BrokerSubMenu from "../components/UI/SubMenu/BrokerSubMenu";
 
 function BrokerList() {
   const { setBroks } = useContext(Context);
@@ -20,34 +20,44 @@ const [registeredBrokers, setRegisteredBrokers] = useState(null);
     fetchData();
   }, []);
 
-  const getBrokers = async () => {
-    const getList = BrokerService.getBrokers();
-    if (getList !== null) {
-      setRegisteredBrokers(getList);
-      setBroks(getList);
-      console.log(getList);
-    }
-  };
 
   return (
     <div className="container-fluid">
-      <BrokerSubMenu />
       <div className="row">
         <div className="col-8 my-3">
           <h3>Broker List</h3>
         </div>
-        <div className="col-4 my-3">
-          <div className="form-group">
-            {/* <button className="btn btn-primary btn-block" onClick={getBrokers}>
-              Get Broker List
-            </button> */}
-          </div>
-        </div>
+      </div>
+      <BrokerSubMenu />
 
-        <div>
-          {registeredBrokers !== null && (
-            <Grid brokerList={registeredBrokers} />
-          )}
+      <div className="row">
+        <div className="col-12">
+          <div className="card">
+            {registeredBrokers !== null && (
+              <div className="table-responsive">
+                <table className="table table-light">
+                  <tr>
+                    <th>Name</th>
+                    <th>Endpoint</th>
+                    <th>Counter</th>
+                  </tr>
+                  {Object.keys(registeredBrokers).map((item, key) => (
+                    <tr key={key}>
+                      <td>
+                        <Link
+                          to={`/BrokerDetails/${registeredBrokers[item].metadata.name}`}
+                        >
+                          {registeredBrokers[item].metadata.name}
+                        </Link>
+                      </td>
+                      <td>{registeredBrokers[item].metadata.endpoint}</td>
+                      <td>{registeredBrokers[item].counter}</td>
+                    </tr>
+                  ))}
+                </table>
+              </div>
+            )}
+          </div>
         </div>
       </div>
     </div>

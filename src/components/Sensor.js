@@ -2,7 +2,7 @@ import React, { useState, useEffect, useRef } from "react";
 import SensorService from "../services/sensor.service";
 import { Context } from "../context/context";
 import { Link } from "react-router-dom";
-import ProviderSubMenu from "../components/ProviderSubMenu";
+import ProviderSubMenu from "../components/UI/SubMenu/ProviderSubMenu";
 
 const Sensor = () => {
   const registerSensor = useState([]);

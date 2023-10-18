@@ -31,9 +31,10 @@ const get = (path, getData) => {
 
 const post = (path, postData) => {
   axiosInstance
-    .post(path, postData, headers)
+    .post(path, postData)
     .then((response) => {
-      return response.data;
+      console.log(response);
+      return response;
     })
     .catch((error) => {
       console.error(error);
