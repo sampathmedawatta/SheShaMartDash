@@ -156,10 +156,15 @@ const getBrokers = () => {
 };
 
 const registerBroker = (params) => {
-  return axios.post("/BrokerRegistration", params).then((response) => {
-    console.log(params);
-    return response.data;
-  });
+  return axios
+    .post("/BrokerRegistration", params)
+    .then((response) => {
+      console.log(response);
+      return response;
+    })
+    .catch((error) => {
+      console.error(error);
+    });
 };
 
 const BrokerService = {
