@@ -38,20 +38,29 @@ const Broker = () => {
 
   return (
     <div>
-      <div className="container-fluid">
+      
         <div className="row">
-          <div className="col-8 my-3">
+        <div className="col-6">
+        <BrokerSubMenu />
+          </div>
+       
+          <div className="col-12">
             <div class="title-heders">Broker</div>
           </div>
         </div>
-        <BrokerSubMenu />
+        
         <div className="row">
           <div className="col-12">
-              
-              <h3>Register Broker</h3>
+
               <br />
+              <div className="col-10">
+              <div className="page-title">Broker Registration</div>
+              <br></br>
+              <form class="needs-validation" id="form-registration" novalidate method="post">
+              <div class="alert alert-success alert-dismissible fade show" role="alert">
+              Broker Registered Successfully</div>
               <div className="form-group">
-                <label htmlFor="rewardAmount">Reward Amount</label>
+                <label htmlFor="rewardAmount">Reward Amount*</label>
                 <input
                   type="number"
                   min={0}
@@ -62,10 +71,12 @@ const Broker = () => {
                   value={rewardAmount}
                   autoComplete="off"
                   required
-                />{" "}
+                />
+                <div class="invalid-feedback">Please enter a reward Amount</div>
+                {" "}
               </div>
               <div className="form-group">
-                <label htmlFor="brokerName">Broker Name </label>
+                <label htmlFor="brokerName">Broker Name* </label>
                 <input
                   type="text"
                   id="brokerName"
@@ -76,9 +87,10 @@ const Broker = () => {
                   autoComplete="off"
                   required
                 />
+                 <div class="invalid-feedback">Please enter a Broker Name</div>
               </div>
               <div className="form-group">
-                <label htmlFor="endpoint">Endpoint </label>
+                <label htmlFor="endpoint">Endpoint*</label>
                 <input
                   type="text"
                   id="endpoint"
@@ -89,19 +101,21 @@ const Broker = () => {
                   autoComplete="off"
                   required
                 />
+                <div class="invalid-feedback">Please enter a Endpoint</div>
               </div>
-              <div className="form-group col-3 mt-3">
+              <div className="form-group ">
                 <button
-                  className="btn btn-primary btn-block"
+                  className="btn btn-add bi-file-plus-fill"
                   onClick={brokerRegister}
                 >
-                  Click
+                  Register
                 </button>
               </div>
+              </form>
+              </div></div>
             </div>
           </div>
-        </div>
-      </div>
+        
   );
 };
 
