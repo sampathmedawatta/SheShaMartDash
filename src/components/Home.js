@@ -6,7 +6,7 @@ const Home = () => {
     <div className="container-fluid">
       <div className="row g-3 my-5 justify-content-center align-items-center home-icon">
         <div className="col-md-3 p-1">
-          <Link to={"/provider"} className="nav-link">
+          <Link to={"/sensor"} className="nav-link">
             <div className="provider shadow-sm d-flex justify-content-around align-items-center">
               <h1 className="fs-2">Provider</h1>
               <img className="icon-1" alt="" src="/icon-1.svg"></img>
