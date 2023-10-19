@@ -55,7 +55,6 @@ font-size: 14px;
 
 }
 
-
 .client{
   background-color: #808fe1;
   color: white;
@@ -152,3 +151,10 @@ tr td {
   text-transform: capitalize;
   border-bottom: 1px solid #dee2e6 !important;
   }
+
+.form-error {
+  color: #e74c3c;
+  font-size: 14px;
+  margin-top: 5px;
+  display: block;
+}
