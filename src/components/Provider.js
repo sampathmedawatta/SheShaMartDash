@@ -62,19 +62,12 @@ function Provider() {
 
   return (
     <div className="container-fluid">
-      <ProviderSubMenu></ProviderSubMenu>
       <div className="row">
         <div className="col-8 my-3">
           <h3>Provider</h3>
         </div>
-        <div className="col-4 my-3">
-          {/* <div className="form-group">
-            <button className="btn btn-primary btn-block" onClick={getSensors}>
-              Get Sensor List
-            </button>
-          </div> */}
-        </div>
       </div>
+      <ProviderSubMenu/>
       <div className="row">
         <div className="col-md-12">
           <div className="card">

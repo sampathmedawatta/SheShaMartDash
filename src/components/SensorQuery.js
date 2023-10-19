@@ -106,51 +106,65 @@ const checkbox = document.getElementById("advanceSearch");
   };
 
   return (
-    <div className="container-fluid">
-      <ProviderSubMenu></ProviderSubMenu>
-      <div className="row">
-        <div className="col-12">
-          <div>
-            <br></br>
-            <div className="form-check form-check-inline">
-              <input
-                className="form-check-input"
-                type="checkbox"
-                id="advanceSearch"
-                checked={isAdvanceSearchChecked} // Set the checked state of the checkbox
-              />
-              <label className="form-check-label">Select for Advance Search</label>
-            </div>
+    <div>
+      <div className="container-fluid">
+        <div className="row">
+          <div className="col-8 my-3">
+            <div class="title-heders">Client</div>
           </div>
-          <br></br>
-          <div id="result">
-            {showAlert ? (
-              <div className="alert alert-danger" role="alert">
-                SPARQL compiler Error. Please fix the SPARQL query!
+        </div>
+        <ProviderSubMenu></ProviderSubMenu>
+        <div className="row">
+          <div className="col-12">
+            <div className="card">
+              <h3>Sensor Quesry</h3>
+              <br />
+              <div>
+                <br></br>
+                <div className="form-check form-check-inline">
+                  <input
+                    className="form-check-input"
+                    type="checkbox"
+                    id="advanceSearch"
+                    checked={isAdvanceSearchChecked} // Set the checked state of the checkbox
+                  />
+                  <label className="form-check-label">
+                    Select for Advance Search
+                  </label>
+                </div>
               </div>
-            ) : null}
+              <br></br>
+              <div id="result">
+                {showAlert ? (
+                  <div className="alert alert-danger" role="alert">
+                    SPARQL compiler Error. Please fix the SPARQL query!
+                  </div>
+                ) : null}
 
-            {isAdvanceSearchChecked ? ( // Display yasgui if the checkbox is checked
-              <div id="yasgui"></div>
-            ) : ( // Display query-bulider if the checkbox is unchecked
-              <div id="query-bulider">query-bulider</div>
-            )}
+                {isAdvanceSearchChecked ? ( // Display yasgui if the checkbox is checked
+                  <div id="yasgui"></div>
+                ) : (
+                  // Display query-bulider if the checkbox is unchecked
+                  <div id="query-bulider">query-bulider</div>
+                )}
 
-            <br></br>
-            <div className="title-heders">Results</div>
-            <br></br>
-            {sensorData.length === 0 ? (
-              <div className="alert alert-warning" role="alert">
-                No result found.
+                <br></br>
+                <div className="title-heders">Results</div>
+                <br></br>
+                {sensorData.length === 0 ? (
+                  <div className="alert alert-warning" role="alert">
+                    No result found.
+                  </div>
+                ) : (
+                  <div className="table-responsive">
+                    <table className="table table-light">
+                      <thead>{renderTableHeaders()}</thead>
+                      <tbody>{renderTableRows()}</tbody>
+                    </table>
+                  </div>
+                )}
               </div>
-            ) : (
-              <div className="table-responsive">
-                <table className="table table-light">
-                  <thead>{renderTableHeaders()}</thead>
-                  <tbody>{renderTableRows()}</tbody>
-                </table>
-              </div>
-            )}
+            </div>
           </div>
         </div>
       </div>

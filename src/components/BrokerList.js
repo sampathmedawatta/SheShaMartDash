@@ -25,7 +25,7 @@ const [registeredBrokers, setRegisteredBrokers] = useState(null);
     <div className="container-fluid">
       <div className="row">
         <div className="col-8 my-3">
-          <h3>Broker List</h3>
+          <div class="title-heders">Broker</div>
         </div>
       </div>
       <BrokerSubMenu />
@@ -33,6 +33,7 @@ const [registeredBrokers, setRegisteredBrokers] = useState(null);
       <div className="row">
         <div className="col-12">
           <div className="card">
+            <h3>Broker List</h3>
             {registeredBrokers !== null && (
               <div className="table-responsive">
                 <table className="table table-light">

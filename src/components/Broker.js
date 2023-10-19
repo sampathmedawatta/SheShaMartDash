@@ -41,13 +41,14 @@ const Broker = () => {
       <div className="container-fluid">
         <div className="row">
           <div className="col-8 my-3">
-            <h3>Broker</h3>
+            <div class="title-heders">Broker</div>
           </div>
         </div>
         <BrokerSubMenu />
         <div className="row">
           <div className="col-12">
             <div className="card">
+              
               <h3>Register Broker</h3>
               <br />
               <div className="form-group">
