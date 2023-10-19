@@ -41,7 +41,7 @@ function SensorList() {
         <ProviderSubMenu />
         <div className="row">
           <div className="col-12">
-            <div className="card">
+
               <h3> Sensor List</h3>
               <br />
               {registeredSensors !== null && (
@@ -74,7 +74,6 @@ function SensorList() {
           </div>
         </div>
       </div>
-    </div>
   );
 }
 
