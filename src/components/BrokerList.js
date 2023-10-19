@@ -32,7 +32,6 @@ const [registeredBrokers, setRegisteredBrokers] = useState(null);
 
       <div className="row">
         <div className="col-12">
-          <div className="card">
             <h3>Broker List</h3>
             {registeredBrokers !== null && (
               <div className="table-responsive">
@@ -61,7 +60,7 @@ const [registeredBrokers, setRegisteredBrokers] = useState(null);
           </div>
         </div>
       </div>
-    </div>
+
   );
 }
 

@@ -13,7 +13,7 @@ function Client() {
         <ClientSubMenu></ClientSubMenu>
         <div className="row">
           <div className="col-12">
-            <div className="card">
+
               <h3>Wallet</h3>
               <br />
               <div className="form-group"></div>
@@ -21,7 +21,7 @@ function Client() {
           </div>
         </div>
       </div>
-    </div>
+  
   );
 }
 

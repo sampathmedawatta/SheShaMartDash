@@ -17,7 +17,7 @@ const BrokerDetails = ({data}) => {
 
       <div className="row">
         <div className="col-12">
-          <div className="card">
+  
             <h3>Broker Details</h3>
 
             {Object.keys(data).map(
@@ -39,7 +39,7 @@ const BrokerDetails = ({data}) => {
                   </table>
                 )
             )}
-          </div>
+         
         </div>
       </div>
     </div>

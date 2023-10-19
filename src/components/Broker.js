@@ -47,7 +47,6 @@ const Broker = () => {
         <BrokerSubMenu />
         <div className="row">
           <div className="col-12">
-            <div className="card">
               
               <h3>Register Broker</h3>
               <br />
@@ -103,7 +102,6 @@ const Broker = () => {
           </div>
         </div>
       </div>
-    </div>
   );
 };
 

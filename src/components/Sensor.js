@@ -73,7 +73,6 @@ const Sensor = () => {
         <ProviderSubMenu />
         <div className="row">
           <div className="col-12">
-            <div className="card">
               <h3>Register Sensor</h3>
               <br />
               <div className="form-group">
@@ -163,7 +162,6 @@ const Sensor = () => {
           </div>
         </div>
       </div>
-    </div>
   );
 };
 
