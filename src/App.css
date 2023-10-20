@@ -352,6 +352,13 @@ border-bottom: 1px solid #dee2e6 !important;
   text-transform: capitalize;
   border-bottom: 1px solid #dee2e6 !important;
   }
+
+.form-error {
+  color: #e74c3c;
+  font-size: 14px;
+  margin-top: 5px;
+  display: block;
+}
   .page-title{
     margin-bottom: 1em;
     font-size: 20px;
