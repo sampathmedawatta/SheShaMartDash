@@ -364,3 +364,8 @@ border-bottom: 1px solid #dee2e6 !important;
     font-size: 20px;
     font-weight: bold;
   }
+
+  .drop-down{
+    height: 43px;
+     color: black;
+  }

@@ -1,9 +1,22 @@
-import React, { useState } from "react";
+import React, { useState, useEffect } from "react";
 import SensorService from "../services/sensor.service";
+import BrokerService from "../services/broker.service";
 import ProviderSubMenu from "../components/UI/SubMenu/ProviderSubMenu";
+import DropDown from "../components/UI/DropDown";
 
 const Sensor = () => {
-  const registerSensor = useState([]);
+
+  const [registeredBrokers, setRegisteredBrokers] = useState(null);
+
+  useEffect(() => {
+    async function fetchData() {
+      const getList = BrokerService.getBrokers();
+      if (getList !== null) {
+        setRegisteredBrokers(getList);
+      }
+    }
+    fetchData();
+  }, []);
 
   const [formData, setFormData] = useState({
     rewardAmount: "",
@@ -23,6 +36,12 @@ const Sensor = () => {
     });
   };
 
+  const [selectedOption, setSelectedOption] = useState("");
+
+  const handleDropdownChange = (event) => {
+    setSelectedOption(event.target.value);
+  };
+  
   const handleSubmit = (e) => {
     e.preventDefault();
     const validationErrors = {};
@@ -42,7 +61,7 @@ const Sensor = () => {
       validationErrors.costPerKB = "Cost per KB is required";
     }
 
-    if (!formData.brokerName.trim()) {
+    if (!selectedOption) {
       validationErrors.brokerName = "Broker name is required";
     }
 
@@ -54,67 +73,13 @@ const Sensor = () => {
         sensorName: formData.sensorName,
         costPerMinute: +formData.costPerMinute,
         costPerKB: +formData.costPerKB,
-        integrationBroker: formData.brokerName,
+        integrationBroker: selectedOption,
       };
 
-      registerSensor = SensorService.registerSensor(params);
+      const response = SensorService.registerSensor(params);
+      console.log(response);
     }
   };
-
-  // const [rewardAmount, setRewardAmount] = useState("");
-  // const handleRewardAmountChange = (event) => {
-  //   setRewardAmount(event.target.value);
-  //   console.log("value is:", event.target.value);
-  // };
-
-  // const [sensorName, setSensorName] = useState("");
-  // const handleSensorNameChange = (event) => {
-  //   setSensorName(event.target.value);
-
-  //   console.log("value is:", event.target.value);
-  // };
-
-  // const [costPerMinute, setCostPerMinute] = useState("");
-  // const handleCostPerMinuteChange = (event) => {
-  //   setCostPerMinute(event.target.value);
-
-  //   console.log("value is:", event.target.value);
-  // };
-
-  // const [costPerKB, setCostPerKB] = useState("");
-  // const handleCostPerKBChange = (event) => {
-  //   setCostPerKB(event.target.value);
-
-  //   console.log("value is:", event.target.value);
-  // };
-
-  // const [brokerName, setBrokerName] = useState("");
-  // const handleBrokerNameChange = (event) => {
-  //   setBrokerName(event.target.value);
-
-  //   console.log("value is:", event.target.value);
-  // };
-
-  // const sensorRegister = (e) => {
-  //   e.preventDefault();
-
-  //   const params = {
-  //     rewardAmount: +rewardAmount,
-  //     sensorName: sensorName,
-  //     costPerMinute: +costPerMinute,
-  //     costPerKB: +costPerKB,
-  //     integrationBroker: brokerName,
-  //   };
-
-  //   console.log(params);
-  //   registerSensor = SensorService.registerSensor(params);
-  //   console.log(registerSensor);
-  // };
-
-  // const getSensors = () => {
-  //   const registeredSensors = SensorService.getSensors();
-  //   console.log(registeredSensors);
-  // };
 
   return (
     <div>
@@ -124,7 +89,7 @@ const Sensor = () => {
         </div>
 
         <div className="col-12">
-          <div class="title-heders">Provider</div>
+          <div className="title-heders">Provider</div>
         </div>
       </div>
       <div className="row">
@@ -180,14 +145,14 @@ const Sensor = () => {
               </div>
               <div className="form-group">
                 <label htmlFor="brokerName">Broker Name </label>
-                <input
-                  type="text"
-                  id="brokerName"
-                  name="brokerName"
-                  className="form-control"
-                  onChange={handleChange}
-                  autoComplete="off"
-                />
+
+                {registeredBrokers && (
+                  <DropDown
+                    onChange={handleDropdownChange}
+                    data={registeredBrokers}
+                  />
+                )}
+
                 {errors.brokerName && (
                   <span className="form-error">{errors.brokerName}</span>
                 )}
@@ -215,6 +180,7 @@ const Sensor = () => {
                   type="file"
                   name="metaData"
                   id="metaData"
+                  className="form-control"
                   onChange={handleChange}
                 />
               </div>

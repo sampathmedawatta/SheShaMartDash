@@ -3,23 +3,19 @@ import { Link } from "react-router-dom";
 
 function ProviderSubMenu() {
   return (
-    <nav class="navbar navbar-expand-lg broker-menu navbar-dark">
-      <Link to={"/"} className="">
-        <div className="">
-          <a class="navbar-brand" href="#">
-            <i class="bi bi-house-door-fill"></i>
-          </a>
-        </div>
+    <nav className="navbar navbar-expand-lg broker-menu navbar-dark">
+      <Link to={"/"} className="navbar-brand">
+        <i className="bi bi-house-door-fill"></i>
       </Link>
 
-      <div class="collapse navbar-collapse" id="navbarSupportedContent">
-        <ul class="navbar-nav me-auto mb-2 mb-lg-0">
-          <li class="top-menu">
+      <div className="collapse navbar-collapse" id="navbarSupportedContent">
+        <ul className="navbar-nav me-auto mb-2 mb-lg-0">
+          <li className="top-menu">
             <Link to={"/sensor"} className="">
               <div className="">Register Sensor</div>
             </Link>
           </li>
-          <li class="top-menu">
+          <li className="top-menu">
             <Link to={"/sensorList"} className="">
               <div className="">Sensor List</div>
             </Link>
@@ -27,30 +23,6 @@ function ProviderSubMenu() {
         </ul>
       </div>
     </nav>
-
-    // <div className="row justify-content-left align-items-left">
-    //   <div className="col-md-1 p-1">
-    //     <Link to={"/"} className="nav-link broker-sub-menu-link">
-    //       <div className="broker-sub-menu shadow-sm d-flex justify-content-around align-items-center">
-    //         <img alt="" src="/icon-1.svg"></img>
-    //       </div>
-    //     </Link>
-    //   </div>
-    //   <div className="col-md-2 p-1">
-    //     <Link to={"/sensor"} className="nav-link broker-sub-menu-link">
-    //       <div className="broker-sub-menu shadow-sm d-flex justify-content-around align-items-center">
-    //         Register Sensor
-    //       </div>
-    //     </Link>
-    //   </div>
-    //   <div className="col-md-2 p-1">
-    //     <Link to={"/sensorList"} className="nav-link broker-sub-menu-link">
-    //       <div className="broker-sub-menu shadow-sm d-flex justify-content-around align-items-center">
-    //         Sensor List
-    //       </div>
-    //     </Link>
-    //   </div>
-    // </div>
   );
 }
 
