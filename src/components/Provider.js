@@ -70,7 +70,7 @@ function Provider() {
       <ProviderSubMenu/>
       <div className="row">
         <div className="col-md-12">
-          <div className="card">
+
             <div className="form-group">
               <label htmlFor="sensorName">Sensor Name </label>
               <input
@@ -157,7 +157,6 @@ function Provider() {
           </div>
         </div>
       </div>
-    </div>
   );
 };
 

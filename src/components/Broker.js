@@ -83,69 +83,83 @@ const Broker = () => {
 
   return (
     <div>
-      <div className="container-fluid">
-        <div className="row">
-          <div className="col-8 my-3">
-            <div class="title-heders">Broker</div>
-          </div>
+      <div className="row">
+        <div className="col-12">
+          <BrokerSubMenu />
         </div>
-        <BrokerSubMenu />
-        <div className="row">
-          <div className="col-12">
-            <div className="card">
-              <h3>Register Broker</h3>
-              <br />
-              <form onSubmit={handleSubmit}>
-                <div className="form-group">
-                  <label htmlFor="rewardAmount">Reward Amount</label>
-                  <input
-                    type="number"
-                    min={0}
-                    id="rewardAmount"
-                    className="form-control"
-                    name="rewardAmount"
-                    onChange={handleChange}
-                    autoComplete="off"
-                  />
-                  {errors.rewardAmount && (
-                    <span className="form-error">{errors.rewardAmount}</span>
-                  )}
-                </div>
-                <div className="form-group">
-                  <label htmlFor="brokerName">Broker Name </label>
-                  <input
-                    type="text"
-                    id="brokerName"
-                    className="form-control"
-                    name="brokerName"
-                    onChange={handleChange}
-                    autoComplete="off"
-                  />
-                  {errors.brokerName && (
-                    <span className="form-error">{errors.brokerName}</span>
-                  )}
-                </div>
-                <div className="form-group">
-                  <label htmlFor="endpoint">Endpoint </label>
-                  <input
-                    type="text"
-                    id="endpoint"
-                    className="form-control"
-                    name="endpoint"
-                    onChange={handleChange}
-                    autoComplete="off"
-                  />
-                  {errors.endpoint && (
-                    <span className="form-error">{errors.endpoint}</span>
-                  )}
-                </div>
-                <div className="form-group col-3 mt-3">
-                  <button type="submit" className="btn btn-primary btn-block">
-                    Click
-                  </button>
-                </div>
-              </form>
-            </div>
+
+        <div className="col-12">
+          <div class="title-heders">Broker</div>
+        </div>
+      </div>
+
+      <div className="row">
+        <div className="col-12">
+          <br />
+          <div className="col-10">
+            <div className="page-title">Broker Registration</div>
+            <br></br>
+            <form onSubmit={handleSubmit}>
+              {/* class="needs-validation" id="form-registration" novalidate
+              method="post" */}
+              <div
+                class="alert alert-success alert-dismissible fade show"
+                role="alert"
+              >
+                Broker Registered Successfully
+              </div>
+              <div className="form-group">
+                <label htmlFor="rewardAmount">Reward Amount*</label>
+                <input
+                  type="number"
+                  min={0}
+                  id="rewardAmount"
+                  className="form-control"
+                  name="rewardAmount"
+                  onChange={handleChange}
+                  autoComplete="off"
+                />
+                {errors.rewardAmount && (
+                  <span className="form-error">{errors.rewardAmount}</span>
+                )}
+                <div class="invalid-feedback">Please enter a reward Amount</div>{" "}
+              </div>
+              <div className="form-group">
+                <label htmlFor="brokerName">Broker Name* </label>
+                <input
+                  type="text"
+                  id="brokerName"
+                  className="form-control"
+                  name="brokerName"
+                  onChange={handleChange}
+                  autoComplete="off"
+                />
+                {errors.brokerName && (
+                  <span className="form-error">{errors.brokerName}</span>
+                )}
+                <div class="invalid-feedback">Please enter a Broker Name</div>
+              </div>
+              <div className="form-group">
+                <label htmlFor="endpoint">Endpoint*</label>
+                <input
+                  type="text"
+                  id="endpoint"
+                  className="form-control"
+                  name="endpoint"
+                  onChange={handleChange}
+                  autoComplete="off"
+                />
+                {errors.endpoint && (
+                  <span className="form-error">{errors.endpoint}</span>
+                )}
+                <div class="invalid-feedback">Please enter a Endpoint</div>
+              </div>
+              <div className="form-group ">
+                <button type="submit" className="btn btn-add bi-file-plus-fill">
+                  Register
+                </button>
+              </div>
+            </form>
           </div>
         </div>
       </div>

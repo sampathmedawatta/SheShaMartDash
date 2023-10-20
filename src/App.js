@@ -22,70 +22,43 @@ const App = () => {
   const { broks, sensors } = useContext(Context);
 
   return (
-    <div>
-      <div className="container-fluid bg-color min-vh-100">
-        <div className="row">
-          <div className="col-2 sidebar vh-100">
+    <div class="container-fluid">
+      <div class="row flex-nowrap">
+        <div class="col-auto col-md-3 col-xl-2 px-sm-2 px-0 sidebar">
+          <div class="d-flex flex-column align-items-center align-items-sm-start px-3 pt-2 text-white min-vh-100">
+            <a
+              href="/"
+              class="d-flex align-items-center pb-3 mb-md-0 me-md-auto text-white text-decoration-none"
+            >
+              <br></br>
+              <span class="fs-5 d-none d-sm-inline ">
+                <h3>SenShaMart</h3>
+              </span>
+            </a>
             <Sidebar />
           </div>
-          <div className="col-10">
-            <div className="row">
-              <div className="col-12">
-                {/* <nav className="navbar navbar-expand navbar-white bg-white">
-                  <div className="navbar-nav mr-auto">
-                    <li className="nav-item">
-                      <Link to={"/home"} className="nav-link">
-                        Home
-                      </Link>
-                    </li>
-                    <li className="nav-item">
-                      <Link to={"/broker"} className="nav-link">
-                        Broker
-                      </Link>
-                    </li>
-                    <li className="nav-item">
-                      <Link to={"/provider"} className="nav-link">
-                        Provider
-                      </Link>
-                    </li>
-                    <li className="nav-item">
-                      <Link to={"/sensor"} className="nav-link">
-                        Sensor
-                      </Link>
-                    </li>
-                    <li className="nav-item">
-                      <Link to={"/sensorquery"} className="nav-link">
-                        Sensor Query
-                      </Link>
-                    </li>
-                    <li className="nav-item">
-                      <Link to={"/client"} className="nav-link">
-                        Client
-                      </Link>
-                    </li>
-                  </div>
-                </nav> */}
-              </div>
-            </div>
-            <Routes>
-              <Route exact path={"/"} element={<Home />} />
-              <Route exact path={"/home"} element={<Home />} />
-              <Route exact path="/broker" element={<Broker />} />
-              <Route exact path="/provider" element={<Provider />} />
-              <Route exact path="/sensor" element={<Sensor />} />
-              <Route exact path="/sensorquery" element={<SensorQuery />} />
+        </div>
+        <div class="col py-3">
+          <Routes>
+            <Route exact path={"/"} element={<Home />} />
+            <Route exact path={"/home"} element={<Home />} />
+            <Route exact path="/broker" element={<Broker />} />
+            <Route exact path="/provider" element={<Provider />} />
+            <Route exact path="/sensor" element={<Sensor />} />
+            <Route exact path="/sensorquery" element={<SensorQuery />} />
 
-              <Route exact path="/client" element={<Client />} />
-              <Route
-                path="/BrokerDetails/:id"
-                element={<BrokerDetails data={broks} />}
-              />
-              <Route path="/brokerList" element={<BrokerList />} />
-              <Route path="/sensorList" element={<SensorList />} />
-            </Routes>
-          </div>
+            <Route exact path="/client" element={<Client />} />
+            <Route
+              path="/BrokerDetails/:id"
+              element={<BrokerDetails data={broks} />}
+            />
+            <Route path="/brokerList" element={<BrokerList />} />
+            <Route path="/sensorList" element={<SensorList />} />
+          </Routes>
         </div>
       </div>
+
+      <footer class="footer text-center py-2">&copy; 2023 SenShaMart</footer>
     </div>
   );
 };

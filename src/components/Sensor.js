@@ -127,7 +127,6 @@ const Sensor = () => {
         <ProviderSubMenu />
         <div className="row">
           <div className="col-12">
-            <div className="card">
               <h3>Register Sensor</h3>
               <br />
               <form onSubmit={handleSubmit}>
@@ -225,7 +224,6 @@ const Sensor = () => {
           </div>
         </div>
       </div>
-    </div>
   );
 };
 
