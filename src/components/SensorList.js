@@ -38,7 +38,7 @@ function SensorList() {
         </div>
 
         <div className="col-12">
-          <div class="title-heders">Provider</div>
+          <div className="title-heders">Provider</div>
         </div>
       </div>
       <div className="row">
@@ -49,28 +49,32 @@ function SensorList() {
             <br></br>
             {registeredSensors !== null && (
               <table className="table table-light">
-                <tr>
-                  <th>Name</th>
-                  <th>Cost Per Minute</th>
-                  <th>Cost Per KB</th>
-                  <th>Broker</th>
-                  <th>Reward amount</th>
-                </tr>
-                {Object.keys(registeredSensors).map((item, key) => (
-                  <tr key={key}>
-                    <td>
-                      <Link
-                        to={`/sensorDetails/${registeredSensors[item].metadata.name}`}
-                      >
-                        {registeredSensors[item].metadata.name}
-                      </Link>
-                    </td>
-                    <td>{registeredSensors[item].metadata.costPerMinute}</td>
-                    <td>{registeredSensors[item].metadata.costPerKB}</td>
-                    <td>{registeredSensors[item].integrationBroker}</td>
-                    <td>{registeredSensors[item].rewardAmount}</td>
+                <thead>
+                  <tr>
+                    <th>Name</th>
+                    <th>Cost Per Minute</th>
+                    <th>Cost Per KB</th>
+                    <th>Broker</th>
+                    <th>Reward amount</th>
                   </tr>
-                ))}
+                </thead>
+                <tbody>
+                  {Object.keys(registeredSensors).map((item, key) => (
+                    <tr key={key}>
+                      <td>
+                        <Link
+                          to={`/sensorDetails/${registeredSensors[item].metadata.name}`}
+                        >
+                          {registeredSensors[item].metadata.name}
+                        </Link>
+                      </td>
+                      <td>{registeredSensors[item].metadata.costPerMinute}</td>
+                      <td>{registeredSensors[item].metadata.costPerKB}</td>
+                      <td>{registeredSensors[item].integrationBroker}</td>
+                      <td>{registeredSensors[item].rewardAmount}</td>
+                    </tr>
+                  ))}
+                </tbody>
               </table>
             )}
           </div>

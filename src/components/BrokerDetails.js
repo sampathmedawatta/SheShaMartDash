@@ -7,39 +7,48 @@ const BrokerDetails = ({data}) => {
   
   
   return (
-    <div className="container-fluid">
+    <div>
       <div className="row">
-        <div className="col-8 my-3">
-          <div class="title-heders">Broker</div>
+        <div className="col-12">
+          <BrokerSubMenu />
+        </div>
+
+        <div className="col-12">
+          <div className="title-heders">Broker</div>
         </div>
       </div>
-      <BrokerSubMenu />
 
       <div className="row">
         <div className="col-12">
-  
-            <h3>Broker Details</h3>
+          <br />
+          <div className="col-10">
+            <div className="page-title">Broker Details</div>
+            <br></br>
 
             {Object.keys(data).map(
               (item, key) =>
                 data[item].metadata.name === id && (
                   <table className="table table-light" key={key}>
-                    <tr>
-                      <th>Name</th>
-                      <th>Endpoint</th>
-                      <th>Counter</th>
-                      <th>Hash</th>
-                    </tr>
-                    <tr>
-                      <td>{data[item].metadata.name}</td>
-                      <td>{data[item].metadata.endpoint}</td>
-                      <td>{data[item].counter}</td>
-                      <td>{data[item].hash}</td>
-                    </tr>
+                    <thead>
+                      <tr>
+                        <th>Name</th>
+                        <th>Endpoint</th>
+                        <th>Counter</th>
+                        <th>Hash</th>
+                      </tr>
+                    </thead>
+                    <tbody>
+                      <tr>
+                        <td>{data[item].metadata.name}</td>
+                        <td>{data[item].metadata.endpoint}</td>
+                        <td>{data[item].counter}</td>
+                        <td>{data[item].hash}</td>
+                      </tr>
+                    </tbody>
                   </table>
                 )
             )}
-         
+          </div>
         </div>
       </div>
     </div>
