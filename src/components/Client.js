@@ -4,24 +4,26 @@ import ClientSubMenu from '../components/UI/SubMenu/ClientSubMenu'
 function Client() {
   return (
     <div>
-      <div className="container-fluid">
-        <div className="row">
-          <div className="col-8 my-3">
-            <div class="title-heders">Client</div>
-          </div>
+      <div className="row">
+        <div className="col-12">
+          <ClientSubMenu />
         </div>
-        <ClientSubMenu></ClientSubMenu>
-        <div className="row">
-          <div className="col-12">
 
-              <h3>Wallet</h3>
-              <br />
-              <div className="form-group"></div>
-            </div>
+        <div className="col-12">
+          <div class="title-heders">Client</div>
+        </div>
+      </div>
+      <div className="row">
+        <div className="col-12">
+          <br />
+          <div className="col-10">
+            <div className="page-title">Wallet</div>
+            <br></br>
+            <div className="form-group"></div>
           </div>
         </div>
       </div>
-  
+    </div>
   );
 }
 
