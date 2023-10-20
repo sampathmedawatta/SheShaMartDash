@@ -10,7 +10,7 @@ function Client() {
         </div>
 
         <div className="col-12">
-          <div class="title-heders">Client</div>
+          <div className="title-heders">Client</div>
         </div>
       </div>
       <div className="row">

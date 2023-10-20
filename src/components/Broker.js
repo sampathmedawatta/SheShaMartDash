@@ -89,7 +89,7 @@ const Broker = () => {
         </div>
 
         <div className="col-12">
-          <div class="title-heders">Broker</div>
+          <div className="title-heders">Broker</div>
         </div>
       </div>
 
@@ -100,10 +100,10 @@ const Broker = () => {
             <div className="page-title">Broker Registration</div>
             <br></br>
             <form onSubmit={handleSubmit}>
-              {/* class="needs-validation" id="form-registration" novalidate
+              {/* className="needs-validation" id="form-registration" novalidate
               method="post" */}
               <div
-                class="alert alert-success alert-dismissible fade show"
+                className="alert alert-success alert-dismissible fade show"
                 role="alert"
               >
                 Broker Registered Successfully
@@ -122,7 +122,9 @@ const Broker = () => {
                 {errors.rewardAmount && (
                   <span className="form-error">{errors.rewardAmount}</span>
                 )}
-                <div class="invalid-feedback">Please enter a reward Amount</div>{" "}
+                <div className="invalid-feedback">
+                  Please enter a reward Amount
+                </div>{" "}
               </div>
               <div className="form-group">
                 <label htmlFor="brokerName">Broker Name* </label>
@@ -137,7 +139,9 @@ const Broker = () => {
                 {errors.brokerName && (
                   <span className="form-error">{errors.brokerName}</span>
                 )}
-                <div class="invalid-feedback">Please enter a Broker Name</div>
+                <div className="invalid-feedback">
+                  Please enter a Broker Name
+                </div>
               </div>
               <div className="form-group">
                 <label htmlFor="endpoint">Endpoint*</label>
@@ -152,7 +156,7 @@ const Broker = () => {
                 {errors.endpoint && (
                   <span className="form-error">{errors.endpoint}</span>
                 )}
-                <div class="invalid-feedback">Please enter a Endpoint</div>
+                <div className="invalid-feedback">Please enter a Endpoint</div>
               </div>
               <div className="form-group ">
                 <button type="submit" className="btn btn-add bi-file-plus-fill">

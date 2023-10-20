@@ -29,7 +29,7 @@ const [registeredBrokers, setRegisteredBrokers] = useState(null);
         </div>
 
         <div className="col-12">
-          <div class="title-heders">Broker</div>
+          <div className="title-heders">Broker</div>
         </div>
       </div>
 
@@ -42,24 +42,28 @@ const [registeredBrokers, setRegisteredBrokers] = useState(null);
             {registeredBrokers !== null && (
               <div className="table-responsive">
                 <table className="table table-light">
-                  <tr>
-                    <th>Name</th>
-                    <th>Endpoint</th>
-                    <th>Counter</th>
-                  </tr>
-                  {Object.keys(registeredBrokers).map((item, key) => (
-                    <tr key={key}>
-                      <td>
-                        <Link
-                          to={`/BrokerDetails/${registeredBrokers[item].metadata.name}`}
-                        >
-                          {registeredBrokers[item].metadata.name}
-                        </Link>
-                      </td>
-                      <td>{registeredBrokers[item].metadata.endpoint}</td>
-                      <td>{registeredBrokers[item].counter}</td>
+                  <thead>
+                    <tr>
+                      <th>Name</th>
+                      <th>Endpoint</th>
+                      <th>Counter</th>
                     </tr>
-                  ))}
+                  </thead>
+                  <tbody>
+                    {Object.keys(registeredBrokers).map((item, key) => (
+                      <tr key={key}>
+                        <td>
+                          <Link
+                            to={`/BrokerDetails/${registeredBrokers[item].metadata.name}`}
+                          >
+                            {registeredBrokers[item].metadata.name}
+                          </Link>
+                        </td>
+                        <td>{registeredBrokers[item].metadata.endpoint}</td>
+                        <td>{registeredBrokers[item].counter}</td>
+                      </tr>
+                    ))}
+                  </tbody>
                 </table>
               </div>
             )}
