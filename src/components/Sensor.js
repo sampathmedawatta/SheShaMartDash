@@ -205,6 +205,16 @@ const Sensor = () => {
                     <span className="form-error">{errors.rewardAmount}</span>
                   )}
                 </div>
+
+                <div className="form-group">
+                  <label htmlFor="metaData">Extra metadata:</label>
+                  <input
+                    type="file"
+                    name="metaData"
+                    id="metaData"
+                    onChange={handleChange}
+                  />
+                </div>
                 <div className="form-group col-3 mt-3">
                   <button type="submit" className="btn btn-primary btn-block">
                     Click

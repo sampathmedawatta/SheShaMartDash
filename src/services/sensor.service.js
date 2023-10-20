@@ -558,6 +558,78 @@ const tempres=
   //});
 };
 
+const sensorParms = {
+  sensorName: "cam",
+  costPerMinute: 1,
+  costPerKB: 1,
+  integrationBroker: "broker1",
+  rewardAmount: 0,
+  extraLiteralMetadata: [
+    {
+      s: "SSMS://#CameraSensorVideo",
+      p: "http://www.w3.org/2000/01/rdf-schema#label",
+      o: "video",
+    },
+    {
+      s: "SSMS://#CameraSensorLocation",
+      p: "http://www.w3.org/2003/01/geo/wgs84_pos#lat",
+      o: "-37.821658",
+    },
+    {
+      s: "SSMS://#CameraSensorLocation",
+      p: "http://www.w3.org/2003/01/geo/wgs84_pos#long",
+      o: "145.03904",
+    },
+    {
+      s: "SSMS://#CameraSensorLocation",
+      p: "http://www.w3.org/2003/01/geo/wgs84_pos#alt",
+      o: "12.75",
+    },
+    {
+      s: "SSMS://#CameraSensorLocation",
+      p: "http://rdfs.co/juso/country",
+      o: "Australia",
+    },
+    {
+      s: "SSMS://#CameraSensorLocation",
+      p: "http://rdfs.co/juso/Provenance",
+      o: "Queensland",
+    },
+    {
+      s: "SSMS://#CameraSensorLocation",
+      p: "http://rdfs.co/juso/City",
+      o: "Brisbane",
+    },
+    {
+      s: "SSMS://#CameraSensorLocation",
+      p: "http://rdfs.co/juso/Suburb",
+      o: "Stafford",
+    },
+    {
+      s: "SSMS://#CameraSensorLocation",
+      p: "http://rdfs.co/juso/Address",
+      o: "9 Webster street",
+    },
+    {
+      s: "SSMS://#CameraSensorLocation",
+      p: "http://rdfs.co/juso/Postcode",
+      o: "4053",
+    },
+  ],
+  extraNodeMetadata: [
+    {
+      s: "SSMS://",
+      p: "http://www.w3.org/ns/sosa/observes",
+      o: "SSMS://#CameraSensorVideo",
+    },
+    {
+      s: "SSMS://",
+      p: "http://www.w3.org/ns/sosa/hasFeatureOfInterest",
+      o: "SSMS://#CameraSensorLocation",
+    },
+  ],
+};
+
 const registerSensor = (params) => {
   return axios.post("/sensorRegistration", params).then((response) => {
     return response.data;
