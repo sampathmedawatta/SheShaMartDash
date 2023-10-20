@@ -180,7 +180,7 @@ const Sensor = () => {
                   type="file"
                   name="metaData"
                   id="metaData"
-                  className="form-control"
+                  className="form-control drop-down"
                   onChange={handleChange}
                 />
               </div>
