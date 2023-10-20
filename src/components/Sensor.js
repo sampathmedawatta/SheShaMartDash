@@ -1,80 +1,139 @@
-import React, { useState, useEffect, useRef } from "react";
+import React, { useState } from "react";
 import SensorService from "../services/sensor.service";
-import { Context } from "../context/context";
-import { Link } from "react-router-dom";
 import ProviderSubMenu from "../components/UI/SubMenu/ProviderSubMenu";
 
 const Sensor = () => {
   const registerSensor = useState([]);
 
-  const [rewardAmount, setRewardAmount] = useState("");
-  const handleRewardAmountChange = (event) => {
-    setRewardAmount(event.target.value);
-    console.log("value is:", event.target.value);
+  const [formData, setFormData] = useState({
+    rewardAmount: "",
+    sensorName: "",
+    costPerMinute: "",
+    costPerKB: "",
+    brokerName: "",
+  });
+
+  const [errors, setErrors] = useState({});
+
+  const handleChange = (e) => {
+    const { name, value } = e.target;
+    setFormData({
+      ...formData,
+      [name]: value,
+    });
   };
 
-  const [sensorName, setSensorName] = useState("");
-  const handleSensorNameChange = (event) => {
-    setSensorName(event.target.value);
-
-    console.log("value is:", event.target.value);
-  };
-
-  const [costPerMinute, setCostPerMinute] = useState("");
-  const handleCostPerMinuteChange = (event) => {
-    setCostPerMinute(event.target.value);
-
-    console.log("value is:", event.target.value);
-  };
-
-  const [costPerKB, setCostPerKB] = useState("");
-  const handleCostPerKBChange = (event) => {
-    setCostPerKB(event.target.value);
-
-    console.log("value is:", event.target.value);
-  };
-
-  const [brokerName, setBrokerName] = useState("");
-  const handleBrokerNameChange = (event) => {
-    setBrokerName(event.target.value);
-
-    console.log("value is:", event.target.value);
-  };
-
-  const sensorRegister = (e) => {
+  const handleSubmit = (e) => {
     e.preventDefault();
+    const validationErrors = {};
+    if (!formData.rewardAmount) {
+      validationErrors.rewardAmount = "Reward amount is required";
+    }
 
-    const params = {
-      rewardAmount: +rewardAmount,
-      sensorName: sensorName,
-      costPerMinute: +costPerMinute,
-      costPerKB: +costPerKB,
-      integrationBroker: brokerName,
-    };
+    if (!formData.sensorName.trim()) {
+      validationErrors.sensorName = "Sensor name is required";
+    }
 
-    console.log(params);
-    registerSensor = SensorService.registerSensor(params);
-    console.log(registerSensor);
+    if (!formData.costPerMinute.trim()) {
+      validationErrors.costPerMinute = "Cost per minute is required";
+    }
+
+    if (!formData.costPerKB.trim()) {
+      validationErrors.costPerKB = "Cost per KB is required";
+    }
+
+    if (!formData.brokerName.trim()) {
+      validationErrors.brokerName = "Broker name is required";
+    }
+
+    setErrors(validationErrors);
+
+    if (Object.keys(validationErrors).length === 0) {
+      const params = {
+        rewardAmount: +formData.rewardAmount,
+        sensorName: formData.sensorName,
+        costPerMinute: +formData.costPerMinute,
+        costPerKB: +formData.costPerKB,
+        integrationBroker: formData.brokerName,
+      };
+
+      registerSensor = SensorService.registerSensor(params);
+    }
   };
 
-  const getSensors = () => {
-    const registeredSensors = SensorService.getSensors();
-    console.log(registeredSensors);
-  };
+  // const [rewardAmount, setRewardAmount] = useState("");
+  // const handleRewardAmountChange = (event) => {
+  //   setRewardAmount(event.target.value);
+  //   console.log("value is:", event.target.value);
+  // };
+
+  // const [sensorName, setSensorName] = useState("");
+  // const handleSensorNameChange = (event) => {
+  //   setSensorName(event.target.value);
+
+  //   console.log("value is:", event.target.value);
+  // };
+
+  // const [costPerMinute, setCostPerMinute] = useState("");
+  // const handleCostPerMinuteChange = (event) => {
+  //   setCostPerMinute(event.target.value);
+
+  //   console.log("value is:", event.target.value);
+  // };
+
+  // const [costPerKB, setCostPerKB] = useState("");
+  // const handleCostPerKBChange = (event) => {
+  //   setCostPerKB(event.target.value);
+
+  //   console.log("value is:", event.target.value);
+  // };
+
+  // const [brokerName, setBrokerName] = useState("");
+  // const handleBrokerNameChange = (event) => {
+  //   setBrokerName(event.target.value);
+
+  //   console.log("value is:", event.target.value);
+  // };
+
+  // const sensorRegister = (e) => {
+  //   e.preventDefault();
+
+  //   const params = {
+  //     rewardAmount: +rewardAmount,
+  //     sensorName: sensorName,
+  //     costPerMinute: +costPerMinute,
+  //     costPerKB: +costPerKB,
+  //     integrationBroker: brokerName,
+  //   };
+
+  //   console.log(params);
+  //   registerSensor = SensorService.registerSensor(params);
+  //   console.log(registerSensor);
+  // };
+
+  // const getSensors = () => {
+  //   const registeredSensors = SensorService.getSensors();
+  //   console.log(registeredSensors);
+  // };
 
   return (
     <div>
-      <div className="container-fluid">
-        <div className="row-8">
-          <div className="col-8 my-3">
-            <div class="title-heders">Provider</div>
-          </div>
+      <div className="row">
+        <div className="col-12">
+          <ProviderSubMenu />
         </div>
-        <ProviderSubMenu />
-        <div className="row">
-          <div className="col-12">
-              <h3>Register Sensor</h3>
-              <br />
+
+        <div className="col-12">
+          <div class="title-heders">Provider</div>
+        </div>
+      </div>
+      <div className="row">
+        <div className="col-12">
+          <br />
+          <div className="col-10">
+            <div className="page-title">Sensor Registration</div>
+            <br></br>
+            <form onSubmit={handleSubmit}>
               <div className="form-group">
                 <label htmlFor="sensorName">Sensor Name </label>
                 <input
@@ -82,10 +141,12 @@ const Sensor = () => {
                   id="sensorName"
                   name="sensorName"
                   className="form-control"
-                  onChange={handleSensorNameChange}
-                  value={sensorName}
+                  onChange={handleChange}
                   autoComplete="off"
                 />
+                {errors.sensorName && (
+                  <span className="form-error">{errors.sensorName}</span>
+                )}
               </div>
               <div className="form-group">
                 <label htmlFor="costPerMinute">Cost Per Minute </label>
@@ -95,10 +156,12 @@ const Sensor = () => {
                   id="costPerMinute"
                   name="costPerMinute"
                   className="form-control"
-                  onChange={handleCostPerMinuteChange}
-                  value={costPerMinute}
+                  onChange={handleChange}
                   autoComplete="off"
                 />
+                {errors.costPerMinute && (
+                  <span className="form-error">{errors.costPerMinute}</span>
+                )}
               </div>
               <div className="form-group">
                 <label htmlFor="costPerKB">Cost Per KB </label>
@@ -108,10 +171,12 @@ const Sensor = () => {
                   id="costPerKB"
                   name="costPerKB"
                   className="form-control"
-                  onChange={handleCostPerKBChange}
-                  value={costPerKB}
+                  onChange={handleChange}
                   autoComplete="off"
                 />
+                {errors.costPerKB && (
+                  <span className="form-error">{errors.costPerKB}</span>
+                )}
               </div>
               <div className="form-group">
                 <label htmlFor="brokerName">Broker Name </label>
@@ -120,10 +185,12 @@ const Sensor = () => {
                   id="brokerName"
                   name="brokerName"
                   className="form-control"
-                  onChange={handleBrokerNameChange}
-                  value={brokerName}
+                  onChange={handleChange}
                   autoComplete="off"
                 />
+                {errors.brokerName && (
+                  <span className="form-error">{errors.brokerName}</span>
+                )}
               </div>
 
               <div className="form-group">
@@ -134,34 +201,33 @@ const Sensor = () => {
                   id="rewardAmount"
                   name="rewardAmount"
                   className="form-control"
-                  onChange={handleRewardAmountChange}
-                  value={rewardAmount}
+                  onChange={handleChange}
                   autoComplete="off"
                 />
+                {errors.rewardAmount && (
+                  <span className="form-error">{errors.rewardAmount}</span>
+                )}
               </div>
+
               <div className="form-group">
-                <button
-                  className="btn btn-primary btn-block"
-                  onClick={sensorRegister}
-                >
-                  Click
-                </button>
-                <br></br>
-                <span>rewardAmount: {rewardAmount}</span>
-                <br></br>
-                <span>brokerName: {brokerName}</span>
-                <br></br>
-                <span>sensorName: {sensorName}</span>
-                <br></br>
-                <span>costPerMinute: {costPerMinute}</span>
-                <br></br>
-                <span>costPerKB: {costPerKB}</span>
-                <br></br>
+                <label htmlFor="metaData">Extra metadata:</label>
+                <input
+                  type="file"
+                  name="metaData"
+                  id="metaData"
+                  onChange={handleChange}
+                />
               </div>
-            </div>
+              <div className="form-group col-3 mt-3">
+                <button type="submit" className="btn btn-add bi-file-plus-fill">
+                  Register
+                </button>
+              </div>
+            </form>
           </div>
         </div>
       </div>
+    </div>
   );
 };
 
