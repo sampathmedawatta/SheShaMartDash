@@ -22,17 +22,23 @@ const [registeredBrokers, setRegisteredBrokers] = useState(null);
 
 
   return (
-    <div className="container-fluid">
+    <div>
       <div className="row">
-        <div className="col-8 my-3">
+        <div className="col-12">
+          <BrokerSubMenu />
+        </div>
+
+        <div className="col-12">
           <div class="title-heders">Broker</div>
         </div>
       </div>
-      <BrokerSubMenu />
 
       <div className="row">
         <div className="col-12">
-            <h3>Broker List</h3>
+          <br />
+          <div className="col-10">
+            <div className="page-title">Broker List</div>
+            <br></br>
             {registeredBrokers !== null && (
               <div className="table-responsive">
                 <table className="table table-light">
@@ -60,7 +66,7 @@ const [registeredBrokers, setRegisteredBrokers] = useState(null);
           </div>
         </div>
       </div>
-
+    </div>
   );
 }
 

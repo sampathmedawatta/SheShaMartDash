@@ -57,7 +57,7 @@ const Sensor = () => {
         integrationBroker: formData.brokerName,
       };
 
-    registerSensor = SensorService.registerSensor(params);
+      registerSensor = SensorService.registerSensor(params);
     }
   };
 
@@ -118,112 +118,116 @@ const Sensor = () => {
 
   return (
     <div>
-      <div className="container-fluid">
-        <div className="row-8">
-          <div className="col-8 my-3">
-            <div class="title-heders">Provider</div>
-          </div>
+      <div className="row">
+        <div className="col-12">
+          <ProviderSubMenu />
         </div>
-        <ProviderSubMenu />
-        <div className="row">
-          <div className="col-12">
-              <h3>Register Sensor</h3>
-              <br />
-              <form onSubmit={handleSubmit}>
-                <div className="form-group">
-                  <label htmlFor="sensorName">Sensor Name </label>
-                  <input
-                    type="text"
-                    id="sensorName"
-                    name="sensorName"
-                    className="form-control"
-                    onChange={handleChange}
-                    autoComplete="off"
-                  />
-                  {errors.sensorName && (
-                    <span className="form-error">{errors.sensorName}</span>
-                  )}
-                </div>
-                <div className="form-group">
-                  <label htmlFor="costPerMinute">Cost Per Minute </label>
-                  <input
-                    type="number"
-                    min={0}
-                    id="costPerMinute"
-                    name="costPerMinute"
-                    className="form-control"
-                    onChange={handleChange}
-                    autoComplete="off"
-                  />
-                  {errors.costPerMinute && (
-                    <span className="form-error">{errors.costPerMinute}</span>
-                  )}
-                </div>
-                <div className="form-group">
-                  <label htmlFor="costPerKB">Cost Per KB </label>
-                  <input
-                    type="number"
-                    min={0}
-                    id="costPerKB"
-                    name="costPerKB"
-                    className="form-control"
-                    onChange={handleChange}
-                    autoComplete="off"
-                  />
-                  {errors.costPerKB && (
-                    <span className="form-error">{errors.costPerKB}</span>
-                  )}
-                </div>
-                <div className="form-group">
-                  <label htmlFor="brokerName">Broker Name </label>
-                  <input
-                    type="text"
-                    id="brokerName"
-                    name="brokerName"
-                    className="form-control"
-                    onChange={handleChange}
-                    autoComplete="off"
-                  />
-                  {errors.brokerName && (
-                    <span className="form-error">{errors.brokerName}</span>
-                  )}
-                </div>
 
-                <div className="form-group">
-                  <label htmlFor="rewardAmount">Reward Amount</label>
-                  <input
-                    type="number"
-                    min={0}
-                    id="rewardAmount"
-                    name="rewardAmount"
-                    className="form-control"
-                    onChange={handleChange}
-                    autoComplete="off"
-                  />
-                  {errors.rewardAmount && (
-                    <span className="form-error">{errors.rewardAmount}</span>
-                  )}
-                </div>
+        <div className="col-12">
+          <div class="title-heders">Provider</div>
+        </div>
+      </div>
+      <div className="row">
+        <div className="col-12">
+          <br />
+          <div className="col-10">
+            <div className="page-title">Sensor Registration</div>
+            <br></br>
+            <form onSubmit={handleSubmit}>
+              <div className="form-group">
+                <label htmlFor="sensorName">Sensor Name </label>
+                <input
+                  type="text"
+                  id="sensorName"
+                  name="sensorName"
+                  className="form-control"
+                  onChange={handleChange}
+                  autoComplete="off"
+                />
+                {errors.sensorName && (
+                  <span className="form-error">{errors.sensorName}</span>
+                )}
+              </div>
+              <div className="form-group">
+                <label htmlFor="costPerMinute">Cost Per Minute </label>
+                <input
+                  type="number"
+                  min={0}
+                  id="costPerMinute"
+                  name="costPerMinute"
+                  className="form-control"
+                  onChange={handleChange}
+                  autoComplete="off"
+                />
+                {errors.costPerMinute && (
+                  <span className="form-error">{errors.costPerMinute}</span>
+                )}
+              </div>
+              <div className="form-group">
+                <label htmlFor="costPerKB">Cost Per KB </label>
+                <input
+                  type="number"
+                  min={0}
+                  id="costPerKB"
+                  name="costPerKB"
+                  className="form-control"
+                  onChange={handleChange}
+                  autoComplete="off"
+                />
+                {errors.costPerKB && (
+                  <span className="form-error">{errors.costPerKB}</span>
+                )}
+              </div>
+              <div className="form-group">
+                <label htmlFor="brokerName">Broker Name </label>
+                <input
+                  type="text"
+                  id="brokerName"
+                  name="brokerName"
+                  className="form-control"
+                  onChange={handleChange}
+                  autoComplete="off"
+                />
+                {errors.brokerName && (
+                  <span className="form-error">{errors.brokerName}</span>
+                )}
+              </div>
 
-                <div className="form-group">
-                  <label htmlFor="metaData">Extra metadata:</label>
-                  <input
-                    type="file"
-                    name="metaData"
-                    id="metaData"
-                    onChange={handleChange}
-                  />
-                </div>
-                <div className="form-group col-3 mt-3">
-                  <button type="submit" className="btn btn-primary btn-block">
-                    Click
-                  </button>
-                </div>
-              </form>
-            </div>
+              <div className="form-group">
+                <label htmlFor="rewardAmount">Reward Amount</label>
+                <input
+                  type="number"
+                  min={0}
+                  id="rewardAmount"
+                  name="rewardAmount"
+                  className="form-control"
+                  onChange={handleChange}
+                  autoComplete="off"
+                />
+                {errors.rewardAmount && (
+                  <span className="form-error">{errors.rewardAmount}</span>
+                )}
+              </div>
+
+              <div className="form-group">
+                <label htmlFor="metaData">Extra metadata:</label>
+                <input
+                  type="file"
+                  name="metaData"
+                  id="metaData"
+                  onChange={handleChange}
+                />
+              </div>
+              <div className="form-group col-3 mt-3">
+                <button type="submit" className="btn btn-add bi-file-plus-fill">
+                  Register
+                </button>
+              </div>
+            </form>
           </div>
         </div>
       </div>
+    </div>
   );
 };
 

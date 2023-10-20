@@ -2,6 +2,7 @@ import React, { useEffect, useState } from "react";
 import Yasgui from "@triply/yasgui";
 import "@triply/yasgui/build/yasgui.min.css";
 import SensorService from "../services/sensor.service";
+import ClientSubMenu from "../components/UI/SubMenu/ClientSubMenu";
 
 const SensorQuery = () => {
   const [showAlert, setShowAlert] = useState(false);
@@ -120,70 +121,72 @@ const SensorQuery = () => {
 
   return (
     <div>
-      <div className="container-fluid">
-        <div className="row">
-          <div className="col-8 my-3">
-            <div className="title-heders">Client</div>
-          </div>
+      <div className="row">
+        <div className="col-12">
+          <ClientSubMenu />
         </div>
-        <div className="row">
-          <div className="col-12">
-              <h3>Sensor Query</h3>
-              <br />
-              <div>
-                <br></br>
-                <div className="form-check form-check-inline">
-                  <input
-                    className="form-check-input"
-                    type="checkbox"
-                    id="advanceSearch"
-                    checked={isAdvanceSearchChecked}
-                    onChange={(e) => setIsAdvanceSearchChecked(e.target.checked)}
-                  />
-                  <label className="form-check-label">
-                    Select for Advance Search
-                  </label>
+
+        <div className="col-12">
+          <div class="title-heders">Client</div>
+        </div>
+      </div>
+      <div className="row">
+        <div className="col-12">
+          <br />
+          <div className="col-10">
+            <div className="page-title">Sensor Query</div>
+            <br></br>
+            <div>
+              <div className="form-check form-check-inline">
+                <input
+                  className="form-check-input"
+                  type="checkbox"
+                  id="advanceSearch"
+                  checked={isAdvanceSearchChecked}
+                  onChange={(e) => setIsAdvanceSearchChecked(e.target.checked)}
+                />
+                <label className="form-check-label">
+                  Select for Advance Search
+                </label>
+              </div>
+            </div>
+            <br></br>
+            <div id="result">
+              {showAlert ? (
+                <div className="alert alert-danger" role="alert">
+                  SPARQL compiler Error. Please fix the SPARQL query!
                 </div>
-              </div>
+              ) : null}
+
+              {isAdvanceSearchChecked ? (
+                <div id="yasgui"></div>
+              ) : (
+                <div id="query-builder">query-builder</div>
+              )}
+
               <br></br>
-              <div id="result">
-                {showAlert ? (
-                  <div className="alert alert-danger" role="alert">
-                    SPARQL compiler Error. Please fix the SPARQL query!
+              <div className="title-heders">Results</div>
+              <br></br>
+              {showNoResultFound && sensorData.length === 0 ? (
+                <div className="alert alert-warning" role="alert">
+                  No result found.
+                </div>
+              ) : (
+                sensorData.length > 0 && (
+                  <div className="table-responsive">
+                    <table className="table table-light">
+                      <thead>{renderTableHeaders()}</thead>
+                      <tbody>{renderTableRows()}</tbody>
+                    </table>
                   </div>
-                ) : null}
-
-                {isAdvanceSearchChecked ? (
-                  <div id="yasgui"></div>
-                ) : (
-                  <div id="query-builder">query-builder</div>
-                )}
-
-                <br></br>
-                <div className="title-heders">Results</div>
-                <br></br>
-                {showNoResultFound && sensorData.length === 0 ? (
-                  <div className="alert alert-warning" role="alert">
-                    No result found.
-                  </div>
-                ) : (
-                  sensorData.length > 0 && (
-                    <div className="table-responsive">
-                      <table className="table table-light">
-                        <thead>{renderTableHeaders()}</thead>
-                        <tbody>{renderTableRows()}</tbody>
-                      </table>
-                    </div>
-                  )
-                )}
-              </div>
-            
+                )
+              )}
+            </div>
           </div>
         </div>
       </div>
     </div>
-  
-);
+  );
                   
 };
 
