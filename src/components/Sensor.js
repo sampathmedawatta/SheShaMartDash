@@ -100,6 +100,7 @@ const Sensor = () => {
   };
 
   const [selectedOption, setSelectedOption] = useState("");
+  const [response, setResponse] = useState({});
 
   const handleDropdownChange = (event) => {
     setSelectedOption(event.target.value);
@@ -147,8 +148,10 @@ const Sensor = () => {
         params.extraNodeMetadata = jsonExtraNodeMetadata;
       }
 
-      const response = await SensorService.registerSensor(params);
-      // TODO show success message
+      const registerResponse = await SensorService.registerSensor(params);
+      if (registerResponse) {
+        setResponse({ status: "saved" });
+      }
     }
   };
 
@@ -170,6 +173,14 @@ const Sensor = () => {
             <div className="page-title">Sensor Registration</div>
             <br></br>
             <form onSubmit={handleSubmit}>
+              {response.status && (
+                <div
+                  className="alert alert-success alert-dismissible fade show"
+                  role="alert"
+                >
+                  Sensor Registered Successfully
+                </div>
+              )}
               <div className="form-group">
                 <label htmlFor="sensorName">Sensor Name </label>
                 <input
