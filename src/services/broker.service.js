@@ -21,8 +21,8 @@ const getBrokers = () => {
     });
 };
 
-const registerBroker = (params) => {
-  axiosInstance
+const registerBroker = async (params) => {
+  await axiosInstance
     .post("/BrokerRegistration", params, headers)
     .then((response) => {
       console.log(response);

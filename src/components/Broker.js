@@ -11,6 +11,7 @@ const Broker = () => {
   });
 
   const [errors, setErrors] = useState({});
+  const [response, setResponse] = useState({});
 
   const handleChange = (e) => {
     const { name, value } = e.target;
@@ -20,7 +21,7 @@ const Broker = () => {
     });
   };
 
-  const handleSubmit = (e) => {
+  const handleSubmit = async (e) => {
     e.preventDefault();
     const validationErrors = {};
     if (!formData.rewardAmount) {
@@ -43,43 +44,12 @@ const Broker = () => {
           brokerName: formData.brokerName.trim(),
           endpoint: formData.endpoint.trim(),
         };
-      const registerBroker = BrokerService.registerBroker(params);
-
+      const registerBroker = await BrokerService.registerBroker(params);
+        if (registerBroker) {
+          setResponse({ status: "saved" });
+        }
     }
   };
-
-
-  // const registerBroker = useState([]);
-
-  // const [rewardAmount, setRewardAmount] = useState("");
-  // const handleRewardAmountChange = (event) => {
-  //   setRewardAmount(event.target.value);
-  // };
-
-  // const [brokerName, setBrokerName] = useState("");
-  // const handleBrokerNameChange = (event) => {
-  //   setBrokerName(event.target.value);
-  // };
-
-  // const [endpoint, setEndpoint] = useState("");
-  // const handleEndpointChange = (event) => {
-  //   setEndpoint(event.target.value);
-  // };
-
-  // const brokerRegister = (e) => {
-
-  //    var forms = document.querySelectorAll(".needs-validation");
-  //   e.preventDefault();
-
-  //   const params = {
-  //     rewardAmount: +rewardAmount,
-  //     brokerName: brokerName,
-  //     endpoint: endpoint,
-  //   };
-
-  //   registerBroker = BrokerService.registerBroker(params);
-
-  // };
 
   return (
     <div>
@@ -100,14 +70,14 @@ const Broker = () => {
             <div className="page-title">Broker Registration</div>
             <br></br>
             <form onSubmit={handleSubmit}>
-              {/* className="needs-validation" id="form-registration" novalidate
-              method="post" */}
-              <div
-                className="alert alert-success alert-dismissible fade show"
-                role="alert"
-              >
-                Broker Registered Successfully
-              </div>
+              {response.status && (
+                <div
+                  className="alert alert-success alert-dismissible fade show"
+                  role="alert"
+                >
+                  Broker Registered Successfully
+                </div>
+              )}
               <div className="form-group">
                 <label htmlFor="rewardAmount">Reward Amount*</label>
                 <input

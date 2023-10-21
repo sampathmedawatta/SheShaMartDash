@@ -42,8 +42,8 @@ const querySensor = (payload) => {
 //   return tempres;
 };
 
-const registerSensor = (params) => {
-  axiosInstance
+const registerSensor = async (params) => {
+  await axiosInstance
     .post("/sensorRegistration", params, headers)
     .then((response) => {
       console.log(response);

@@ -9,6 +9,7 @@ const TurtleFileReader = ({onChange}) => {
         <input
           type="file"
           name="turtleFile"
+          class="form-control drop-down"
           accept=".ttl"
           onChange={onChange}
         />

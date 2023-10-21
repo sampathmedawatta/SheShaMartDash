@@ -105,7 +105,7 @@ const Sensor = () => {
     setSelectedOption(event.target.value);
   };
 
-  const handleSubmit = (e) => {
+  const handleSubmit = async (e) => {
     e.preventDefault();
     const validationErrors = {};
     if (!formData.rewardAmount) {
@@ -147,7 +147,7 @@ const Sensor = () => {
         params.extraNodeMetadata = jsonExtraNodeMetadata;
       }
 
-      const response = SensorService.registerSensor(params);
+      const response = await SensorService.registerSensor(params);
       // TODO show success message
     }
   };
