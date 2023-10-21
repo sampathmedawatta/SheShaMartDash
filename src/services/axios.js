@@ -11,13 +11,6 @@ const headers = {
   //Authorization: "Bearer your-access-token", // Add any custom headers as needed
 };
 
-// Set up default headers for all requests
-// axiosInstance.defaults.headers.common["Access-Control-Allow-Origin"] = "*";
-// axiosInstance.defaults.headers.common["Access-Control-Allow-Methods"] =
-//   "GET, POST, PUT, DELETE";
-// axiosInstance.defaults.headers.common["Access-Control-Allow-Headers"] =
-//   "Authorization, Content-Type";
-
 const get = (path, getData) => {
   return axiosInstance
     .get(path, getData, headers)
