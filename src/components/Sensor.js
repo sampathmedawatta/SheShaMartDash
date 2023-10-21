@@ -3,6 +3,7 @@ import SensorService from "../services/sensor.service";
 import BrokerService from "../services/broker.service";
 import ProviderSubMenu from "../components/UI/SubMenu/ProviderSubMenu";
 import DropDown from "../components/UI/DropDown";
+import TurtleFileReader from "../components/UI/TurtleFileReader";
 
 const Sensor = () => {
 
@@ -157,7 +158,6 @@ const Sensor = () => {
                   <span className="form-error">{errors.brokerName}</span>
                 )}
               </div>
-
               <div className="form-group">
                 <label htmlFor="rewardAmount">Reward Amount</label>
                 <input
@@ -173,17 +173,17 @@ const Sensor = () => {
                   <span className="form-error">{errors.rewardAmount}</span>
                 )}
               </div>
-
-              <div className="form-group">
-                <label htmlFor="metaData">Extra metadata:</label>
+              <TurtleFileReader />
+              <label htmlFor="turtleFile">Extra metadata:</label>
+              {/* <div className="form-group">
                 <input
                   type="file"
                   name="metaData"
                   id="metaData"
-                  className="form-control"
+                  className="form-control drop-down"
                   onChange={handleChange}
                 />
-              </div>
+              </div> */}
               <div className="form-group col-3 mt-3">
                 <button type="submit" className="btn btn-add bi-file-plus-fill">
                   Register
