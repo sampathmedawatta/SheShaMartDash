@@ -10,7 +10,7 @@ function SensorList() {
 
   useEffect(() => {
     async function fetchData() {
-      const registeredSensors = SensorService.getSensors();
+      const registeredSensors = await SensorService.getSensors();
       if (registeredSensors !== null) {
         setRegisteredSensors(registeredSensors);
         setSensors(registeredSensors);

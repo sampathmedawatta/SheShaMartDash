@@ -16,10 +16,16 @@ import axios from "./axios";
   };
 
   const Integration = (params) => {
-    return axios.post("/integration", prms).then((response) => {
-      console.log(params);
-      return response.data;
-    });
+
+     axiosInstance
+       .post("/integration", params, headers)
+       .then((response) => {
+         console.log(response);
+         return response;
+       })
+       .catch((error) => {
+         console.error(error);
+       });
   };
 
 const PaymentService = {

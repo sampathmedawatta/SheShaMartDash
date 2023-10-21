@@ -73,7 +73,7 @@ const Sensor = () => {
   const [registeredBrokers, setRegisteredBrokers] = useState(null);
   useEffect(() => {
     async function fetchData() {
-      const getList = BrokerService.getBrokers();
+      const getList = await BrokerService.getBrokers();
       if (getList !== null) {
         setRegisteredBrokers(getList);
       }
