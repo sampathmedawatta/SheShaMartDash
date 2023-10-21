@@ -25,7 +25,7 @@ const BrokerDetails = ({data}) => {
             <div className="page-title">Broker Details</div>
             <br></br>
 
-            {Object.keys(data).map(
+            {Object && Object.keys(data).map(
               (item, key) =>
                 data[item].metadata.name === id && (
                   <table className="table table-light" key={key}>

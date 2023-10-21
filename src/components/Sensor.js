@@ -3,14 +3,77 @@ import SensorService from "../services/sensor.service";
 import BrokerService from "../services/broker.service";
 import ProviderSubMenu from "../components/UI/SubMenu/ProviderSubMenu";
 import DropDown from "../components/UI/DropDown";
+import TurtleFileReader from "../components/UI/TurtleFileReader";
+import N3 from "n3";
 
 const Sensor = () => {
+  const [jsonExtraLiteralMetadata, setExtraLiteralMetadata] = useState(null);
+  const [jsonExtraNodeMetadata, setExtraNodeMetadata] = useState(null);
+  
+  const handleFileInput = (e) => {
+    const file = e.target.files[0];
+    if (file) {
+      const fileName = file.name;
+      const fileExtension = fileName.split(".").pop().toLowerCase();
+      if (fileExtension === "ttl") {
+        const reader = new FileReader();
+        reader.onload = (e) => {
+          parseTurtle(e.target.result);
+        };
+        reader.readAsText(file);
+      }
+      else{
+        // TODO Show error File format not supported
+      }
+    }
+  };
+
+  const parseTurtle = (data) => {
+    const parser = new N3.Parser();
+    const dataExtraLiteralMetadata = []; // Initialize an array to store data
+    const dataExtraNodeMetadata = [];
+
+    parser.parse(data, (error, triple, prefixes) => {
+      if (triple) {
+        // Create the parameter object
+        const params = {
+          s: triple.subject.value,
+          p: triple.predicate.value,
+          o: triple.object.value,
+        };
+
+        if (triple.object.termType === "Literal") {
+          // Check the object is a Literal
+          dataExtraLiteralMetadata.push(params); // Push params into the dataExtraLiteralMetadata array
+        } else if (triple.object.termType === "NamedNode") {
+          // Check the object is a NamedNode
+          dataExtraNodeMetadata.push(params); // Push params into the dataExtraNodeMetadata array
+        }
+      } else {
+        // All parsing is complete, convert dataExtraLiteralMetadata to a JSON object
+        const extraLiteralMetadata = JSON.stringify(
+          dataExtraLiteralMetadata,
+          null,
+          2
+        );
+        setExtraLiteralMetadata(extraLiteralMetadata);
+
+        // All parsing is complete, convert dataExtraNodeMetadata to a JSON object
+        const extraNodeMetadata = JSON.stringify(
+          dataExtraNodeMetadata,
+          null,
+          2
+        );
+        setExtraNodeMetadata(extraNodeMetadata);
+      }
+    });
+  };
+
 
   const [registeredBrokers, setRegisteredBrokers] = useState(null);
-
   useEffect(() => {
     async function fetchData() {
-      const getList = BrokerService.getBrokers();
+      const getList = await BrokerService.getBrokers();
       if (getList !== null) {
         setRegisteredBrokers(getList);
       }
@@ -41,7 +104,7 @@ const Sensor = () => {
   const handleDropdownChange = (event) => {
     setSelectedOption(event.target.value);
   };
-  
+
   const handleSubmit = (e) => {
     e.preventDefault();
     const validationErrors = {};
@@ -76,8 +139,16 @@ const Sensor = () => {
         integrationBroker: selectedOption,
       };
 
+      if (jsonExtraLiteralMetadata !== null) {
+        params.extraLiteralMetadata = jsonExtraLiteralMetadata;
+      }
+
+      if (jsonExtraNodeMetadata !== null) {
+        params.extraNodeMetadata = jsonExtraNodeMetadata;
+      }
+
       const response = SensorService.registerSensor(params);
-      console.log(response);
+      // TODO show success message
     }
   };
 
@@ -145,7 +216,6 @@ const Sensor = () => {
               </div>
               <div className="form-group">
                 <label htmlFor="brokerName">Broker Name </label>
-
                 {registeredBrokers && (
                   <DropDown
                     onChange={handleDropdownChange}
@@ -157,7 +227,6 @@ const Sensor = () => {
                   <span className="form-error">{errors.brokerName}</span>
                 )}
               </div>
-
               <div className="form-group">
                 <label htmlFor="rewardAmount">Reward Amount</label>
                 <input
@@ -173,16 +242,9 @@ const Sensor = () => {
                   <span className="form-error">{errors.rewardAmount}</span>
                 )}
               </div>
-
               <div className="form-group">
-                <label htmlFor="metaData">Extra metadata:</label>
-                <input
-                  type="file"
-                  name="metaData"
-                  id="metaData"
-                  className="form-control"
-                  onChange={handleChange}
-                />
+                <label htmlFor="turtleFile">Extra metadata:</label>
+                <TurtleFileReader onChange={handleFileInput} />
               </div>
               <div className="form-group col-3 mt-3">
                 <button type="submit" className="btn btn-add bi-file-plus-fill">
