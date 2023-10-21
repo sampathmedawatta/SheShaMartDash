@@ -45,7 +45,16 @@ const TurtleFileReader = () => {
 
   return (
     <div>
-      <input type="file" accept=".ttl" onChange={handleFileInput} />
+      <div className="form-group">
+        <input
+          type="file"
+          name="turtleFile"
+          accept=".ttl"
+          onChange={handleFileInput}
+        />
+      </div>
+      <pre>{ttlData}</pre>
+      <pre>{jsonResult}</pre> {/* Display the JSON result */}
     </div>
   );
 };
