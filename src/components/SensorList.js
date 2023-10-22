@@ -3,12 +3,24 @@ import SensorService from "../services/sensor.service";
 import { Context } from "../context/context";
 import { Link, useNavigate } from "react-router-dom";
 import ProviderSubMenu from "../components/UI/SubMenu/ProviderSubMenu";
+import BrokerService from "../services/broker.service";
 
 function SensorList() {
   const { setSensors } = useContext(Context);
   const [registeredSensors, setRegisteredSensors] = useState(null);
   const { sensorList, setSensorList } = useContext(Context);
   const navigate = useNavigate();
+
+  const [registeredBrokers, setRegisteredBrokers] = useState(null);
+  useEffect(() => {
+    async function fetchData() {
+      const getList = await BrokerService.getBrokers();
+      if (getList !== null) {
+        setRegisteredBrokers(getList);
+      }
+    }
+    fetchData();
+  }, []);
 
   useEffect(() => {
     async function fetchData() {
@@ -21,13 +33,38 @@ function SensorList() {
     fetchData();
   }, []);
 
-  const toggleCheckbox = (hash) => {
-    if (sensorList && sensorList.includes(hash)) {
-      setSensorList(sensorList.filter((hash) => hash !== hash));
-    } else {
-      setSensorList([...sensorList, hash]);
+  const sensorExists = (sensor) => {
+    return sensorList.some((snr) => snr.sensorHash === sensor.hash);
+  };
+
+  const getBroker = (name) => {
+    if (registeredBrokers !== null) {
+      const foundBroker = Object.values(registeredBrokers).find(
+        (broker) => broker.metadata.name === name
+      );
+      return foundBroker.hash;
     }
   };
+  const toggleCheckbox = (sensor) => {
+
+    const exists = sensorExists(sensor);
+    if (exists) {
+      setSensorList(sensorList.filter((snr) => snr.sensorHash !== sensor.hash));
+    } else {
+
+      setSensorList([
+        ...sensorList,
+        {
+          amount: 0,
+          sensorName: sensor.metadata.name,
+          sensorHash: sensor.hash,
+          brokerHash: getBroker(sensor.metadata.integrationBroker), 
+        },
+      ]);
+    }
+  };
+
+ console.log(sensorList);
 
   const handleCheckout = () => {
      navigate("/checkout");
@@ -76,11 +113,12 @@ function SensorList() {
                         <td>
                           <input
                             type="checkbox"
-                            checked={sensorList && sensorList.includes(
-                              registeredSensors[item].hash
-                            )}
+                            checked={
+                              sensorList &&
+                              sensorExists(registeredSensors[item])
+                            }
                             onChange={() =>
-                              toggleCheckbox(registeredSensors[item].hash)
+                              toggleCheckbox(registeredSensors[item])
                             }
                           />
                         </td>
