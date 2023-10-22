@@ -6,6 +6,7 @@ import PaymentService from "../services/payment.service";
 function Checkout() {
 
   const [response, setResponse] = useState({});
+  const [rewAmount, setrewAmount] = useState(0);
   const { sensorList, setSensorList } = useContext(Context);
   // Create a new array with the updated sensor
   const updatedSensorList = [...sensorList];
@@ -29,10 +30,15 @@ function Checkout() {
     }
   };
 
-  const handleIntergrate = () => {
+   const handleRewardAmountChange = (newAmount) => {
+       setrewAmount(newAmount);
+   };
+
+  const handleIntergrate = (e) => {
+
     // TODO update amount for each sensor
     const params = {
-      rewardAmount: 0,
+      rewardAmount: +rewAmount,
       witnessCount: 0,
       outputs: sensorList,
     };
@@ -107,7 +113,20 @@ function Checkout() {
               </tbody>
             </table>
 
+            <div className="form-group">
+              <label htmlFor="rewardAmount">reward Amount</label>
+              <input
+                type="number"
+                min={1}
+                name="rewardAmount"
+                id="rewardAmount"
+                onChange={(e) => {
+                  handleRewardAmountChange( e.target.value);
+                }}
+              />
+            </div>
             <button
+              type="submit"
               onClick={handleIntergrate}
               className="btn btn-add bi-file-plus-fill"
             >
