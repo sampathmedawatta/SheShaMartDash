@@ -7,7 +7,16 @@ export const ContextProvider = ({ children }) => {
     const [query, setQuery] = useState(null);
 
     return (
-      <Context.Provider value={{ broks, setBroks,sensors, setSensors, query, setQuery }}>
+      <Context.Provider
+        value={{
+          broks,
+          setBroks,
+          sensors,
+          setSensors,
+          query,
+          setQuery,
+        }}
+      >
         {children}
       </Context.Provider>
     );

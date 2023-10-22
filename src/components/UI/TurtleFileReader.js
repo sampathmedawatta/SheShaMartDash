@@ -1,4 +1,4 @@
-import React, { useState } from "react";
+import React from "react";
 
 
 const TurtleFileReader = ({onChange}) => {
@@ -9,6 +9,7 @@ const TurtleFileReader = ({onChange}) => {
         <input
           type="file"
           name="turtleFile"
+          class="form-control drop-down"
           accept=".ttl"
           onChange={onChange}
         />

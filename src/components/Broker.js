@@ -1,9 +1,8 @@
-import React, { useState} from "react";
+import React, { useState } from "react";
 import BrokerService from "../services/broker.service";
 import BrokerSubMenu from "../components/UI/SubMenu/BrokerSubMenu";
 
 const Broker = () => {
-
   const [formData, setFormData] = useState({
     rewardAmount: "",
     brokerName: "",
@@ -11,6 +10,7 @@ const Broker = () => {
   });
 
   const [errors, setErrors] = useState({});
+  const [response, setResponse] = useState({});
 
   const handleChange = (e) => {
     const { name, value } = e.target;
@@ -34,52 +34,26 @@ const Broker = () => {
     if (!formData.endpoint.trim()) {
       validationErrors.endpoint = "Endpoint is required";
     }
-   
+
     setErrors(validationErrors);
 
     if (Object.keys(validationErrors).length === 0) {
-        const params = {
-          rewardAmount: +formData.rewardAmount,
-          brokerName: formData.brokerName.trim(),
-          endpoint: formData.endpoint.trim(),
-        };
-      const registerBroker = BrokerService.registerBroker(params);
+      const params = {
+        rewardAmount: +formData.rewardAmount,
+        brokerName: formData.brokerName.trim(),
+        endpoint: formData.endpoint.trim(),
+      };
 
+      BrokerService.registerBroker(params).then((response) => {
+         if (response.status === 200 && response.data.result === true) {
+           setFormData({ rewardAmount: "", brokerName: "", endpoint: "" });
+           setResponse({ status: "saved" });
+         } else {
+           console.log("Broker registration failed.");
+         }
+      });
     }
   };
-
-
-  // const registerBroker = useState([]);
-
-  // const [rewardAmount, setRewardAmount] = useState("");
-  // const handleRewardAmountChange = (event) => {
-  //   setRewardAmount(event.target.value);
-  // };
-
-  // const [brokerName, setBrokerName] = useState("");
-  // const handleBrokerNameChange = (event) => {
-  //   setBrokerName(event.target.value);
-  // };
-
-  // const [endpoint, setEndpoint] = useState("");
-  // const handleEndpointChange = (event) => {
-  //   setEndpoint(event.target.value);
-  // };
-
-  // const brokerRegister = (e) => {
-
-  //    var forms = document.querySelectorAll(".needs-validation");
-  //   e.preventDefault();
-
-  //   const params = {
-  //     rewardAmount: +rewardAmount,
-  //     brokerName: brokerName,
-  //     endpoint: endpoint,
-  //   };
-
-  //   registerBroker = BrokerService.registerBroker(params);
-
-  // };
 
   return (
     <div>
@@ -100,14 +74,14 @@ const Broker = () => {
             <div className="page-title">Broker Registration</div>
             <br></br>
             <form onSubmit={handleSubmit}>
-              {/* className="needs-validation" id="form-registration" novalidate
-              method="post" */}
-              <div
-                className="alert alert-success alert-dismissible fade show"
-                role="alert"
-              >
-                Broker Registered Successfully
-              </div>
+              {response.status && (
+                <div
+                  className="alert alert-success alert-dismissible fade show"
+                  role="alert"
+                >
+                  Broker Registered Successfully
+                </div>
+              )}
               <div className="form-group">
                 <label htmlFor="rewardAmount">Reward Amount*</label>
                 <input

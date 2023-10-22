@@ -1,12 +1,14 @@
 import React, { useState, useEffect, useContext } from "react";
 import SensorService from "../services/sensor.service";
 import { Context } from "../context/context";
-import { Link } from "react-router-dom";
+import { Link, useNavigate } from "react-router-dom";
 import ProviderSubMenu from "../components/UI/SubMenu/ProviderSubMenu";
 
 function SensorList() {
   const { setSensors } = useContext(Context);
   const [registeredSensors, setRegisteredSensors] = useState(null);
+  const [selectedSensors, setSelectedSensors] = useState([]);
+  const navigate = useNavigate();
 
   useEffect(() => {
     async function fetchData() {
@@ -19,15 +21,18 @@ function SensorList() {
     fetchData();
   }, []);
 
-  const getSensors = () => {
-    const registeredSensors = SensorService.getSensors();
-
-    if (registeredSensors !== null) {
-      setRegisteredSensors(registeredSensors);
-      setSensors(registeredSensors);
+  const toggleCheckbox = (hash) => {
+    if (selectedSensors.includes(hash)) {
+      setSelectedSensors(selectedSensors.filter((hash) => hash !== hash));
+    } else {
+      setSelectedSensors([...selectedSensors, hash]);
     }
+  };
 
-    console.log(registeredSensors);
+  const handleCheckout = () => {
+    // You can handle the checkout logic here using the selectedSensors array.
+    console.log("Selected Sensors:", selectedSensors);
+     navigate("/checkout", { selectedSensors });
   };
 
   return (
@@ -48,34 +53,59 @@ function SensorList() {
             <div className="page-title">Sensor List</div>
             <br></br>
             {registeredSensors !== null && (
-              <table className="table table-light">
-                <thead>
-                  <tr>
-                    <th>Name</th>
-                    <th>Cost Per Minute</th>
-                    <th>Cost Per KB</th>
-                    <th>Broker</th>
-                    <th>Reward amount</th>
-                  </tr>
-                </thead>
-                <tbody>
-                  {Object.keys(registeredSensors).map((item, key) => (
-                    <tr key={key}>
-                      <td>
-                        <Link
-                          to={`/sensorDetails/${registeredSensors[item].metadata.name}`}
-                        >
-                          {registeredSensors[item].metadata.name}
-                        </Link>
-                      </td>
-                      <td>{registeredSensors[item].metadata.costPerMinute}</td>
-                      <td>{registeredSensors[item].metadata.costPerKB}</td>
-                      <td>{registeredSensors[item].integrationBroker}</td>
-                      <td>{registeredSensors[item].rewardAmount}</td>
+              <div>
+                <button
+                  onClick={handleCheckout}
+                  className="btn btn-add bi-file-plus-fill"
+                >
+                  Checkout
+                </button>
+                <br /> <br />
+                <table className="table table-light">
+                  <thead>
+                    <tr>
+                      <th>Select</th>
+                      <th>Name</th>
+                      <th>Cost Per Minute</th>
+                      <th>Cost Per KB</th>
+                      <th>Broker</th>
+                      <th>Reward amount</th>
                     </tr>
-                  ))}
-                </tbody>
-              </table>
+                  </thead>
+                  <tbody>
+                    {Object.keys(registeredSensors).map((item, key) => (
+                      <tr key={key}>
+                        <td>
+                          <input
+                            type="checkbox"
+                            checked={selectedSensors.includes(
+                              registeredSensors[item].hash
+                            )}
+                            onChange={() =>
+                              toggleCheckbox(registeredSensors[item].hash)
+                            }
+                          />
+                        </td>
+                        <td>
+                          <Link
+                            to={`/sensorDetails/${registeredSensors[item].metadata.name}`}
+                          >
+                            {registeredSensors[item].metadata.name}
+                          </Link>
+                        </td>
+                        <td>
+                          {registeredSensors[item].metadata.costPerMinute}
+                        </td>
+                        <td>{registeredSensors[item].metadata.costPerKB}</td>
+                        <td>
+                          {registeredSensors[item].metadata.integrationBroker}
+                        </td>
+                        <td>{registeredSensors[item].rewardAmount}</td>
+                      </tr>
+                    ))}
+                  </tbody>
+                </table>
+              </div>
             )}
           </div>
         </div>

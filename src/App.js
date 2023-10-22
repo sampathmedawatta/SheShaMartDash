@@ -16,18 +16,19 @@ import SensorQuery from "./components/SensorQuery";
 import SensorList from "./components/SensorList";
 import { Context } from "./context/context";
 import Client from "./components/Client";
+import Checkout from "./components/Checkout";
 
 const App = () => {
   const [currentUser, setCurrentUser] = useState(undefined);
   const { broks, sensors } = useContext(Context);
-
+  
   return (
     <div className="container-fluid">
       <div className="row flex-nowrap">
         <div className="col-auto col-md-3 col-xl-2 px-sm-2 px-0 sidebar">
           <div className="d-flex flex-column align-items-center align-items-sm-start px-3 pt-2 text-white min-vh-100">
             <Link
-               to="/"
+              to="/"
               className="d-flex align-items-center pb-3 mb-md-0 me-md-auto text-white text-decoration-none"
             >
               <br></br>
@@ -40,13 +41,13 @@ const App = () => {
         </div>
         <div className="col py-3">
           <Routes>
+            <Route exact path={"/dashboard"} element={<Home />} />
             <Route exact path={"/"} element={<Home />} />
             <Route exact path={"/home"} element={<Home />} />
             <Route exact path="/broker" element={<Broker />} />
             <Route exact path="/provider" element={<Provider />} />
             <Route exact path="/sensor" element={<Sensor />} />
             <Route exact path="/sensorquery" element={<SensorQuery />} />
-
             <Route exact path="/client" element={<Client />} />
             <Route
               path="/BrokerDetails/:id"
@@ -54,6 +55,10 @@ const App = () => {
             />
             <Route path="/brokerList" element={<BrokerList />} />
             <Route path="/sensorList" element={<SensorList />} />
+            <Route path="/checkout" element={<Checkout />} />
+
+            {/* <Route path="/wallet" component={Wallet} />
+            <Route path="/public-key" component={PublicKey} /> */}
           </Routes>
         </div>
       </div>

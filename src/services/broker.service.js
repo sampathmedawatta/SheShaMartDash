@@ -21,16 +21,14 @@ const getBrokers = () => {
     });
 };
 
-const registerBroker = (params) => {
-  axiosInstance
-    .post("/BrokerRegistration", params, headers)
-    .then((response) => {
-      console.log(response);
-      return response;
-    })
-    .catch((error) => {
-      console.error(error);
-    });
+const registerBroker = async (params) => {
+  const response = await axiosInstance.post(
+    "/BrokerRegistration",
+    params,
+    headers
+  );
+  return response;
+     
 };
 
 const BrokerService = {
