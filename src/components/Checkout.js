@@ -45,7 +45,7 @@ function Checkout() {
 
     PaymentService.Integration(params).then((response) => {
       if (response.status === 200 && response.data.result === true) {
-        //setSensorList(null);
+        setSensorList([]);
 
         setResponse({ status: "saved" });
         console.log("Integration completed.");
