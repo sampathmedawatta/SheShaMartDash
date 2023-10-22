@@ -12,6 +12,14 @@ import axios from "./axios";
         brokerHash:
           "dd934ef395a4a9210c5318f51f9e8cdd25906eeecafb84cb40a8ffba9d9bc045",
       },
+      {
+        amount: 1,
+        sensorName: "Camera Sensor 1",
+        sensorHash:
+          "ab3f54d910eaa51208a5c10e362967df6b288825ab8e3ebacf919ad8720cfe9e",
+        brokerHash:
+          "dd934ef395a4a9210c5318f51f9e8cdd25906eeecafb84cb40a8ffba9d9bc045",
+      },
     ],
   };
 

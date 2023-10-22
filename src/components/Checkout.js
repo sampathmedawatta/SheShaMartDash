@@ -1,9 +1,11 @@
-import React from "react";
+import React, { useContext } from "react";
+import { Context } from "../context/context";
 import ProviderSubMenu from "../components/UI/SubMenu/ProviderSubMenu";
 
-function Checkout({ selectedSensors }) {
+function Checkout() {
+  const { sensorList } = useContext(Context);
 
-     console.log(selectedSensors);
+  console.log(sensorList);
   return (
     <div>
       <div className="row">
@@ -32,12 +34,12 @@ function Checkout({ selectedSensors }) {
                 </tr>
               </thead>
               <tbody>
-                {selectedSensors &&
-                  selectedSensors.map((sensor) => (
-                    <tr key={sensor.name}>
-                      <td>{sensor.name}</td>
-                      <td>{sensor.broker}</td>
-                      <td>{sensor.amount}</td>
+                {sensorList &&
+                  sensorList.map((sensor) => (
+                    <tr key={sensor}>
+                      <td>{sensor}</td>
+                      <td>{sensor}</td>
+                      <td>{sensor}</td>
                     </tr>
                   ))}
               </tbody>
