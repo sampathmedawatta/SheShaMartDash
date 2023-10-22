@@ -7,7 +7,7 @@ import ProviderSubMenu from "../components/UI/SubMenu/ProviderSubMenu";
 function SensorList() {
   const { setSensors } = useContext(Context);
   const [registeredSensors, setRegisteredSensors] = useState(null);
-  const [selectedSensors, setSelectedSensors] = useState([]);
+  const { sensorList, setSensorList } = useContext(Context);
   const navigate = useNavigate();
 
   useEffect(() => {
@@ -22,17 +22,15 @@ function SensorList() {
   }, []);
 
   const toggleCheckbox = (hash) => {
-    if (selectedSensors.includes(hash)) {
-      setSelectedSensors(selectedSensors.filter((hash) => hash !== hash));
+    if (sensorList && sensorList.includes(hash)) {
+      setSensorList(sensorList.filter((hash) => hash !== hash));
     } else {
-      setSelectedSensors([...selectedSensors, hash]);
+      setSensorList([...sensorList, hash]);
     }
   };
 
   const handleCheckout = () => {
-    // You can handle the checkout logic here using the selectedSensors array.
-    console.log("Selected Sensors:", selectedSensors);
-     navigate("/checkout", { selectedSensors });
+     navigate("/checkout");
   };
 
   return (
@@ -78,7 +76,7 @@ function SensorList() {
                         <td>
                           <input
                             type="checkbox"
-                            checked={selectedSensors.includes(
+                            checked={sensorList && sensorList.includes(
                               registeredSensors[item].hash
                             )}
                             onChange={() =>

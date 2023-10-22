@@ -21,7 +21,7 @@ import Checkout from "./components/Checkout";
 const App = () => {
   const [currentUser, setCurrentUser] = useState(undefined);
   const { broks, sensors } = useContext(Context);
-  
+ 
   return (
     <div className="container-fluid">
       <div className="row flex-nowrap">
