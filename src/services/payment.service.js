@@ -15,17 +15,11 @@ import axios from "./axios";
     ],
   };
 
-  const Integration = (params) => {
+  const Integration = async (params) => {
 
-     axiosInstance
-       .post("/integration", params, headers)
-       .then((response) => {
-         console.log(response);
-         return response;
-       })
-       .catch((error) => {
-         console.error(error);
-       });
+    const response = await axiosInstance
+       .post("/integration", params, headers);
+
   };
 
 const PaymentService = {

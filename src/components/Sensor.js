@@ -7,9 +7,10 @@ import TurtleFileReader from "../components/UI/TurtleFileReader";
 import N3 from "n3";
 
 const Sensor = () => {
-  const [jsonExtraLiteralMetadata, setExtraLiteralMetadata] = useState(null);
-  const [jsonExtraNodeMetadata, setExtraNodeMetadata] = useState(null);
-  
+  const [dataExtraLiteralMetadata, setDataExtraLiteralMetadata] =
+    useState([]);
+  const [dataExtraNodeMetadata, setDataExtraNodeMetadata] = useState([]);
+
   const handleFileInput = (e) => {
     const file = e.target.files[0];
     if (file) {
@@ -30,8 +31,9 @@ const Sensor = () => {
 
   const parseTurtle = (data) => {
     const parser = new N3.Parser();
-    const dataExtraLiteralMetadata = []; // Initialize an array to store data
-    const dataExtraNodeMetadata = [];
+   
+    const dataLiteralMetadata = [];
+    const dataNodeMetadata  = [];    
 
     parser.parse(data, (error, triple, prefixes) => {
       if (triple) {
@@ -44,27 +46,16 @@ const Sensor = () => {
 
         if (triple.object.termType === "Literal") {
           // Check the object is a Literal
-          dataExtraLiteralMetadata.push(params); // Push params into the dataExtraLiteralMetadata array
+          dataLiteralMetadata.push(params); // Push params into the dataExtraLiteralMetadata array
         } else if (triple.object.termType === "NamedNode") {
           // Check the object is a NamedNode
-          dataExtraNodeMetadata.push(params); // Push params into the dataExtraNodeMetadata array
+          dataNodeMetadata.push(params); // Push params into the dataExtraNodeMetadata array
         }
       } else {
-        // All parsing is complete, convert dataExtraLiteralMetadata to a JSON object
-        const extraLiteralMetadata = JSON.stringify(
-          dataExtraLiteralMetadata,
-          null,
-          2
-        );
-        setExtraLiteralMetadata(extraLiteralMetadata);
 
-        // All parsing is complete, convert dataExtraNodeMetadata to a JSON object
-        const extraNodeMetadata = JSON.stringify(
-          dataExtraNodeMetadata,
-          null,
-          2
-        );
-        setExtraNodeMetadata(extraNodeMetadata);
+        setDataExtraLiteralMetadata(dataLiteralMetadata);
+        setDataExtraNodeMetadata(dataNodeMetadata);
+       
       }
     });
   };
@@ -106,7 +97,7 @@ const Sensor = () => {
     setSelectedOption(event.target.value);
   };
 
-  const handleSubmit = async (e) => {
+  const handleSubmit = (e) => {
     e.preventDefault();
     const validationErrors = {};
     if (!formData.rewardAmount) {
@@ -140,18 +131,28 @@ const Sensor = () => {
         integrationBroker: selectedOption,
       };
 
-      if (jsonExtraLiteralMetadata !== null) {
-        params.extraLiteralMetadata = jsonExtraLiteralMetadata;
-      }
+        if (dataExtraLiteralMetadata.length > 0) {
+         params.extraLiteralMetadata = dataExtraLiteralMetadata;
+        }
 
-      if (jsonExtraNodeMetadata !== null) {
-        params.extraNodeMetadata = jsonExtraNodeMetadata;
-      }
+        if (dataExtraNodeMetadata.length > 0) {
+          params.extraNodeMetadata = dataExtraNodeMetadata;
+        }
 
-      const registerResponse = await SensorService.registerSensor(params);
-      if (registerResponse) {
-        setResponse({ status: "saved" });
-      }
+        SensorService.registerSensor(params).then((response) => {
+          if (response.status ===200 && response.data.result === true) {
+            setFormData({
+              rewardAmount: "",
+              sensorName: "",
+              costPerMinute: "",
+              costPerKB: "",
+              brokerName: "",
+            });
+            setResponse({ status: "saved" });
+          } else {
+            console.log("Broker registration failed.");
+          }
+        });
     }
   };
 

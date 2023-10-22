@@ -1,9 +1,8 @@
-import React, { useState} from "react";
+import React, { useState } from "react";
 import BrokerService from "../services/broker.service";
 import BrokerSubMenu from "../components/UI/SubMenu/BrokerSubMenu";
 
 const Broker = () => {
-
   const [formData, setFormData] = useState({
     rewardAmount: "",
     brokerName: "",
@@ -21,7 +20,7 @@ const Broker = () => {
     });
   };
 
-  const handleSubmit = async (e) => {
+  const handleSubmit = (e) => {
     e.preventDefault();
     const validationErrors = {};
     if (!formData.rewardAmount) {
@@ -35,19 +34,24 @@ const Broker = () => {
     if (!formData.endpoint.trim()) {
       validationErrors.endpoint = "Endpoint is required";
     }
-   
+
     setErrors(validationErrors);
 
     if (Object.keys(validationErrors).length === 0) {
-        const params = {
-          rewardAmount: +formData.rewardAmount,
-          brokerName: formData.brokerName.trim(),
-          endpoint: formData.endpoint.trim(),
-        };
-      const registerBroker = await BrokerService.registerBroker(params);
-        if (registerBroker) {
-          setResponse({ status: "saved" });
-        }
+      const params = {
+        rewardAmount: +formData.rewardAmount,
+        brokerName: formData.brokerName.trim(),
+        endpoint: formData.endpoint.trim(),
+      };
+
+      BrokerService.registerBroker(params).then((response) => {
+         if (response.status === 200 && response.data.result === true) {
+           setFormData({ rewardAmount: "", brokerName: "", endpoint: "" });
+           setResponse({ status: "saved" });
+         } else {
+           console.log("Broker registration failed.");
+         }
+      });
     }
   };
 

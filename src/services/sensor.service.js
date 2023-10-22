@@ -21,16 +21,12 @@ const getSensors = () => {
     });
 };
 
-const querySensor = (payload) => {
-     axiosInstance
-       .post("/sparql", payload, headers)
-       .then((response) => {
-         console.log(response);
-         return response;
-       })
-       .catch((error) => {
-         console.error(error);
-       });
+const querySensor = async(payload) => {
+     const response = await axiosInstance
+       .post("/sparql", payload, headers);
+       
+       console.log(response);
+       return response;
 
 //   const params = {
 //     query: payload,
@@ -43,15 +39,14 @@ const querySensor = (payload) => {
 };
 
 const registerSensor = async (params) => {
-  await axiosInstance
-    .post("/sensorRegistration", params, headers)
-    .then((response) => {
-      console.log(response);
-      return response;
-    })
-    .catch((error) => {
-      console.error(error);
-    });
+  const response = await axiosInstance.post(
+    "/sensorRegistration",
+    params,
+    headers
+  );
+
+  console.log(response);
+    return response;
 };
 
 const SensorService = {
