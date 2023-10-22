@@ -13,24 +13,22 @@ function SensorList() {
 
   const [registeredBrokers, setRegisteredBrokers] = useState(null);
   useEffect(() => {
-    async function fetchData() {
+    async function fetchBrokerData() {
       const getList = await BrokerService.getBrokers();
       if (getList !== null) {
         setRegisteredBrokers(getList);
       }
     }
-    fetchData();
-  }, []);
+     async function fetchSensorData() {
+       const registeredSensors = await SensorService.getSensors();
+       if (registeredSensors !== null) {
+         setRegisteredSensors(registeredSensors);
+         setSensors(registeredSensors);
+       }
+     }
 
-  useEffect(() => {
-    async function fetchData() {
-      const registeredSensors = await SensorService.getSensors();
-      if (registeredSensors !== null) {
-        setRegisteredSensors(registeredSensors);
-        setSensors(registeredSensors);
-      }
-    }
-    fetchData();
+     fetchBrokerData();
+     fetchSensorData();
   }, []);
 
   const sensorExists = (sensor) => {
