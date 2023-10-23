@@ -59,9 +59,9 @@ const Broker = () => {
       BrokerService.registerBroker(params).then((response) => {
          if (response.status === 200 && response.data.result === true) {
            setFormData({ rewardAmount: "", brokerName: "", endpoint: "" });
-           setResponse({ status: "saved" });
+           setResponse({ status: true, error: false });
          } else {
-           console.log("Broker registration failed.");
+           setResponse({ status: false, error: true });
          }
       });
     }
@@ -89,12 +89,20 @@ const Broker = () => {
               <div className="page-title">Broker Registration</div>
               <br></br>
               <form onSubmit={handleSubmit}>
-                {response.status && (
+                {response.status && !response.error && (
                   <div
                     className="alert alert-success alert-dismissible fade show"
                     role="alert"
                   >
-                    Broker Registered Successfully
+                    Broker Successfully Registered.
+                  </div>
+                )}
+                {!response.status && response.error && (
+                  <div
+                    className="alert alert-danger alert-dismissible fade show"
+                    role="alert"
+                  >
+                    Broker Registeration Failed!
                   </div>
                 )}
                 <div className="form-group">

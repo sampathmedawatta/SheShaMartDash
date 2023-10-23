@@ -1,4 +1,4 @@
-import React, { useState,useContext, useEffect } from "react";
+import React, { useState, useContext, useEffect } from "react";
 import SensorService from "../services/sensor.service";
 import BrokerService from "../services/broker.service";
 import ProviderSubMenu from "../components/UI/SubMenu/ProviderSubMenu";
@@ -13,7 +13,6 @@ const Sensor = () => {
   const [showPopup, setShowPopup] = useState(false);
 
   useEffect(() => {
-   
     if (!savedPublicKey) {
       setShowPopup(true);
     }
@@ -154,9 +153,9 @@ const Sensor = () => {
             costPerKB: "",
             brokerName: "",
           });
-          setResponse({ status: "saved" });
+          setResponse({ status: true, error: false });
         } else {
-          console.log("Broker registration failed.");
+          setResponse({ status: false, error: true });
         }
       });
     }
@@ -184,16 +183,24 @@ const Sensor = () => {
               <div className="page-title">Sensor Registration</div>
               <br></br>
               <form onSubmit={handleSubmit}>
-                {response.status && (
+                {response.status && !response.error && (
                   <div
                     className="alert alert-success alert-dismissible fade show"
                     role="alert"
                   >
-                    Sensor Registered Successfully
+                    Sensor Successfully Registered.
+                  </div>
+                )}
+                {!response.status && response.error && (
+                  <div
+                    className="alert alert-danger alert-dismissible fade show"
+                    role="alert"
+                  >
+                    Sensor Registeration Failed!
                   </div>
                 )}
                 <div className="form-group">
-                  <label htmlFor="sensorName">Sensor Name </label>
+                  <label htmlFor="sensorName">Sensor Name* </label>
                   <input
                     type="text"
                     id="sensorName"
@@ -207,7 +214,7 @@ const Sensor = () => {
                   )}
                 </div>
                 <div className="form-group">
-                  <label htmlFor="costPerMinute">Cost Per Minute </label>
+                  <label htmlFor="costPerMinute">Cost Per Minute* </label>
                   <input
                     type="number"
                     min={0}
@@ -222,7 +229,7 @@ const Sensor = () => {
                   )}
                 </div>
                 <div className="form-group">
-                  <label htmlFor="costPerKB">Cost Per KB </label>
+                  <label htmlFor="costPerKB">Cost Per KB* </label>
                   <input
                     type="number"
                     min={0}
@@ -237,7 +244,7 @@ const Sensor = () => {
                   )}
                 </div>
                 <div className="form-group">
-                  <label htmlFor="brokerName">Broker Name </label>
+                  <label htmlFor="brokerName">Broker Name* </label>
                   {registeredBrokers && (
                     <DropDown
                       onChange={handleDropdownChange}
@@ -250,7 +257,7 @@ const Sensor = () => {
                   )}
                 </div>
                 <div className="form-group">
-                  <label htmlFor="rewardAmount">Reward Amount</label>
+                  <label htmlFor="rewardAmount">Reward Amount*</label>
                   <input
                     type="number"
                     min={0}

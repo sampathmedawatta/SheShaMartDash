@@ -33,6 +33,13 @@ function SensorList() {
      async function fetchSensorData() {
        const registeredSensors = await SensorService.getSensors();
        if (registeredSensors !== null) {
+        
+      //  const filteredSensors = registeredSensors.filter(
+      //    (sensor) => sensor.hash === savedPublicKey
+      //  );
+      //  console.log(registeredSensors);
+      //   console.log(filteredSensors);
+
          setRegisteredSensors(registeredSensors);
          setSensors(registeredSensors);
        }
@@ -72,8 +79,6 @@ function SensorList() {
       ]);
     }
   };
-
- console.log(sensorList);
 
   const handleCheckout = () => {
      navigate("/checkout");
