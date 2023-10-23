@@ -17,6 +17,7 @@ import SensorList from "./components/SensorList";
 import { Context } from "./context/context";
 import Client from "./components/Client";
 import Checkout from "./components/Checkout";
+import PublicKey from "./components/PublicKey";
 
 const App = () => {
   const [currentUser, setCurrentUser] = useState(undefined);
@@ -58,8 +59,8 @@ const App = () => {
             <Route path="/sensorList" element={<SensorList />} />
             <Route path="/checkout" element={<Checkout />} />
 
-            {/* <Route path="/wallet" component={Wallet} />
-            <Route path="/public-key" component={PublicKey} /> */}
+            {/* <Route path="/wallet" element={<Wallet} />} />*/}
+            <Route path="/public-key" element={<PublicKey />} />
           </Routes>
         </div>
       </div>
