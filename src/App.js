@@ -23,6 +23,7 @@ const App = () => {
   const { broks, sensors } = useContext(Context);
  
   return (
+    <div>
     <div className="container-fluid">
       <div className="row flex-nowrap">
         <div className="col-auto col-md-3 col-xl-2 px-sm-2 px-0 sidebar">
@@ -33,7 +34,7 @@ const App = () => {
             >
               <br></br>
               <span className="fs-5 d-none d-sm-inline ">
-                <h3>SenShaMart</h3>
+                <h4>SenShaMart</h4>
               </span>
             </Link>
             <Sidebar />
@@ -62,10 +63,10 @@ const App = () => {
           </Routes>
         </div>
       </div>
-
       <footer className="footer text-center py-2">
         &copy; 2023 SenShaMart
       </footer>
+    </div>
     </div>
   );
 };

@@ -11,7 +11,7 @@ const Home = () => {
         <div className="col-md-3 p-1">
           <Link to={"/sensor"} className="nav-link">
             <div className="provider shadow-sm d-flex flex-column justify-content-start align-items-center">
-              <img className="icon-1 mb-2" alt="" src="/icon-1.svg"></img>
+              <img className="icon-1 mb-2" alt="" src="/provider.svg"></img>
               <h1 className="fs-2">Provider</h1>
             </div>
           </Link>
@@ -19,7 +19,7 @@ const Home = () => {
         <div className="col-md-3 p-1">
           <Link to={"/broker"} className="nav-link">
             <div className="broker shadow-sm d-flex flex-column justify-content-start align-items-center">
-              <img className="icon-3 mb-2" alt="" src="/icon-3.svg"></img>
+              <img className="icon-1 mb-2" alt="" src="/broker.svg"></img>
               <h1 className="fs-2">Broker</h1>
             </div>
           </Link>
@@ -27,7 +27,7 @@ const Home = () => {
         <div className="col-md-3 p-1">
           <Link to={"/client"} className="nav-link">
             <div className="client shadow-sm d-flex flex-column justify-content-start align-items-center">
-              <img className="icon-4 mb-2" alt="" src="/icon-4.svg"></img>
+              <img className="icon-1 mb-2" alt="" src="/client.svg"></img>
               <h1 className="fs-2 white">Client</h1>
             </div>
           </Link>
