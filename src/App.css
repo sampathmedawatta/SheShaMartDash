@@ -132,74 +132,12 @@ h4 {
   color: #fff;
 }
 
-/* form css */
-.form-control {
-  border: 1px solid #e0e6f7;
-  border-radius: 4px;
-  background-color: #fff;
-  padding: 11px 15px 13px 15px;
-  width: 100%;
-  color: #a0abb8;
-}
-.form-control::-moz-placeholder {
-  color: #a0abb8;
-}
-.form-control::placeholder {
-  color: #a0abb8;
-}
-.form-group {
-  position: relative;
-  font-weight: bold;
-}
-.form-group i {
-  position: absolute;
-  top: 50%;
-  transform: translateY(-50%);
-  left: 15px;
-  font-size: 18px;
-  color: #a0abb8;
-}
-.form-icons {
-  padding-left: 41px;
-}
-.form-error {
-  color: #e74c3c;
-  font-size: 14px;
-  margin-top: 5px;
-  display: block;
-}
-
 /* specific text */
 .text-white {
   color: #fff;
 }
 .text-shadow {
   text-shadow: 0 4px 4px rgba(0, 0, 0, 0.25);
-}
-
-/* component transitions */
-a,
-button,
-h4,
-img,
-input,
-span {
-  transition: all 0.3s ease 0s;
-}
-
-/* buttons */
-.btn {
-  border-radius: 8px;
-  padding: 10px 20px;
-  font-size: 14px;
-  transition: 0.2s;
-}
-.btn-add {
-  content: '\F3AA';
-  background: #296124;
-  color: #fff;
-  border-radius: 4px;
-  font-weight: bold;
 }
 
 /* provider */
@@ -217,8 +155,11 @@ span {
 .provider:hover{
   background-color: #296742;
 }
+.provider-menu{
+  background-color: #74cb97;
+}
 .Provider-submenu{
-  background-color:#235165;
+  background-color: #235165;
 }
 .Provider-submenu a{
   color: white;
@@ -268,20 +209,60 @@ span {
 .client:hover{
   background-color: #2b3670;
 }
-
-/* hover methods */
-:hover {
-  transition-duration: 0.2s;
+.client-menu{
+  background-color:  #808fe1;
 }
 
-.profile-img-card {
-  width: 96px;
-  height: 96px;
-  margin: 0 auto 10px;
+/* buttons */
+.btn {
+  border-radius: 8px;
+  padding: 10px 20px;
+  font-size: 14px;
+  transition: 0.2s;
+}
+.btn-add {
+  content: '\F3AA';
+  background: #296124;
+  color: #fff;
+  border-radius: 4px;
+  font-weight: bold;
+}
+
+/* form css */
+.form-control {
+  border: 1px solid #e0e6f7;
+  border-radius: 4px;
+  background-color: #fff;
+  padding: 11px 15px 13px 15px;
+  width: 100%;
+  color: #a0abb8;
+}
+.form-control::-moz-placeholder {
+  color: #a0abb8;
+}
+.form-control::placeholder {
+  color: #a0abb8;
+}
+.form-group {
+  position: relative;
+  font-weight: bold;
+}
+.form-group i {
+  position: absolute;
+  top: 50%;
+  transform: translateY(-50%);
+  left: 15px;
+  font-size: 18px;
+  color: #a0abb8;
+}
+.form-icons {
+  padding-left: 41px;
+}
+.form-error {
+  color: #e74c3c;
+  font-size: 14px;
+  margin-top: 5px;
   display: block;
-  -moz-border-radius: 50%;
-  -webkit-border-radius: 50%;
-  border-radius: 50%;
 }
 
 /* lists */
@@ -339,6 +320,31 @@ ul {
   color: #696767;
   text-transform: capitalize;
   border-bottom: 1px solid #dee2e6 !important;
+}
+
+/* hover methods */
+:hover {
+  transition-duration: 0.2s;
+}
+
+/* component transitions */
+a,
+button,
+h4,
+img,
+input,
+span {
+  transition: all 0.3s ease 0s;
+}
+
+.profile-img-card {
+  width: 96px;
+  height: 96px;
+  margin: 0 auto 10px;
+  display: block;
+  -moz-border-radius: 50%;
+  -webkit-border-radius: 50%;
+  border-radius: 50%;
 }
 
 /* moz stuff */

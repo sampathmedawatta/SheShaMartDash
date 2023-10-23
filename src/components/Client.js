@@ -6,9 +6,8 @@ function Client() {
     <div>
       <div className="row">
         <div className="col-12">
-          <ClientSubMenu />
+          <ClientSubMenu/>
         </div>
-
         <div className="col-12">
           <div className="title-heders">Client</div>
         </div>

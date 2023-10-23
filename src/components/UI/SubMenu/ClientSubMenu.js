@@ -3,7 +3,7 @@ import { Link } from "react-router-dom";
 
 function ClientSubMenu() {
   return (
-    <nav className="navbar navbar-expand-lg broker-menu navbar-dark">
+    <nav className="navbar navbar-expand-lg client-menu navbar-dark">
       <Link to={"/"} className="navbar-brand">
         <i className="bi bi-house-door-fill"></i>
       </Link>
