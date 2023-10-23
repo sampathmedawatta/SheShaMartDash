@@ -36,7 +36,7 @@ const App = () => {
             >
               <br></br>
               <span className="fs-5 d-none d-sm-inline ">
-                <h4>SenShaMart</h4>
+                <h3>SenShaMart</h3>
               </span>
             </Link>
             <Sidebar />
