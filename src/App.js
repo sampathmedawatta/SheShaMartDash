@@ -63,10 +63,11 @@ const App = () => {
             <Route path="/public-key" element={<PublicKey />} />
           </Routes>
         </div>
-      </div>
-      <footer className="footer text-center py-2">
+        <footer className="footer text-center py-2">
         &copy; 2023 SenShaMart
       </footer>
+      </div>
+      
     </div>
     </div>
   );

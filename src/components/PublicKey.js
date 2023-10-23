@@ -78,7 +78,7 @@ const PublicKey = () => {
             )}
 
             <div className="row form-group ">
-              <div>
+              <div className="col-3">
                 <button
                   type="submit"
                   onClick={getPublicKey}
