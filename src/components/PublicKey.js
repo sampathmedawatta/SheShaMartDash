@@ -32,6 +32,7 @@ const PublicKey = () => {
     e.preventDefault(); // Prevent the default form submission behavior
 
     if (enteredPublicKey) {
+      
       setSavedPublicKey(enteredPublicKey);
     } else if (requestedPublicKey) {
       setSavedPublicKey(requestedPublicKey);
