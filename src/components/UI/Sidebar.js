@@ -24,12 +24,12 @@ function Sidebar() {
       </li>
       <li className="sidebar-menu">
         <Link
-          to="#submenu2"
+          to="/public-key"
           data-bs-toggle="collapse"
           className="nav-link px-0 align-middle "
         >
           <i className="fs-4 bi-key-fill"></i>{" "}
-          <span className="ms-1 d-none d-sm-inline">Change Public Key</span>
+          <span className="ms-1 d-none d-sm-inline">Public Key</span>
         </Link>
       </li>
     </ul>
