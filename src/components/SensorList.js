@@ -1,11 +1,22 @@
 import React, { useState, useEffect, useContext } from "react";
 import SensorService from "../services/sensor.service";
-import { Context } from "../context/context";
 import { Link, useNavigate } from "react-router-dom";
 import ProviderSubMenu from "../components/UI/SubMenu/ProviderSubMenu";
 import BrokerService from "../services/broker.service";
+import { Context } from "../context/context";
+import ValidatePublicKey from "../components/ValidatePublicKey";
 
 function SensorList() {
+
+   const { savedPublicKey } = useContext(Context);
+   const [showPopup, setShowPopup] = useState(false);
+
+   useEffect(() => {
+     if (!savedPublicKey) {
+       setShowPopup(true);
+     }
+   }, []);
+
   const { setSensors } = useContext(Context);
   const [registeredSensors, setRegisteredSensors] = useState(null);
   const { sensorList, setSensorList } = useContext(Context);
@@ -79,71 +90,76 @@ function SensorList() {
           <div className="title-heders">Provider</div>
         </div>
       </div>
-      <div className="row">
-        <div className="col-12">
-          <br />
-          <div className="col-10">
-            <div className="page-title">Sensor List</div>
-            <br></br>
-            {registeredSensors !== null && (
-              <div>
-                <button
-                  onClick={handleCheckout}
-                  className="btn btn-add bi-file-plus-fill"
-                >
-                  Checkout
-                </button>
-                <br /> <br />
-                <table className="table table-light">
-                  <thead>
-                    <tr>
-                      <th>Select</th>
-                      <th>Name</th>
-                      <th>Cost Per Minute</th>
-                      <th>Cost Per KB</th>
-                      <th>Broker</th>
-                      <th>Reward amount</th>
-                    </tr>
-                  </thead>
-                  <tbody>
-                    {Object.keys(registeredSensors).map((item, key) => (
-                      <tr key={key}>
-                        <td>
-                          <input
-                            type="checkbox"
-                            checked={
-                              sensorList &&
-                              sensorExists(registeredSensors[item])
-                            }
-                            onChange={() =>
-                              toggleCheckbox(registeredSensors[item])
-                            }
-                          />
-                        </td>
-                        <td>
-                          <Link
-                            to={`/sensorDetails/${registeredSensors[item].metadata.name}`}
-                          >
-                            {registeredSensors[item].metadata.name}
-                          </Link>
-                        </td>
-                        <td>
-                          {registeredSensors[item].metadata.costPerMinute}
-                        </td>
-                        <td>{registeredSensors[item].metadata.costPerKB}</td>
-                        <td>
-                          {registeredSensors[item].metadata.integrationBroker}
-                        </td>
-                        <td>{registeredSensors[item].rewardAmount}</td>
+
+      {showPopup && <ValidatePublicKey />}
+
+      {!showPopup && (
+        <div className="row">
+          <div className="col-12">
+            <br />
+            <div className="col-10">
+              <div className="page-title">Sensor List</div>
+              <br></br>
+              {registeredSensors !== null && (
+                <div>
+                  <button
+                    onClick={handleCheckout}
+                    className="btn btn-add bi-file-plus-fill"
+                  >
+                    Checkout
+                  </button>
+                  <br /> <br />
+                  <table className="table table-light">
+                    <thead>
+                      <tr>
+                        <th>Select</th>
+                        <th>Name</th>
+                        <th>Cost Per Minute</th>
+                        <th>Cost Per KB</th>
+                        <th>Broker</th>
+                        <th>Reward amount</th>
                       </tr>
-                    ))}
-                  </tbody>
-                </table>
-              </div>
-            )}
+                    </thead>
+                    <tbody>
+                      {Object.keys(registeredSensors).map((item, key) => (
+                        <tr key={key}>
+                          <td>
+                            <input
+                              type="checkbox"
+                              checked={
+                                sensorList &&
+                                sensorExists(registeredSensors[item])
+                              }
+                              onChange={() =>
+                                toggleCheckbox(registeredSensors[item])
+                              }
+                            />
+                          </td>
+                          <td>
+                            <Link
+                              to={`/sensorDetails/${registeredSensors[item].metadata.name}`}
+                            >
+                              {registeredSensors[item].metadata.name}
+                            </Link>
+                          </td>
+                          <td>
+                            {registeredSensors[item].metadata.costPerMinute}
+                          </td>
+                          <td>{registeredSensors[item].metadata.costPerKB}</td>
+                          <td>
+                            {registeredSensors[item].metadata.integrationBroker}
+                          </td>
+                          <td>{registeredSensors[item].rewardAmount}</td>
+                        </tr>
+                      ))}
+                    </tbody>
+                  </table>
+                </div>
+              )}
+            </div>
           </div>
         </div>
-      </div>
+      )}
     </div>
   );
 }

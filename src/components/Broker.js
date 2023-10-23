@@ -1,8 +1,20 @@
-import React, { useState } from "react";
+import React, { useState, useContext, useEffect } from "react";
 import BrokerService from "../services/broker.service";
 import BrokerSubMenu from "../components/UI/SubMenu/BrokerSubMenu";
+import { Context } from "../context/context";
+import ValidatePublicKey from "../components/ValidatePublicKey";
 
 const Broker = () => {
+
+  const { savedPublicKey } = useContext(Context);
+  const [showPopup, setShowPopup] = useState(false);
+
+  useEffect(() => {
+    if (!savedPublicKey) {
+      setShowPopup(true);
+    }
+  }, []);
+
   const [formData, setFormData] = useState({
     rewardAmount: "",
     brokerName: "",
@@ -67,80 +79,89 @@ const Broker = () => {
         </div>
       </div>
 
-      <div className="row">
-        <div className="col-12">
-          <br />
-          <div className="col-10">
-            <div className="page-title">Broker Registration</div>
-            <br></br>
-            <form onSubmit={handleSubmit}>
-              {response.status && (
-                <div
-                  className="alert alert-success alert-dismissible fade show"
-                  role="alert"
-                >
-                  Broker Registered Successfully
+      {showPopup && <ValidatePublicKey />}
+
+      {!showPopup && (
+        <div className="row">
+          <div className="col-12">
+            <br />
+            <div className="col-10">
+              <div className="page-title">Broker Registration</div>
+              <br></br>
+              <form onSubmit={handleSubmit}>
+                {response.status && (
+                  <div
+                    className="alert alert-success alert-dismissible fade show"
+                    role="alert"
+                  >
+                    Broker Registered Successfully
+                  </div>
+                )}
+                <div className="form-group">
+                  <label htmlFor="rewardAmount">Reward Amount*</label>
+                  <input
+                    type="number"
+                    min={0}
+                    id="rewardAmount"
+                    className="form-control"
+                    name="rewardAmount"
+                    onChange={handleChange}
+                    autoComplete="off"
+                  />
+                  {errors.rewardAmount && (
+                    <span className="form-error">{errors.rewardAmount}</span>
+                  )}
+                  <div className="invalid-feedback">
+                    Please enter a reward Amount
+                  </div>{" "}
                 </div>
-              )}
-              <div className="form-group">
-                <label htmlFor="rewardAmount">Reward Amount*</label>
-                <input
-                  type="number"
-                  min={0}
-                  id="rewardAmount"
-                  className="form-control"
-                  name="rewardAmount"
-                  onChange={handleChange}
-                  autoComplete="off"
-                />
-                {errors.rewardAmount && (
-                  <span className="form-error">{errors.rewardAmount}</span>
-                )}
-                <div className="invalid-feedback">
-                  Please enter a reward Amount
-                </div>{" "}
-              </div>
-              <div className="form-group">
-                <label htmlFor="brokerName">Broker Name* </label>
-                <input
-                  type="text"
-                  id="brokerName"
-                  className="form-control"
-                  name="brokerName"
-                  onChange={handleChange}
-                  autoComplete="off"
-                />
-                {errors.brokerName && (
-                  <span className="form-error">{errors.brokerName}</span>
-                )}
-                <div className="invalid-feedback">
-                  Please enter a Broker Name
+                <div className="form-group">
+                  <label htmlFor="brokerName">Broker Name* </label>
+                  <input
+                    type="text"
+                    id="brokerName"
+                    className="form-control"
+                    name="brokerName"
+                    onChange={handleChange}
+                    autoComplete="off"
+                  />
+                  {errors.brokerName && (
+                    <span className="form-error">{errors.brokerName}</span>
+                  )}
+                  <div className="invalid-feedback">
+                    Please enter a Broker Name
+                  </div>
                 </div>
-              </div>
-              <div className="form-group">
-                <label htmlFor="endpoint">Endpoint*</label>
-                <input
-                  type="text"
-                  id="endpoint"
-                  className="form-control"
-                  name="endpoint"
-                  onChange={handleChange}
-                  autoComplete="off"
-                />
-                {errors.endpoint && (
-                  <span className="form-error">{errors.endpoint}</span>
-                )}
-                <div className="invalid-feedback">Please enter a Endpoint</div>
-              </div>
-              <div className="form-group ">
-                <button type="submit" className="btn btn-add bi-file-plus-fill">
-                  Register
-                </button>
-              </div>
-            </form>
+                <div className="form-group">
+                  <label htmlFor="endpoint">Endpoint*</label>
+                  <input
+                    type="text"
+                    id="endpoint"
+                    className="form-control"
+                    name="endpoint"
+                    onChange={handleChange}
+                    autoComplete="off"
+                  />
+                  {errors.endpoint && (
+                    <span className="form-error">{errors.endpoint}</span>
+                  )}
+                  <div className="invalid-feedback">
+                    Please enter a Endpoint
+                  </div>
+                </div>
+                <div className="form-group ">
+                  <button
+                    type="submit"
+                    className="btn btn-add bi-file-plus-fill"
+                  >
+                    Register
+                  </button>
+                </div>
+              </form>
+            </div>
           </div>
         </div>
-      </div>
+      )}
     </div>
   );
 };
