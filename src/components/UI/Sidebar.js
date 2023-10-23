@@ -8,7 +8,7 @@ function Sidebar() {
     >
       <li className="sidebar-menu">
         <Link
-          to="#submenu1"
+          to="/home"
           data-bs-toggle="collapse"
           className="nav-link px-0 align-middle"
         >
@@ -17,7 +17,7 @@ function Sidebar() {
         </Link>
       </li>
       <li className="sidebar-menu">
-        <Link to="#" className="nav-link px-0 align-middle">
+        <Link to="/wallet" className="nav-link px-0 align-middle">
           <i className="fs-4 bi-wallet-fill"></i>{" "}
           <span className="ms-1 d-none d-sm-inline">Wallet</span>
         </Link>

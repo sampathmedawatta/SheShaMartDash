@@ -4,7 +4,7 @@ import { Link } from "react-router-dom";
 function ProviderSubMenu() {
   return (
     <nav className="navbar navbar-expand-lg provider-menu navbar-dark">
-      <Link to={"/"} className="navbar-brand">
+      <Link to={"/"} className="navbar-brand prov">
         <i className="bi bi-house-door-fill"></i>
       </Link>
 
@@ -12,12 +12,12 @@ function ProviderSubMenu() {
         <ul className="navbar-nav me-auto mb-2 mb-lg-0">
           <li className="top-menu">
             <Link to={"/sensor"} className="">
-              <div className="">Register Sensor</div>
+              <div className="menu-space prov">Register Sensor</div>
             </Link>
           </li>
           <li className="top-menu">
             <Link to={"/sensorList"} className="">
-              <div className="">Sensor List</div>
+              <div className="menu-space prov">Sensor List</div>
             </Link>
           </li>
         </ul>

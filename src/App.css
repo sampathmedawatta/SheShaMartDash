@@ -40,14 +40,35 @@ body{
 }
 .top-menu a {
   color: white !important;
-  text-decoration: none 
+  text-decoration: none;
+}
+.menu-space{
+  padding-left: 1rem;
+}
+.menu-space.brok:hover{
+  color:#1e5268;
+}
+.menu-space.prov:hover{
+  color:#296124;
+}
+.menu-space.clnt:hover{
+  color:#2b3670;
+}
+.navbar{
+  padding-left: 2em;
+}
+.navbar-brand.brok:hover{
+  color:#1e5268;
+}
+.navbar-brand.prov:hover{
+  color:#296124;
+}
+.navbar-brand.clnt:hover{
+  color:#2b3670;
 }
 .drop-down{
   height: 43px;
   color: black;
-}
-.navbar{
-  padding-left: 2em;
 }
 
 /* titles */
@@ -308,6 +329,9 @@ ul {
 }
 
 /* tables */
+.table{
+  border-radius: 24px;
+}
 .table thead th {
   vertical-align: bottom;
   border-bottom: 2px solid #dee2e6;
