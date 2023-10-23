@@ -1,32 +1,47 @@
-import React, { useState } from "react";
+import React, { useState, useContext } from "react";
 import GeneralMenu from "../components/UI/SubMenu/GeneralMenu";
 import PublicKeyService from "../services/publicKey.service";
+import { Context } from "../context/context";
 
 const PublicKey = () => {
-   const [publicKeyFrom, setPublicKeyFrom] = useState(false);
-   const [savedPublicKey, setSavedPublicKey] = useState('');
-  ;
-   const showPublicKeyForm = () =>{
-     setPublicKeyFrom(!publicKeyFrom);
-   }
+  const [publicKeyFrom, setPublicKeyFrom] = useState(false);
+  const [requestedPublicKey, setRequestedPublicKey] = useState(false);
+  const [enteredPublicKey, setEnteredPublicKey] = useState("");
+  const {savedPublicKey, setSavedPublicKey } = useContext(Context);
 
-   const getPublicKey = async () => {
+  const showPublicKeyForm = () => {
+    setPublicKeyFrom(!publicKeyFrom);
+    setRequestedPublicKey(false);
+  };
+
+  const getPublicKey = async () => {
     setPublicKeyFrom(false);
 
     const response = await PublicKeyService.getPublicKey();
     if (response !== null) {
-        setSavedPublicKey(response);
+    setRequestedPublicKey(!requestedPublicKey);
+    setEnteredPublicKey(response);
+    }
+  };
+
+  const handlePublickeyChange = (key) => {
+    setEnteredPublicKey(key);
+  };
+
+  const handleSubmit = (e) => {
+    e.preventDefault(); // Prevent the default form submission behavior
+
+    if (enteredPublicKey) {
+      setSavedPublicKey(enteredPublicKey);
+    } else if (requestedPublicKey) {
+      setSavedPublicKey(requestedPublicKey);
     }
 
-    console.log(response);
+     setEnteredPublicKey("");
+     setPublicKeyFrom(false);
+     setRequestedPublicKey(false);
+  };
 
-   };
-
-    const handleSubmit = (e) => {
-      e.preventDefault(); // Prevent the default form submission behavior
-     
-       setSavedPublicKey(e.ta);
-    };
 
   return (
     <div>
@@ -44,81 +59,61 @@ const PublicKey = () => {
         <div className="col-12">
           <br />
           <div className="col-10">
-            <form onSubmit={handleSubmit}>
-              <br></br>
-              <div className="row form-group ">
-                <div>
-                  <button
-                    type="submit"
-                    onClick={getPublicKey}
-                    className="btn btn-add bi-file-plus-fill"
-                  >
-                    Request a Public Key
-                  </button>
-                </div>
-                <div className="col-3">
-                  <button
-                    type="submit"
-                    onClick={showPublicKeyForm}
-                    className="btn btn-add bi-file-plus-fill"
-                  >
-                    Save New Public Key
-                  </button>
-                </div>
+            <br></br>
+            {savedPublicKey && (
+              <div className="form-group">
+                <br></br>
+                <label htmlFor="savedPublicKey">Public Key</label>
+                <input
+                  type="text"
+                  id="savedPublicKey"
+                  className="form-control"
+                  name="savedPublicKey"
+                  autoComplete="off"
+                  value={savedPublicKey}
+                  readOnly
+                />
               </div>
-              <br></br>
-              {savedPublicKey && (
-                <div>
-                  <div className="form-group">
-                    <div className="page-title">Requested Public Key</div>
-                    <br></br>
-                    <label htmlFor="SavedPublicKey">Public Key</label>
-                    <input
-                      type="text"
-                      min={0}
-                      id="SavedPublicKey"
-                      className="form-control"
-                      name="SavedPublicKey"
-                      autoComplete="off"
-                      value={savedPublicKey}
-                      readOnly
-                    />
-                  </div>
-                  <div className="form-group ">
-                    <button
-                      type="submit"
-                      className="btn btn-add bi-file-plus-fill"
-                    >
-                      Save
-                    </button>
-                  </div>
-                </div>
-              )}
+            )}
 
-              {publicKeyFrom && (
-                <div>
-                  <div className="page-title">Save New Public Key</div>
+            <div className="row form-group ">
+              <div>
+                <button
+                  type="submit"
+                  onClick={getPublicKey}
+                  className="btn btn-add bi-file-plus-fill"
+                >
+                  Request a Public Key
+                </button>
+              </div>
+              <div className="col-3">
+                <button
+                  type="submit"
+                  onClick={showPublicKeyForm}
+                  className="btn btn-add bi-file-plus-fill"
+                >
+                  Save New Public Key
+                </button>
+              </div>
+            </div>
+            <br></br>
+            {requestedPublicKey && (
+              <div>
+                <div className="form-group">
+                  <div className="page-title">Requested Public Key</div>
                   <br></br>
-
-                  {/* <div
-                    className="alert alert-success alert-dismissible fade show"
-                    role="alert"
-                  >
-                    Public Key Saved Successfully
-                  </div> */}
-
-                  <div className="form-group">
-                    <label htmlFor="publicKey">Public Key*</label>
-                    <input
-                      type="text"
-                      min={0}
-                      id="publicKey"
-                      className="form-control"
-                      name="publicKey"
-                      autoComplete="off"
-                    />
-                  </div>
-
+                  <label htmlFor="reqPublicKey">Public Key</label>
+                  <input
+                    type="text"
+                    id="reqPublicKey"
+                    className="form-control"
+                    name="reqPublicKey"
+                    autoComplete="off"
+                    value={enteredPublicKey}
+                    readOnly
+                  />
+                </div>
+                <form onSubmit={handleSubmit}>
                   <div className="form-group ">
                     <button
                       type="submit"
@@ -127,9 +122,39 @@ const PublicKey = () => {
                       Save
                     </button>
                   </div>
+                </form>
+              </div>
+            )}
+
+            {publicKeyFrom && (
+              <div>
+                <div className="page-title">Save New Public Key</div>
+                <br></br>
+                <div className="form-group">
+                  <label htmlFor="newPublicKey">Public Key*</label>
+                  <input
+                    type="text"
+                    id="newPublicKey"
+                    className="form-control"
+                    name="newPublicKey"
+                    autoComplete="off"
+                    onChange={(e) => {
+                      handlePublickeyChange(e.target.value);
+                    }}
+                  />
                 </div>
-              )}
-            </form>
+                <form onSubmit={handleSubmit}>
+                  <div className="form-group ">
+                    <button
+                      type="submit"
+                      className="btn btn-add bi-file-plus-fill"
+                    >
+                      Save
+                    </button>
+                  </div>
+                </form>
+              </div>
+            )}
           </div>
         </div>
       </div>
