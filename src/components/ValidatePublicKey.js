@@ -22,13 +22,13 @@ const navigate = useNavigate();
       {showPopup && (
         <div className="row">
           <div className="col-12 popup">
-            <div className="form-group col-3 mt-3 popup-content">
-              <p>Public key is not available!</p>
+            <div className="form-group col-5 mt-3 popup-content">
+              <p>Public key is not available! Please enter Public Key.</p>
               <button
                 onClick={handleClosePopup}
                 className="btn btn-add bi-file-plus-fill"
               >
-                Add a Public Key
+                Add Public Key
               </button>
             </div>
           </div>
