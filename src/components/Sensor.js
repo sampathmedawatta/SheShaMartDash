@@ -1,4 +1,4 @@
-import React, { useState, useContext, useEffect } from "react";
+import React, { useState,useContext, useEffect } from "react";
 import SensorService from "../services/sensor.service";
 import BrokerService from "../services/broker.service";
 import ProviderSubMenu from "../components/UI/SubMenu/ProviderSubMenu";
@@ -6,25 +6,18 @@ import DropDown from "../components/UI/DropDown";
 import TurtleFileReader from "../components/UI/TurtleFileReader";
 import N3 from "n3";
 import { Context } from "../context/context";
-import { Link, useNavigate } from "react-router-dom";
+import ValidatePublicKey from "../components/ValidatePublicKey";
 
 const Sensor = () => {
-  const navigate = useNavigate();
-  const { savedPublicKey, setSavedPublicKey } = useContext(Context);
+  const { savedPublicKey } = useContext(Context);
   const [showPopup, setShowPopup] = useState(false);
 
   useEffect(() => {
-    setSavedPublicKey("");
+   
     if (!savedPublicKey) {
       setShowPopup(true);
     }
   }, []);
-
-  const handleClosePopup = () => {
-    setShowPopup(false);
-    navigate("/public-key");
-  };
-
   const [dataExtraLiteralMetadata, setDataExtraLiteralMetadata] = useState([]);
   const [dataExtraNodeMetadata, setDataExtraNodeMetadata] = useState([]);
 
@@ -181,21 +174,7 @@ const Sensor = () => {
         </div>
       </div>
 
-      {showPopup && (
-        <div className="row">
-          <div className="col-12 popup">
-            <div className="form-group col-3 mt-3 popup-content">
-              <p>Public key is not available!</p>
-              <button
-                onClick={handleClosePopup}
-                className="btn btn-add bi-file-plus-fill"
-              >
-                Add a Public Key
-              </button>
-            </div>
-          </div>
-        </div>
-      )}
+      {showPopup && <ValidatePublicKey />}
 
       {!showPopup && (
         <div className="row">
