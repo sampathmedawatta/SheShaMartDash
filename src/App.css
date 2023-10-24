@@ -49,9 +49,6 @@ label::after {
   color: white !important;
   text-decoration: none;
 }
-.top-menu a:active{
-  background-color: rgb(146, 41, 41) !important;
-}
 .menu-space{
   padding-left: 1rem;
 }
@@ -81,6 +78,30 @@ label::after {
 }
 .navbar-brand.wall:hover{
   color: #235165;
+}
+.logo-menu{   
+  border-radius: 16px;
+  font-size: 16px;
+  padding: 10px 14px 10px 14px;
+  color: white !important;
+}
+.logo-menu.c{   
+  background-color:#5c6dc3;
+}
+.logo-menu.c:hover{   
+  background-color: #2b3670;
+}
+.logo-menu.b{   
+  background-color: #35a8c2;
+}
+.logo-menu.b:hover{   
+  background-color: #1e5268;
+}
+.logo-menu.p{   
+  background-color: #5aad7b;
+}
+.logo-menu.p:hover{   
+  background-color: #296124;
 }
 
 .drop-down{
