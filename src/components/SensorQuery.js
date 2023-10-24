@@ -206,6 +206,8 @@ const SensorQuery = () => {
         </div>
       </div>
     </div>
+    </div>
+    </div>
   );
 };
 

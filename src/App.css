@@ -14,9 +14,10 @@ body{
   padding-top: 10px;
 }
 .sidebar-menu{   
-  font-size: 14px;
+  font-size: 18px;
   padding: 2px;
   margin-top: 2em;
+  font-weight: bold;
   color: white !important;
 }
 .sidebar-menu a {
@@ -44,6 +45,7 @@ label::after {
   font-size: 17px;
   padding: 10px;
   color: white !important;
+  font-weight: bold;
 }
 .top-menu a {
   color: white !important;
