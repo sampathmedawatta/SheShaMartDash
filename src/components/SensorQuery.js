@@ -143,7 +143,7 @@ const SensorQuery = () => {
       <div className="row">
         <div className="col-12">
           <br />
-          <div className="col-12">
+          <div className="col-10">
             <div className="page-title">Sensor Query</div>
             <br></br>
             <div>
@@ -174,9 +174,9 @@ const SensorQuery = () => {
               ) : (
                 <div id="query-builder">query-builder</div>
               )}
+              
+              <div className="title-heders2">Results</div>
               <br></br>
-              <div className="title-heders">Results</div>
-              <br></br><br></br><br></br>
               <button
                 type="submit"
                 className="btn btn-map bi bi-geo-alt-fill float-left"
@@ -185,9 +185,6 @@ const SensorQuery = () => {
               >
                 View on Map
               </button>
-
-              <br></br>
-              <br></br>
               <h5> Query Results in Tabular Format</h5>
               {showNoResultFound && sensorData.length === 0 ? (
                 <div className="alert alert-warning" role="alert">
