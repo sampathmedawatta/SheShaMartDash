@@ -303,9 +303,33 @@ h4 {
 }
 .btn-add {
   content: '\F3AA';
-  background: #54b8ae;
+  background: #296124;
   color: #fff;
   border-radius: 12px;
+  font-weight: bold;
+}
+.btn-add:hover{
+  content: '\F3AA';
+  background: #28716a;
+  color: #fff;
+}
+.btn-add:focus{
+  background: #28716a;
+  outline: 0 !important;
+  border: none;}
+
+.btn-map {
+  content: '\F3AA';
+  background: #235165;
+  color: #fff;
+  border-radius: 4px;
+  font-weight: bold;
+}
+.btn-map {
+  content: '\F3AA';
+  background: #235165;
+  color: #fff;
+  border-radius: 4px;
   font-weight: bold;
 }
 .btn-add:hover{
