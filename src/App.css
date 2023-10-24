@@ -270,6 +270,13 @@ h4 {
   border-radius: 4px;
   font-weight: bold;
 }
+.btn-map {
+  content: '\F3AA';
+  background: #235165;
+  color: #fff;
+  border-radius: 4px;
+  font-weight: bold;
+}
 
 /* form css */
 .form-control {
