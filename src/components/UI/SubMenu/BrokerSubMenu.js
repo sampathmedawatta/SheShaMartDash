@@ -5,7 +5,7 @@ function BrokerSubMenu() {
   return (
     <nav className="navbar navbar-expand-lg broker-menu navbar-dark">
       <Link to={"/"} className="navbar-brand brok">
-        <i className="bi bi-house-door-fill"></i>
+        <div className="bi bi-house-door-fill logo-menu b">        Broker Mode</div>
       </Link>
 
       <div className="collapse navbar-collapse" id="navbarSupportedContent">

@@ -5,7 +5,7 @@ function ProviderSubMenu() {
   return (
     <nav className="navbar navbar-expand-lg provider-menu navbar-dark">
       <Link to={"/"} className="navbar-brand prov">
-        <i className="bi bi-house-door-fill"></i>
+        <div className="bi bi-house-door-fill logo-menu p">        Provider Mode</div>
       </Link>
 
       <div className="collapse navbar-collapse" id="navbarSupportedContent">
