@@ -41,7 +41,7 @@ label::after {
 
 /* menus */
 .top-menu{   
-  font-size: large;
+  font-size: 17px;
   padding: 10px;
   color: white !important;
 }
@@ -422,7 +422,7 @@ ul {
   font-weight: 500;
   color: #696767;
   text-transform: capitalize;
-  border-bottom: 1px solid #dee2e6 !important;
+  border-bottom: 0px solid #dee2e6 !important;
 }
 .title-heders{
   font-weight: bold;
@@ -444,16 +444,12 @@ ul {
   font-weight: 500;
   color: #696767;
   text-transform: capitalize;
-  border-bottom: 1px solid #dee2e6 !important;
 }
-
- 
 /* Apply a border to the right of all but the last column */
 table th:not(:last-child),
 table td:not(:last-child) {
   border-right: var(--border);
 }
- 
 table>thead>tr:not(:last-child)>th,
 table>thead>tr:not(:last-child)>td,
 table>tbody>tr:not(:last-child)>th,
@@ -466,6 +462,9 @@ table>thead:not(:last-child),
 table>tbody:not(:last-child),
 table>tfoot:not(:last-child) {
   border-bottom: var(--border);
+}
+tbody tr:nth-child(even) {
+  background-color: #e4f1f3;
 }
 
 /* hover methods */

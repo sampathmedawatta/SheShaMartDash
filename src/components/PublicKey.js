@@ -123,8 +123,7 @@ const PublicKey = () => {
                     </button>
                   </div>
                 </form>
-                  </div>
-                
+                </div>
               </div>
             )}
 
