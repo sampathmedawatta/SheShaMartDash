@@ -21,13 +21,65 @@ const getSensors = () => {
     });
 };
 
-const querySensor = async(payload) => {
-     const response = await axiosInstance
-       .post("/sparql", payload, headers);
-       
-       console.log(response);
-       return response;
+const querySensor = (payload) => {
 
+  const params = {
+
+      "result": true,
+      "values": [
+          {
+              "lat": {
+                  "termType": "Literal",
+                  "value": "-37.821658",
+                  "language": "",
+                  "datatype": {
+                      "termType": "NamedNode",
+                      "value": "http://www.w3.org/2001/XMLSchema#string"
+                  }
+              },
+              "long": {
+                  "termType": "Literal",
+                  "value": "145.03904",
+                  "language": "",
+                  "datatype": {
+                      "termType": "NamedNode",
+                      "value": "http://www.w3.org/2001/XMLSchema#string"
+                  }
+              },
+              "measures": {
+                  "termType": "Literal",
+                  "value": "video",
+                  "language": "",
+                  "datatype": {
+                      "termType": "NamedNode",
+                      "value": "http://www.w3.org/2001/XMLSchema#string"
+                  }
+              },
+              "sensor": {
+                  "termType": "NamedNode",
+                  "value": "test sensor"
+              }
+          }
+      ]
+  }
+ /* const params = {
+    query: payload,
+  };
+console.log(params)
+  return axiosInstance
+    .post("/sparql", params, headers)
+    .then((response) => {
+      console.log(response);
+      return response;
+     
+    })
+    .catch((error) => {
+      console.error(error);
+      throw error; // Optionally re-throw the error to be handled later
+    });*/
+    return params
+};
+/*
 //   const params = {
 //     query: payload,
 //   };
@@ -36,7 +88,7 @@ const querySensor = async(payload) => {
 //     values: [],
 //   };
 //   return tempres;
-};
+};*/
 
 const registerSensor = async (params) => {
   const response = await axiosInstance.post(
