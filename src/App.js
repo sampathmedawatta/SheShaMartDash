@@ -17,12 +17,15 @@ import SensorList from "./components/SensorList";
 import { Context } from "./context/context";
 import Client from "./components/Client";
 import Checkout from "./components/Checkout";
+import PublicKey from "./components/PublicKey";
+import Wallet from "./components/Wallet";
 
 const App = () => {
   const [currentUser, setCurrentUser] = useState(undefined);
   const { broks, sensors } = useContext(Context);
  
   return (
+    <div>
     <div className="container-fluid">
       <div className="row flex-nowrap">
         <div className="col-auto col-md-3 col-xl-2 px-sm-2 px-0 sidebar">
@@ -57,15 +60,15 @@ const App = () => {
             <Route path="/sensorList" element={<SensorList />} />
             <Route path="/checkout" element={<Checkout />} />
 
-            {/* <Route path="/wallet" component={Wallet} />
-            <Route path="/public-key" component={PublicKey} /> */}
+            <Route path="/wallet" element={<Wallet />} />
+            <Route path="/public-key" element={<PublicKey />} />
           </Routes>
         </div>
       </div>
-
       <footer className="footer text-center py-2">
         &copy; 2023 SenShaMart
       </footer>
+    </div>
     </div>
   );
 };
