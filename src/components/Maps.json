@@ -1,0 +1,104 @@
+{
+    "result": true,
+    "values": [
+        {
+            "measures": {
+                "termType": "Literal",
+                "value": "video",
+                "language": "",
+                "datatype": {
+                    "termType": "NamedNode",
+                    "value": "http://www.w3.org/2001/XMLSchema#string"
+                }
+            },
+            "lat": {
+                "termType": "Literal",
+                "value": "-37.821658",
+                "language": "",
+                "datatype": {
+                    "termType": "NamedNode",
+                    "value": "http://www.w3.org/2001/XMLSchema#string"
+                }
+            },
+            "long": {
+                "termType": "Literal",
+                "value": "145.03904",
+                "language": "",
+                "datatype": {
+                    "termType": "NamedNode",
+                    "value": "http://www.w3.org/2001/XMLSchema#string"
+                }
+            },
+            "sensor": {
+                "termType": "NamedNode",
+                "value": "metaSample"
+            }
+        },
+        {
+            "measures": {
+                "termType": "Literal",
+                "value": "video",
+                "language": "",
+                "datatype": {
+                    "termType": "NamedNode",
+                    "value": "http://www.w3.org/2001/XMLSchema#string"
+                }
+            },
+            "lat": {
+                "termType": "Literal",
+                "value": "-37.821658",
+                "language": "",
+                "datatype": {
+                    "termType": "NamedNode",
+                    "value": "http://www.w3.org/2001/XMLSchema#string"
+                }
+            },
+            "long": {
+                "termType": "Literal",
+                "value": "145.03904",
+                "language": "",
+                "datatype": {
+                    "termType": "NamedNode",
+                    "value": "http://www.w3.org/2001/XMLSchema#string"
+                }
+            },
+            "sensor": {
+                "termType": "NamedNode",
+                "value": "metaSample2"
+            }
+        },
+        {
+            "measures": {
+                "termType": "Literal",
+                "value": "video",
+                "language": "",
+                "datatype": {
+                    "termType": "NamedNode",
+                    "value": "http://www.w3.org/2001/XMLSchema#string"
+                }
+            },
+            "lat": {
+                "termType": "Literal",
+                "value": "-37.821658",
+                "language": "",
+                "datatype": {
+                    "termType": "NamedNode",
+                    "value": "http://www.w3.org/2001/XMLSchema#string"
+                }
+            },
+            "long": {
+                "termType": "Literal",
+                "value": "145.03904",
+                "language": "",
+                "datatype": {
+                    "termType": "NamedNode",
+                    "value": "http://www.w3.org/2001/XMLSchema#string"
+                }
+            },
+            "sensor": {
+                "termType": "NamedNode",
+                "value": "test sensor "
+            }
+        }
+    ]
+}
