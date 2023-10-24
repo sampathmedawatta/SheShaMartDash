@@ -45,7 +45,7 @@ const Wallet = () => {
         <div className="row">
           <div className="col-12">
             <br />
-            <div className="col-5">
+            <div className="col-7">
               <div className="page-title">View Your Wallet</div>
 
               {balance && (

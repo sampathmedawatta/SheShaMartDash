@@ -104,16 +104,9 @@ function SensorList() {
             <br />
             <div className="col-10">
               <div className="page-title">Sensor List</div>
-              <br></br>
+            
               {registeredSensors !== null && (
                 <div>
-                  <button
-                    onClick={handleCheckout}
-                    className="btn btn-add bi-file-plus-fill"
-                  >
-                    Checkout
-                  </button>
-                  <br /> <br />
                   <table className="table table-light">
                     <thead>
                       <tr>
@@ -159,6 +152,12 @@ function SensorList() {
                       ))}
                     </tbody>
                   </table>
+                  <button
+                    onClick={handleCheckout}
+                    className="btn btn-add bi-file-plus-fill"
+                  >
+                    Checkout
+                  </button>
                 </div>
               )}
             </div>

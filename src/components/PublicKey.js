@@ -60,11 +60,11 @@ const PublicKey = () => {
         <div className="col-12">
           <br />
           <div className="col-10">
-            <br></br>
+          
             {savedPublicKey && (
-              <div className="form-group">
+              <div className="form-group pk-req1">
                 <br></br>
-                <label htmlFor="savedPublicKey">Public Key</label>
+                <label htmlFor="savedPublicKey">Current Public Key</label>
                 <input
                   type="text"
                   id="savedPublicKey"
@@ -100,9 +100,8 @@ const PublicKey = () => {
             <br></br>
             {requestedPublicKey && (
               <div>
-                <div className="form-group">
-                  <div className="page-title">Requested Public Key</div>
-                  <br></br>
+                <div className="form-group pk-req">
+                  <div className="page-title">Request a Public Key</div>
                   <label htmlFor="reqPublicKey">Public Key</label>
                   <input
                     type="text"
@@ -113,9 +112,9 @@ const PublicKey = () => {
                     value={enteredPublicKey}
                     readOnly
                   />
-                </div>
-                <form onSubmit={handleSubmit}>
-                  <div className="form-group ">
+                  <form onSubmit={handleSubmit}>
+                  <div className="form-group">
+                    <br/>
                     <button
                       type="submit"
                       className="btn btn-add bi-file-plus-fill"
@@ -124,15 +123,16 @@ const PublicKey = () => {
                     </button>
                   </div>
                 </form>
+                  </div>
+                
               </div>
             )}
 
             {publicKeyFrom && (
               <div>
+                <div className="form-group pk-req">
                 <div className="page-title">Save New Public Key</div>
-                <br></br>
-                <div className="form-group">
-                  <label htmlFor="newPublicKey">Public Key*</label>
+                  <label htmlFor="newPublicKey">Enter Your Public Key Here</label>
                   <input
                     type="text"
                     id="newPublicKey"
@@ -143,9 +143,9 @@ const PublicKey = () => {
                       handlePublickeyChange(e.target.value);
                     }}
                   />
-                </div>
-                <form onSubmit={handleSubmit}>
+                  <form onSubmit={handleSubmit}>
                   <div className="form-group ">
+                    <br/>
                     <button
                       type="submit"
                       className="btn btn-add bi-file-plus-fill"
@@ -154,6 +154,7 @@ const PublicKey = () => {
                     </button>
                   </div>
                 </form>
+                </div>
               </div>
             )}
           </div>

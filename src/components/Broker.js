@@ -85,7 +85,7 @@ const Broker = () => {
         <div className="row">
           <div className="col-12">
             <br />
-            <div className="col-10">
+            <div className="col-10 brok">
               <div className="page-title">Broker Registration</div>
               <br></br>
               <form onSubmit={handleSubmit}>
@@ -154,7 +154,7 @@ const Broker = () => {
                     <span className="form-error">{errors.endpoint}</span>
                   )}
                   <div className="invalid-feedback">
-                    Please enter a Endpoint
+                    Please enter an Endpoint
                   </div>
                 </div>
                 <div className="form-group ">

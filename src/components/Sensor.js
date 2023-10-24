@@ -179,9 +179,8 @@ const Sensor = () => {
         <div className="row">
           <div className="col-12">
             <br />
-            <div className="col-10">
+            <div className="col-10 sensor-form">
               <div className="page-title">Sensor Registration</div>
-              <br></br>
               <form onSubmit={handleSubmit}>
                 {response.status && !response.error && (
                   <div
@@ -196,11 +195,11 @@ const Sensor = () => {
                     className="alert alert-danger alert-dismissible fade show"
                     role="alert"
                   >
-                    Sensor Registeration Failed!
+                    Sensor Registration Failed!
                   </div>
                 )}
                 <div className="form-group">
-                  <label htmlFor="sensorName">Sensor Name* </label>
+                  <label htmlFor="sensorName">Sensor Name </label>
                   <input
                     type="text"
                     id="sensorName"
@@ -214,7 +213,7 @@ const Sensor = () => {
                   )}
                 </div>
                 <div className="form-group">
-                  <label htmlFor="costPerMinute">Cost Per Minute* </label>
+                  <label htmlFor="costPerMinute">Cost Per Minute </label>
                   <input
                     type="number"
                     min={0}
@@ -229,7 +228,7 @@ const Sensor = () => {
                   )}
                 </div>
                 <div className="form-group">
-                  <label htmlFor="costPerKB">Cost Per KB* </label>
+                  <label htmlFor="costPerKB">Cost Per KB </label>
                   <input
                     type="number"
                     min={0}
@@ -244,7 +243,7 @@ const Sensor = () => {
                   )}
                 </div>
                 <div className="form-group">
-                  <label htmlFor="brokerName">Broker Name* </label>
+                  <label htmlFor="brokerName">Broker Name </label>
                   {registeredBrokers && (
                     <DropDown
                       onChange={handleDropdownChange}
@@ -257,7 +256,7 @@ const Sensor = () => {
                   )}
                 </div>
                 <div className="form-group">
-                  <label htmlFor="rewardAmount">Reward Amount*</label>
+                  <label htmlFor="rewardAmount">Reward Amount </label>
                   <input
                     type="number"
                     min={0}
@@ -271,18 +270,16 @@ const Sensor = () => {
                     <span className="form-error">{errors.rewardAmount}</span>
                   )}
                 </div>
-                <div className="form-group">
-                  <label htmlFor="turtleFile">Extra metadata:</label>
+                <div className="form-group meta">
+                  <label htmlFor="turtleFile">Extra Metadata</label>
                   <TurtleFileReader onChange={handleFileInput} />
                 </div>
-                <div className="form-group col-3 mt-3">
                   <button
                     type="submit"
                     className="btn btn-add bi-file-plus-fill"
                   >
                     Register
                   </button>
-                </div>
               </form>
             </div>
           </div>

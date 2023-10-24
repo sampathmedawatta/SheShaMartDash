@@ -163,7 +163,8 @@ const SensorQuery = () => {
               ) : (
                 <div id="query-builder">query-builder</div>
               )}
-
+              </div>
+              </div>
               <br></br>
               <div className="title-heders">Results</div>
               <br></br>
@@ -181,8 +182,6 @@ const SensorQuery = () => {
                   </div>
                 )
               )}
-            </div>
-          </div>
         </div>
       </div>
     </div>
