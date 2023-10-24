@@ -65,10 +65,10 @@ const App = () => {
           </Routes>
         </div>
       </div>
-      <footer className="footer text-center py-2">
+    </div>
+    <footer className="footer text-center py-2">
         &copy; 2023 SenShaMart
       </footer>
-    </div>
     </div>
   );
 };
