@@ -1,4 +1,4 @@
-import React, { useState,useContext, useEffect } from "react";
+import React, { useState, useContext, useEffect } from "react";
 import SensorService from "../services/sensor.service";
 import BrokerService from "../services/broker.service";
 import ProviderSubMenu from "../components/UI/SubMenu/ProviderSubMenu";
@@ -13,7 +13,6 @@ const Sensor = () => {
   const [showPopup, setShowPopup] = useState(false);
 
   useEffect(() => {
-   
     if (!savedPublicKey) {
       setShowPopup(true);
     }
@@ -154,9 +153,9 @@ const Sensor = () => {
             costPerKB: "",
             brokerName: "",
           });
-          setResponse({ status: "saved" });
+          setResponse({ status: true, error: false });
         } else {
-          console.log("Broker registration failed.");
+          setResponse({ status: false, error: true });
         }
       });
     }
@@ -180,16 +179,23 @@ const Sensor = () => {
         <div className="row">
           <div className="col-12">
             <br />
-            <div className="col-10">
+            <div className="col-10 sensor-form">
               <div className="page-title">Sensor Registration</div>
-              <br></br>
               <form onSubmit={handleSubmit}>
-                {response.status && (
+                {response.status && !response.error && (
                   <div
                     className="alert alert-success alert-dismissible fade show"
                     role="alert"
                   >
-                    Sensor Registered Successfully
+                    Sensor Successfully Registered.
+                  </div>
+                )}
+                {!response.status && response.error && (
+                  <div
+                    className="alert alert-danger alert-dismissible fade show"
+                    role="alert"
+                  >
+                    Sensor Registration Failed!
                   </div>
                 )}
                 <div className="form-group">
@@ -250,7 +256,7 @@ const Sensor = () => {
                   )}
                 </div>
                 <div className="form-group">
-                  <label htmlFor="rewardAmount">Reward Amount</label>
+                  <label htmlFor="rewardAmount">Reward Amount </label>
                   <input
                     type="number"
                     min={0}
@@ -264,18 +270,16 @@ const Sensor = () => {
                     <span className="form-error">{errors.rewardAmount}</span>
                   )}
                 </div>
-                <div className="form-group">
-                  <label htmlFor="turtleFile">Extra metadata:</label>
+                <div className="form-group meta">
+                  <label htmlFor="turtleFile">Extra Metadata</label>
                   <TurtleFileReader onChange={handleFileInput} />
                 </div>
-                <div className="form-group col-3 mt-3">
                   <button
                     type="submit"
                     className="btn btn-add bi-file-plus-fill"
                   >
                     Register
                   </button>
-                </div>
               </form>
             </div>
           </div>

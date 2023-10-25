@@ -10,9 +10,9 @@ const headers = {
   //Authorization: "Bearer your-access-token", // Add any custom headers as needed
 };
 
-const getWallet = () => {
-  return axiosInstance
-    .get("/Balance", headers)
+const getWallet = async (params) => {
+  return await axiosInstance
+    .get("/Balance", params, headers)
     .then((response) => {
       return response.data;
     })

@@ -33,6 +33,13 @@ function SensorList() {
      async function fetchSensorData() {
        const registeredSensors = await SensorService.getSensors();
        if (registeredSensors !== null) {
+        
+      //  const filteredSensors = registeredSensors.filter(
+      //    (sensor) => sensor.hash === savedPublicKey
+      //  );
+      //  console.log(registeredSensors);
+      //   console.log(filteredSensors);
+
          setRegisteredSensors(registeredSensors);
          setSensors(registeredSensors);
        }
@@ -73,8 +80,6 @@ function SensorList() {
     }
   };
 
- console.log(sensorList);
-
   const handleCheckout = () => {
      navigate("/checkout");
   };
@@ -99,16 +104,9 @@ function SensorList() {
             <br />
             <div className="col-10">
               <div className="page-title">Sensor List</div>
-              <br></br>
+            
               {registeredSensors !== null && (
                 <div>
-                  <button
-                    onClick={handleCheckout}
-                    className="btn btn-add bi-file-plus-fill"
-                  >
-                    Checkout
-                  </button>
-                  <br /> <br />
                   <table className="table table-light">
                     <thead>
                       <tr>
@@ -154,6 +152,12 @@ function SensorList() {
                       ))}
                     </tbody>
                   </table>
+                  <button
+                    onClick={handleCheckout}
+                    className="btn btn-add bi-file-plus-fill"
+                  >
+                    Checkout
+                  </button>
                 </div>
               )}
             </div>

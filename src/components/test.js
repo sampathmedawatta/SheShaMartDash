@@ -1,47 +1,162 @@
-import React, { useState } from "react";
-import rdflib from "rdflib";
+import React, { useState, useEffect, useContext } from "react";
+import SensorService from "../services/sensor.service";
+import { Link, useNavigate } from "react-router-dom";
+import ProviderSubMenu from "../components/UI/SubMenu/ProviderSubMenu";
+import BrokerService from "../services/broker.service";
+import { Context } from "../context/context";
+import ValidatePublicKey from "../components/ValidatePublicKey";
 
-const RDFConverter = () => {
-  const [jsonResult, setJsonResult] = useState(null);
+function SensorList() {
+  const { savedPublicKey } = useContext(Context);
+  const [showPopup, setShowPopup] = useState(false);
 
-  const handleFileChange = (event) => {
-    const file = event.target.files[0];
-    if (!file) return;
+  useEffect(() => {
+    if (!savedPublicKey) {
+      setShowPopup(true);
+    }
+  }, []);
 
-    const g = rdflib.graph();
-    const fetcher = new rdflib.Fetcher(g);
+  const { setSensors } = useContext(Context);
+  const [registeredSensors, setRegisteredSensors] = useState(null);
+  const { sensorList, setSensorList } = useContext(Context);
+  const navigate = useNavigate();
 
-    const reader = new FileReader();
+  const [registeredBrokers, setRegisteredBrokers] = useState(null);
+  useEffect(() => {
+    async function fetchBrokerData() {
+      const getList = await BrokerService.getBrokers();
+      if (getList !== null) {
+        setRegisteredBrokers(getList);
+      }
+    }
+    async function fetchSensorData() {
+      const registeredSensors = await SensorService.getSensors();
+      if (registeredSensors !== null) {
+        setRegisteredSensors(registeredSensors);
+        setSensors(registeredSensors);
+      }
+    }
 
-    reader.onload = () => {
-      const ttlData = reader.result;
-      rdflib.parse(ttlData, g, "your_file.ttl", "text/turtle"); // Replace 'your_file.ttl' with a meaningful URI or name
+    fetchBrokerData();
+    fetchSensorData();
+  }, []);
 
-      const data = {};
-      g.statements.forEach((triple) => {
-        const subject = triple.subject.value;
-        const predicate = triple.predicate.value;
-        const object = triple.object.value;
+  const sensorExists = (sensor) => {
+    return sensorList.some((snr) => snr.sensorHash === sensor.hash);
+  };
 
-        if (!data[subject]) {
-          data[subject] = {};
-        }
+  const getBroker = (name) => {
+    if (registeredBrokers !== null) {
+      const foundBroker = Object.values(registeredBrokers).find(
+        (broker) => broker.metadata.name === name
+      );
+      return foundBroker.hash;
+    }
+  };
+  const toggleCheckbox = (sensor) => {
+    const exists = sensorExists(sensor);
+    if (exists) {
+      setSensorList(sensorList.filter((snr) => snr.sensorHash !== sensor.hash));
+    } else {
+      setSensorList([
+        ...sensorList,
+        {
+          amount: 0,
+          sensorName: sensor.metadata.name,
+          sensorHash: sensor.hash,
+          brokerHash: getBroker(sensor.metadata.integrationBroker),
+        },
+      ]);
+    }
+  };
 
-        data[subject][predicate] = object;
-      });
-
-      setJsonResult(JSON.stringify(data, null, 2));
-    };
-
-    reader.readAsText(file);
+  const handleCheckout = () => {
+    navigate("/checkout");
   };
 
   return (
     <div>
-      <input type="file" accept=".ttl" onChange={handleFileChange} />
-      <pre>{jsonResult}</pre>
+      <div className="row">
+        <div className="col-12">
+          <ProviderSubMenu />
+        </div>
+
+        <div className="col-12">
+          <div className="title-heders">Provider</div>
+        </div>
+      </div>
+
+      {showPopup && <ValidatePublicKey />}
+
+      {!showPopup && (
+        <div className="row">
+          <div className="col-12">
+            <br />
+            <div className="col-10">
+              <div className="page-title">Sensor List</div>
+              <br></br>
+              {registeredSensors !== null && (
+                <div>
+                  <button
+                    onClick={handleCheckout}
+                    className="btn btn-add bi-file-plus-fill"
+                  >
+                    Checkout
+                  </button>
+                  <br /> <br />
+                  <table className="table table-light">
+                    <thead>
+                      <tr>
+                        <th>Select</th>
+                        <th>Name</th>
+                        <th>Cost Per Minute</th>
+                        <th>Cost Per KB</th>
+                        <th>Broker</th>
+                        <th>Reward amount</th>
+                      </tr>
+                    </thead>
+                    <tbody>
+                      {Object.keys(registeredSensors).map((item, key) => (
+                        <tr key={key}>
+                          <td>
+                            <input
+                              type="checkbox"
+                              checked={
+                                sensorList &&
+                                sensorExists(registeredSensors[item])
+                              }
+                              onChange={() =>
+                                toggleCheckbox(registeredSensors[item])
+                              }
+                            />
+                          </td>
+                          <td>
+                            <Link
+                              to={`/sensorDetails/${registeredSensors[item].metadata.name}`}
+                            >
+                              {registeredSensors[item].metadata.name}
+                            </Link>
+                          </td>
+                          <td>
+                            {registeredSensors[item].metadata.costPerMinute}
+                          </td>
+                          <td>{registeredSensors[item].metadata.costPerKB}</td>
+                          <td>
+                            {registeredSensors[item].metadata.integrationBroker}
+                          </td>
+                          <td>{registeredSensors[item].rewardAmount}</td>
+                        </tr>
+                      ))}
+                    </tbody>
+                  </table>
+                </div>
+              )}
+            </div>
+          </div>
+        </div>
+      )}
     </div>
   );
-};
+}
 
-export default RDFConverter;
+export default SensorList;
