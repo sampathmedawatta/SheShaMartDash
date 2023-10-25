@@ -62,15 +62,15 @@ const App = () => {
               <Route path="/checkout" element={<Checkout />} />
               <Route path="/integrate" element={<Integrate />} />
 
-              <Route path="/wallet" element={<Wallet />} />
-              <Route path="/public-key" element={<PublicKey />} />
-            </Routes>
-          </div>
+            <Route path="/wallet" element={<Wallet />} />
+            <Route path="/public-key" element={<PublicKey />} />
+          </Routes>
         </div>
-        <footer className="footer text-center py-2">
-          &copy; 2023 SenShaMart
-        </footer>
       </div>
+    </div>
+    <footer className="footer text-center py-2">
+        &copy; 2023 SenShaMart
+      </footer>
     </div>
   );
 };
