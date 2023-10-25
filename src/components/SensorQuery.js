@@ -241,7 +241,7 @@ const SensorQuery = () => {
       <div className="row">
         <div className="col-12">
           <br />
-          <div className="col-12">
+          <div className="col-10">
             <div className="page-title">Sensor Query</div>
             <br></br>
             <div>
@@ -272,6 +272,8 @@ const SensorQuery = () => {
               ) : (
                 <div id="query-builder">query-builder</div>
               )}
+              
+              <div className="title-heders2">Results</div>
               <br></br>
               <div className="title-heders">Results</div>
               <br></br>
