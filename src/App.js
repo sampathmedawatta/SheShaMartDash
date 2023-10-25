@@ -19,6 +19,7 @@ import Client from "./components/Client";
 import Checkout from "./components/Checkout";
 import PublicKey from "./components/PublicKey";
 import Wallet from "./components/Wallet";
+import FilterQuery from "./components/FilterQuery";
 
 const App = () => {
   const [currentUser, setCurrentUser] = useState(undefined);
@@ -52,6 +53,7 @@ const App = () => {
             <Route exact path="/sensor" element={<Sensor />} />
             <Route exact path="/sensorquery" element={<SensorQuery />} />
             <Route exact path="/client" element={<Client />} />
+            <Route exact path="/filterquery" element={<FilterQuery />} />
             <Route
               path="/BrokerDetails/:id"
               element={<BrokerDetails data={broks} />}
