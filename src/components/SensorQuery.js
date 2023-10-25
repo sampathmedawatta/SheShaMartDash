@@ -2,6 +2,7 @@ import React, { useEffect, useState, useContext } from "react";
 import Yasgui from "@triply/yasgui";
 import "@triply/yasgui/build/yasgui.min.css";
 import SensorService from "../services/sensor.service";
+import BrokerService from "../services/broker.service";
 import ClientSubMenu from "../components/UI/SubMenu/ClientSubMenu";
 import { Context } from "../context/context";
 import { useNavigate } from "react-router-dom";
@@ -11,7 +12,7 @@ const SensorQuery = () => {
   const [showNoResultFound, setShowNoResultFound] = useState(false);
   const [sensorData, setSensorData] = useState([]);
   const [isAdvanceSearchChecked, setIsAdvanceSearchChecked] = useState(false);
- const navigate = useNavigate();
+  const navigate = useNavigate();
 
   const [shouldShowMapButton, setShouldShowMapButton] = useState(false);
   let yasguiInstance = null;
@@ -76,7 +77,7 @@ const SensorQuery = () => {
                 },
                 sensor: {
                   termType: "NamedNode",
-                  value: "test sensor 1",
+                  value: "Camera TDP",
                 },
               },
               {
@@ -109,7 +110,7 @@ const SensorQuery = () => {
                 },
                 sensor: {
                   termType: "NamedNode",
-                  value: "test sensor 2",
+                  value: "SwinTestSensor100",
                 },
               },
               {
@@ -142,7 +143,7 @@ const SensorQuery = () => {
                 },
                 sensor: {
                   termType: "NamedNode",
-                  value: "test sensor 3",
+                  value: "Test Part Sensor 1",
                 },
               },
               {
@@ -175,7 +176,7 @@ const SensorQuery = () => {
                 },
                 sensor: {
                   termType: "NamedNode",
-                  value: "test sensor 4",
+                  value: "new test",
                 },
               },
               {
@@ -208,7 +209,7 @@ const SensorQuery = () => {
                 },
                 sensor: {
                   termType: "NamedNode",
-                  value: "test sensor 5",
+                  value: "new test 1",
                 },
               },
             ],
@@ -304,13 +305,35 @@ const SensorQuery = () => {
   };
 
   const { sensorList, setSensorList } = useContext(Context);
+  const [registeredSensors, setRegisteredSensors] = useState([]);
+  const [registeredBrokers, setRegisteredBrokers] = useState([]);
+
+  useEffect(() => {
+    async function fetchBrokerData() {
+      const getList = await BrokerService.getBrokers();
+      if (getList !== null) {
+        setRegisteredBrokers(getList);
+      }
+    }
+    async function fetchSensorData() {
+      const getRegisteredSensors = await SensorService.getSensors();
+      if (getRegisteredSensors !== null) {
+        setRegisteredSensors(getRegisteredSensors);
+      }
+    }
+
+    fetchBrokerData();
+    fetchSensorData();
+  }, []);
 
   const sensorExists = (index) => {
     const val = sensorData[index];
 
-    const aa = sensorList.filter((snr) => snr.sensorName === val.sensor.value);
+    const sensor = sensorList.filter(
+      (snr) => snr.sensorName === val.sensor.value
+    );
 
-    if (aa.length >0) {
+    if (sensor.length > 0) {
       return true;
     } else {
       return false;
@@ -326,26 +349,42 @@ const SensorQuery = () => {
         )
       );
     } else {
-      const sen = sensorData[index];
+      const filteredSensor = Object.values(registeredSensors).filter(
+        (sensor) => {
+          return sensor.metadata.name
+            .toLowerCase()
+            .includes(sensorData[index].sensor.value.toLowerCase());
+        }
+      );
+
+      const filteredBroker = Object.values(registeredBrokers).filter(
+        (broker) => {
+          return broker.metadata.name
+            .toLowerCase()
+            .includes(
+              filteredSensor[0].metadata.integrationBroker.toLowerCase()
+            );
+        }
+      );
+
       setSensorList([
         ...sensorList,
         {
           amount: 0,
           sensorName: sensorData[index].sensor.value,
-          sensorHash: "",
-          brokerHash: "",
+          sensorHash: filteredSensor[0].hash,
+          brokerHash: filteredBroker[0].hash,
         },
       ]);
     }
   };
 
   const handleCheckout = () => {
-    if (sensorData.length > 0) {
-       navigate("/integrate");
+    if (sensorList.length > 0) {
+      navigate("/integrate");
+    } else {
+      // Show error please select sensors to inegrate
     }
-   else{
-    // Show error please select sensors to inegrate
-   }
   };
 
   const renderTableRows = () => {
@@ -359,7 +398,7 @@ const SensorQuery = () => {
           <input
             type="checkbox"
             id={`checkbox-${index}`}
-            //checked={sensorExists(index)}
+            checked={sensorExists(index)}
             onChange={() => toggleCheckbox(index)}
           />
         </td>
@@ -425,13 +464,14 @@ const SensorQuery = () => {
                 View on Map
               </button>
 
-              <button
-                onClick={handleCheckout}
-                className="btn btn-add bi-file-plus-fill"
-              >
-                Integrate Sensors
-              </button>
-
+              {sensorList.length > 0 && (
+                <button
+                  onClick={handleCheckout}
+                  className="btn btn-add bi-file-plus-fill"
+                >
+                  Integrate Sensors
+                </button>
+              )}
               <br></br>
               <br></br>
               <h5> Query Results in Tabular Format</h5>
@@ -449,10 +489,10 @@ const SensorQuery = () => {
                   </div>
                 )
               )}
+            </div>
+          </div>
         </div>
       </div>
-    </div>
-    </div>
     </div>
   );
 };
