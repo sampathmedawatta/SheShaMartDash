@@ -16,6 +16,7 @@ const SensorQuery = () => {
   const navigate = useNavigate();
 
   const [shouldShowMapButton, setShouldShowMapButton] = useState(false);
+  const [shouldTabular, setShouldTabular] = useState(false);
   let yasguiInstance = null;
 
   useEffect(() => {
@@ -30,6 +31,7 @@ const SensorQuery = () => {
         resizeable: true,
         tabSize: 2,
       });
+     
 
       yasguiInstance = yasgui;
       yasgui.getTab().yasqe.setSize(1070, 200);
@@ -50,6 +52,7 @@ const SensorQuery = () => {
              
               setSensorData(response.data.values);
               setSensorList(response.data.values);
+              setShouldTabular(true);
             
               if (sensorData.length === 0) {
                 setShowNoResultFound(true);
@@ -80,7 +83,7 @@ const SensorQuery = () => {
         setShowAlert(false);
         setShowNoResultFound(false);
         loadYasgui();
-
+    
         document.querySelector(".yasgui .yasr").style.display = "none";
         document.querySelector(".yasgui .tabsList").style.display = "none";
         document.querySelector(".yasgui .yasqe_share").style.display = "none";
@@ -93,9 +96,9 @@ const SensorQuery = () => {
         setSensorData([]); // Clear the data
         setShowAlert(false);
         setShowNoResultFound(false);
+        document.querySelector(".yasqe").style.display = "none";
         //document.querySelector("div.alert.alert-warning").style.display = "none";
 
-        // Optionally, you can hide Yasgui here if needed.
       }
     });
   }, []);
@@ -275,13 +278,9 @@ const SensorQuery = () => {
                   <FilterQuery />
                 </div>
               )}
-              
               <div className="title-heders2">Results</div>
               <br></br>
-              <div className="title-heders">Results</div>
-              <br></br>
-              <br></br>
-              <br></br>
+          
               <button
                 type="submit"
                 className="btn btn-map bi bi-geo-alt-fill float-left"
@@ -301,7 +300,7 @@ const SensorQuery = () => {
               )}
               <br></br>
               <br></br>
-              <h5> Query Results in Tabular Format</h5>
+              <span className="tabularview tabular" style={{ display: shouldShowMapButton ? "block" : "none" }}>Query Results in Tabular Format</span>
               {showNoResultFound && sensorData.length === 0 ? (
                 <div className="alert alert-warning" role="alert">
                   No result found.
