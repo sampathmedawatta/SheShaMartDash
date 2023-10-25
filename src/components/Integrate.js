@@ -68,26 +68,21 @@ function Integrate() {
       <div className="row">
         <div className="col-12">
           <br />
-          <div className="col-4">
-            <div className="page-title">Integrate Sensors</div>
-            <br></br>
-
+          <div className="col-10">
             {response.status && (
               <div
                 className="alert alert-success alert-dismissible fade show"
                 role="alert"
               >
-                Sensor Intergrated Successfully.
+                Sensor Integrated Successfully.
               </div>
             )}
-            <table className="table table-light">
-              <thead>
-                <tr>
-                  <th>Sensor Name</th>
-                  <th>Amount</th>
-                </tr>
-              </thead>
+            <table className="table table-light checkout">
+              <br></br>
+              <div className="page-title checkout">Checkout Sensors</div>
               <tbody>
+                <th>Sensor Name</th>
+                <th>Amount</th>
                 {sensorList &&
                   Object.keys(sensorList).map((item, key) => (
                     <tr key={key}>
@@ -108,21 +103,24 @@ function Integrate() {
                       </td>
                     </tr>
                   ))}
+
+                <th>
+                  <label htmlFor="rewardAmount">Reward Amount</label>
+                </th>
+                <td>
+                  <input
+                    type="number"
+                    min={1}
+                    name="rewardAmount"
+                    id="rewardAmount"
+                    onChange={(e) => {
+                      handleRewardAmountChange(e.target.value);
+                    }}
+                  />
+                </td>
               </tbody>
             </table>
 
-            <div className="form-group">
-              <label htmlFor="rewardAmount">reward Amount</label>
-              <input
-                type="number"
-                min={1}
-                name="rewardAmount"
-                id="rewardAmount"
-                onChange={(e) => {
-                  handleRewardAmountChange(e.target.value);
-                }}
-              />
-            </div>
             <button
               type="submit"
               onClick={handleIntegrate}
