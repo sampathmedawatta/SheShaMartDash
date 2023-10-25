@@ -1,12 +1,13 @@
-import React, { useEffect, useState } from "react";
+import React, { useEffect, useState, useContext } from "react";
 import Yasgui from "@triply/yasgui";
 import "@triply/yasgui/build/yasgui.min.css";
 import SensorService from "../services/sensor.service";
 import ClientSubMenu from "../components/UI/SubMenu/ClientSubMenu";
+import { Context } from "../context/context";
 
 const SensorQuery = () => {
   const [showAlert, setShowAlert] = useState(false);
-  const [showNoResultFound, setShowNoResultFound] = useState(false); 
+  const [showNoResultFound, setShowNoResultFound] = useState(false);
   const [sensorData, setSensorData] = useState([]);
   const [isAdvanceSearchChecked, setIsAdvanceSearchChecked] = useState(false);
 
@@ -40,9 +41,183 @@ const SensorQuery = () => {
           const inputQuery = instance.getValue();
           setShowAlert(false);
 
+          const params = {
+            result: true,
+            values: [
+              {
+                lat: {
+                  termType: "Literal",
+                  value: "-37.821658",
+                  language: "",
+                  datatype: {
+                    termType: "NamedNode",
+                    value: "http://www.w3.org/2001/XMLSchema#string",
+                  },
+                },
+                long: {
+                  termType: "Literal",
+                  value: "145.03904",
+                  language: "",
+                  datatype: {
+                    termType: "NamedNode",
+                    value: "http://www.w3.org/2001/XMLSchema#string",
+                  },
+                },
+                measures: {
+                  termType: "Literal",
+                  value: "video",
+                  language: "",
+                  datatype: {
+                    termType: "NamedNode",
+                    value: "http://www.w3.org/2001/XMLSchema#string",
+                  },
+                },
+                sensor: {
+                  termType: "NamedNode",
+                  value: "test sensor 1",
+                },
+              },
+              {
+                lat: {
+                  termType: "Literal",
+                  value: "-37.821658",
+                  language: "",
+                  datatype: {
+                    termType: "NamedNode",
+                    value: "http://www.w3.org/2001/XMLSchema#string",
+                  },
+                },
+                long: {
+                  termType: "Literal",
+                  value: "145.03904",
+                  language: "",
+                  datatype: {
+                    termType: "NamedNode",
+                    value: "http://www.w3.org/2001/XMLSchema#string",
+                  },
+                },
+                measures: {
+                  termType: "Literal",
+                  value: "video",
+                  language: "",
+                  datatype: {
+                    termType: "NamedNode",
+                    value: "http://www.w3.org/2001/XMLSchema#string",
+                  },
+                },
+                sensor: {
+                  termType: "NamedNode",
+                  value: "test sensor 2",
+                },
+              },
+              {
+                lat: {
+                  termType: "Literal",
+                  value: "-37.821658",
+                  language: "",
+                  datatype: {
+                    termType: "NamedNode",
+                    value: "http://www.w3.org/2001/XMLSchema#string",
+                  },
+                },
+                long: {
+                  termType: "Literal",
+                  value: "145.03904",
+                  language: "",
+                  datatype: {
+                    termType: "NamedNode",
+                    value: "http://www.w3.org/2001/XMLSchema#string",
+                  },
+                },
+                measures: {
+                  termType: "Literal",
+                  value: "video",
+                  language: "",
+                  datatype: {
+                    termType: "NamedNode",
+                    value: "http://www.w3.org/2001/XMLSchema#string",
+                  },
+                },
+                sensor: {
+                  termType: "NamedNode",
+                  value: "test sensor 3",
+                },
+              },
+              {
+                lat: {
+                  termType: "Literal",
+                  value: "-37.821658",
+                  language: "",
+                  datatype: {
+                    termType: "NamedNode",
+                    value: "http://www.w3.org/2001/XMLSchema#string",
+                  },
+                },
+                long: {
+                  termType: "Literal",
+                  value: "145.03904",
+                  language: "",
+                  datatype: {
+                    termType: "NamedNode",
+                    value: "http://www.w3.org/2001/XMLSchema#string",
+                  },
+                },
+                measures: {
+                  termType: "Literal",
+                  value: "video",
+                  language: "",
+                  datatype: {
+                    termType: "NamedNode",
+                    value: "http://www.w3.org/2001/XMLSchema#string",
+                  },
+                },
+                sensor: {
+                  termType: "NamedNode",
+                  value: "test sensor 4",
+                },
+              },
+              {
+                lat: {
+                  termType: "Literal",
+                  value: "-37.821658",
+                  language: "",
+                  datatype: {
+                    termType: "NamedNode",
+                    value: "http://www.w3.org/2001/XMLSchema#string",
+                  },
+                },
+                long: {
+                  termType: "Literal",
+                  value: "145.03904",
+                  language: "",
+                  datatype: {
+                    termType: "NamedNode",
+                    value: "http://www.w3.org/2001/XMLSchema#string",
+                  },
+                },
+                measures: {
+                  termType: "Literal",
+                  value: "video",
+                  language: "",
+                  datatype: {
+                    termType: "NamedNode",
+                    value: "http://www.w3.org/2001/XMLSchema#string",
+                  },
+                },
+                sensor: {
+                  termType: "NamedNode",
+                  value: "test sensor 5",
+                },
+              },
+            ],
+          };
+
           SensorService.querySensor(inputQuery).then((response) => {
             if (response.status === 200 && response.data.result === true) {
-              setSensorData(response.data.values);
+              //setSensorData(response.data.values);
+              //setSensorList(response.data.values);
+
+              setSensorData(params.values);
 
               if (sensorData.length === 0) {
                 setShowNoResultFound(true);
@@ -50,13 +225,16 @@ const SensorQuery = () => {
                 setShowNoResultFound(false);
               }
 
-              if (
-                response.data.values[0].lat.value &&
-                response.data.values[0].long.value
-              ) {
-               setShouldShowMapButton(true);
+              if (params.values[0].lat.value && params.values[0].long.value) {
+                setShouldShowMapButton(true);
               }
-           
+
+              // if (
+              //   response.data.values[0].lat.value &&
+              //   response.data.values[0].long.value
+              // ) {
+              //   setShouldShowMapButton(true);
+              // }
             } else {
               console.log(response);
             }
@@ -112,7 +290,7 @@ const SensorQuery = () => {
               .join(" ")}
           </th>
         ))}
-        ,
+        <th>Select</th>
       </tr>
     );
   };
@@ -120,12 +298,60 @@ const SensorQuery = () => {
   const handleViewMapClick = () => {
     // Handle the logic to display the map here
   };
+
+  const { sensorList, setSensorList } = useContext(Context);
+
+  const sensorExists = (index) => {
+    const val = sensorData[index];
+
+    const aa = sensorList.filter((snr) => snr.sensorName === val.sensor.value);
+
+    if (aa.length >0) {
+      return true;
+    } else {
+      return false;
+    }
+  };
+
+  const toggleCheckbox = (index) => {
+    const exists = sensorExists(index);
+    if (exists) {
+      setSensorList(
+        sensorList.filter(
+          (snr) => snr.sensorName !== sensorData[index].sensor.value
+        )
+      );
+    } else {
+      const sen = sensorData[index];
+      setSensorList([
+        ...sensorList,
+        {
+          amount: 0,
+          sensorName: sensorData[index].sensor.value,
+          sensorHash: "",
+          brokerHash: "",
+        },
+      ]);
+    }
+  };
+
+  console.log(sensorList);
+
   const renderTableRows = () => {
     return sensorData.map((data, index) => (
       <tr key={index}>
         {Object.values(data).map((value, idx) => (
           <td key={idx}>{value.value}</td>
         ))}
+
+        <td>
+          <input
+            type="checkbox"
+            id={`checkbox-${index}`}
+            //checked={sensorExists(index)}
+            onChange={() => toggleCheckbox(index)}
+          />
+        </td>
       </tr>
     ));
   };
@@ -176,7 +402,9 @@ const SensorQuery = () => {
               )}
               <br></br>
               <div className="title-heders">Results</div>
-              <br></br><br></br><br></br>
+              <br></br>
+              <br></br>
+              <br></br>
               <button
                 type="submit"
                 className="btn btn-map bi bi-geo-alt-fill float-left"
