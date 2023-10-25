@@ -44,202 +44,24 @@ const SensorQuery = () => {
           const inputQuery = instance.getValue();
           setShowAlert(false);
 
-          const params = {
-            result: true,
-            values: [
-              {
-                lat: {
-                  termType: "Literal",
-                  value: "-37.821658",
-                  language: "",
-                  datatype: {
-                    termType: "NamedNode",
-                    value: "http://www.w3.org/2001/XMLSchema#string",
-                  },
-                },
-                long: {
-                  termType: "Literal",
-                  value: "145.03904",
-                  language: "",
-                  datatype: {
-                    termType: "NamedNode",
-                    value: "http://www.w3.org/2001/XMLSchema#string",
-                  },
-                },
-                measures: {
-                  termType: "Literal",
-                  value: "video",
-                  language: "",
-                  datatype: {
-                    termType: "NamedNode",
-                    value: "http://www.w3.org/2001/XMLSchema#string",
-                  },
-                },
-                sensor: {
-                  termType: "NamedNode",
-                  value: "Camera TDP",
-                },
-              },
-              {
-                lat: {
-                  termType: "Literal",
-                  value: "-37.821658",
-                  language: "",
-                  datatype: {
-                    termType: "NamedNode",
-                    value: "http://www.w3.org/2001/XMLSchema#string",
-                  },
-                },
-                long: {
-                  termType: "Literal",
-                  value: "145.03904",
-                  language: "",
-                  datatype: {
-                    termType: "NamedNode",
-                    value: "http://www.w3.org/2001/XMLSchema#string",
-                  },
-                },
-                measures: {
-                  termType: "Literal",
-                  value: "video",
-                  language: "",
-                  datatype: {
-                    termType: "NamedNode",
-                    value: "http://www.w3.org/2001/XMLSchema#string",
-                  },
-                },
-                sensor: {
-                  termType: "NamedNode",
-                  value: "SwinTestSensor100",
-                },
-              },
-              {
-                lat: {
-                  termType: "Literal",
-                  value: "-37.821658",
-                  language: "",
-                  datatype: {
-                    termType: "NamedNode",
-                    value: "http://www.w3.org/2001/XMLSchema#string",
-                  },
-                },
-                long: {
-                  termType: "Literal",
-                  value: "145.03904",
-                  language: "",
-                  datatype: {
-                    termType: "NamedNode",
-                    value: "http://www.w3.org/2001/XMLSchema#string",
-                  },
-                },
-                measures: {
-                  termType: "Literal",
-                  value: "video",
-                  language: "",
-                  datatype: {
-                    termType: "NamedNode",
-                    value: "http://www.w3.org/2001/XMLSchema#string",
-                  },
-                },
-                sensor: {
-                  termType: "NamedNode",
-                  value: "Test Part Sensor 1",
-                },
-              },
-              {
-                lat: {
-                  termType: "Literal",
-                  value: "-37.821658",
-                  language: "",
-                  datatype: {
-                    termType: "NamedNode",
-                    value: "http://www.w3.org/2001/XMLSchema#string",
-                  },
-                },
-                long: {
-                  termType: "Literal",
-                  value: "145.03904",
-                  language: "",
-                  datatype: {
-                    termType: "NamedNode",
-                    value: "http://www.w3.org/2001/XMLSchema#string",
-                  },
-                },
-                measures: {
-                  termType: "Literal",
-                  value: "video",
-                  language: "",
-                  datatype: {
-                    termType: "NamedNode",
-                    value: "http://www.w3.org/2001/XMLSchema#string",
-                  },
-                },
-                sensor: {
-                  termType: "NamedNode",
-                  value: "new test",
-                },
-              },
-              {
-                lat: {
-                  termType: "Literal",
-                  value: "-37.821658",
-                  language: "",
-                  datatype: {
-                    termType: "NamedNode",
-                    value: "http://www.w3.org/2001/XMLSchema#string",
-                  },
-                },
-                long: {
-                  termType: "Literal",
-                  value: "145.03904",
-                  language: "",
-                  datatype: {
-                    termType: "NamedNode",
-                    value: "http://www.w3.org/2001/XMLSchema#string",
-                  },
-                },
-                measures: {
-                  termType: "Literal",
-                  value: "video",
-                  language: "",
-                  datatype: {
-                    termType: "NamedNode",
-                    value: "http://www.w3.org/2001/XMLSchema#string",
-                  },
-                },
-                sensor: {
-                  termType: "NamedNode",
-                  value: "new test 1",
-                },
-              },
-            ],
-          };
-
           SensorService.querySensor(inputQuery).then((response) => {
             if (response.status === 200 && response.data.result === true) {
-              // TODO uncomment this after dev complete
-              //setSensorData(response.data.values);
-              //setSensorList(response.data.values);
-
-              setSensorData(params.values);
-
+             
+              setSensorData(response.data.values);
+              setSensorList(response.data.values);
+            
               if (sensorData.length === 0) {
                 setShowNoResultFound(true);
               } else {
                 setShowNoResultFound(false);
               }
 
-              if (params.values[0].lat.value && params.values[0].long.value) {
+              if (
+                response.data.values[0].lat.value &&
+                response.data.values[0].long.value
+              ) {
                 setShouldShowMapButton(true);
               }
-
-              // TODO uncomment this after dev complete
-              // if (
-              //   response.data.values[0].lat.value &&
-              //   response.data.values[0].long.value
-              // ) {
-              //   setShouldShowMapButton(true);
-              // }
             } else {
               console.log(response);
             }
