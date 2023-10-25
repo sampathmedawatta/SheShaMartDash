@@ -4,12 +4,14 @@ import "@triply/yasgui/build/yasgui.min.css";
 import SensorService from "../services/sensor.service";
 import ClientSubMenu from "../components/UI/SubMenu/ClientSubMenu";
 import { Context } from "../context/context";
+import { useNavigate } from "react-router-dom";
 
 const SensorQuery = () => {
   const [showAlert, setShowAlert] = useState(false);
   const [showNoResultFound, setShowNoResultFound] = useState(false);
   const [sensorData, setSensorData] = useState([]);
   const [isAdvanceSearchChecked, setIsAdvanceSearchChecked] = useState(false);
+ const navigate = useNavigate();
 
   const [shouldShowMapButton, setShouldShowMapButton] = useState(false);
   let yasguiInstance = null;
@@ -214,6 +216,7 @@ const SensorQuery = () => {
 
           SensorService.querySensor(inputQuery).then((response) => {
             if (response.status === 200 && response.data.result === true) {
+              // TODO uncomment this after dev complete
               //setSensorData(response.data.values);
               //setSensorList(response.data.values);
 
@@ -229,6 +232,7 @@ const SensorQuery = () => {
                 setShouldShowMapButton(true);
               }
 
+              // TODO uncomment this after dev complete
               // if (
               //   response.data.values[0].lat.value &&
               //   response.data.values[0].long.value
@@ -335,7 +339,14 @@ const SensorQuery = () => {
     }
   };
 
-  console.log(sensorList);
+  const handleCheckout = () => {
+    if (sensorData.length > 0) {
+       navigate("/integrate");
+    }
+   else{
+    // Show error please select sensors to inegrate
+   }
+  };
 
   const renderTableRows = () => {
     return sensorData.map((data, index) => (
@@ -412,6 +423,13 @@ const SensorQuery = () => {
                 style={{ display: shouldShowMapButton ? "block" : "none" }}
               >
                 View on Map
+              </button>
+
+              <button
+                onClick={handleCheckout}
+                className="btn btn-add bi-file-plus-fill"
+              >
+                Integrate Sensors
               </button>
 
               <br></br>
