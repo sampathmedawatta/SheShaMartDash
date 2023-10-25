@@ -14,14 +14,19 @@ const SensorQuery = () => {
   const [sensorData, setSensorData] = useState([]);
   const [isAdvanceSearchChecked, setIsAdvanceSearchChecked] = useState(false);
   const navigate = useNavigate();
+  const { sensorList, setSensorList } = useContext(Context);
+  const [registeredSensors, setRegisteredSensors] = useState([]);
+  const [registeredBrokers, setRegisteredBrokers] = useState([]);
 
   const [shouldShowMapButton, setShouldShowMapButton] = useState(false);
   const [shouldTabular, setShouldTabular] = useState(false);
   let yasguiInstance = null;
 
   useEffect(() => {
+    setSensorList([]);
     const loadYasgui = () => {
       if (yasguiInstance) {
+        
         yasguiInstance.destroy(); // Destroy the existing Yasgui
       }
 
@@ -31,7 +36,6 @@ const SensorQuery = () => {
         resizeable: true,
         tabSize: 2,
       });
-     
 
       yasguiInstance = yasgui;
       yasgui.getTab().yasqe.setSize(1070, 200);
@@ -49,11 +53,9 @@ const SensorQuery = () => {
 
           SensorService.querySensor(inputQuery).then((response) => {
             if (response.status === 200 && response.data.result === true) {
-             
               setSensorData(response.data.values);
-              setSensorList(response.data.values);
               setShouldTabular(true);
-            
+
               if (sensorData.length === 0) {
                 setShowNoResultFound(true);
               } else {
@@ -83,7 +85,7 @@ const SensorQuery = () => {
         setShowAlert(false);
         setShowNoResultFound(false);
         loadYasgui();
-    
+
         document.querySelector(".yasgui .yasr").style.display = "none";
         document.querySelector(".yasgui .tabsList").style.display = "none";
         document.querySelector(".yasgui .yasqe_share").style.display = "none";
@@ -98,7 +100,6 @@ const SensorQuery = () => {
         setShowNoResultFound(false);
         document.querySelector(".yasqe").style.display = "none";
         //document.querySelector("div.alert.alert-warning").style.display = "none";
-
       }
     });
   }, []);
@@ -129,10 +130,6 @@ const SensorQuery = () => {
   const handleViewMapClick = () => {
     // Handle the logic to display the map here
   };
-
-  const { sensorList, setSensorList } = useContext(Context);
-  const [registeredSensors, setRegisteredSensors] = useState([]);
-  const [registeredBrokers, setRegisteredBrokers] = useState([]);
 
   useEffect(() => {
     async function fetchBrokerData() {
@@ -280,7 +277,7 @@ const SensorQuery = () => {
               )}
               <div className="title-heders2">Results</div>
               <br></br>
-          
+
               <button
                 type="submit"
                 className="btn btn-map bi bi-geo-alt-fill float-left"
@@ -300,7 +297,12 @@ const SensorQuery = () => {
               )}
               <br></br>
               <br></br>
-              <span className="tabularview tabular" style={{ display: shouldShowMapButton ? "block" : "none" }}>Query Results in Tabular Format</span>
+              <span
+                className="tabularview tabular"
+                style={{ display: shouldShowMapButton ? "block" : "none" }}
+              >
+                Query Results in Tabular Format
+              </span>
               {showNoResultFound && sensorData.length === 0 ? (
                 <div className="alert alert-warning" role="alert">
                   No result found.

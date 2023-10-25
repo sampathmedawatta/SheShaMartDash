@@ -7,6 +7,7 @@ function Integrate() {
   const [response, setResponse] = useState({});
   const [rewAmount, setrewAmount] = useState(0);
   const { sensorList, setSensorList } = useContext(Context);
+
   // Create a new array with the updated sensor
   const updatedSensorList = [...sensorList];
 
@@ -68,7 +69,7 @@ function Integrate() {
       <div className="row">
         <div className="col-12">
           <br />
-          <div className="col-10">
+          <div className="col-7">
             {response.status && (
               <div
                 className="alert alert-success alert-dismissible fade show"
@@ -77,57 +78,76 @@ function Integrate() {
                 Sensor Integrated Successfully.
               </div>
             )}
-            <table className="table table-light checkout">
-              <br></br>
-              <div className="page-title checkout">Checkout Sensors</div>
-              <tbody>
-                <th>Sensor Name</th>
-                <th>Amount</th>
-                {sensorList &&
-                  Object.keys(sensorList).map((item, key) => (
-                    <tr key={key}>
-                      <td>{sensorList[item].sensorName}</td>
-                      <td>
+
+            {sensorList.length == 0 && (
+              <div>
+                <br></br>
+                <div className="page-title checkout">Checkout Sensors</div>
+                <p>Please select sensor first.</p>
+              </div>
+            )}
+            {sensorList.length > 0 && (
+              <form>
+                <table className="table table-light checkout">
+                  <br></br>
+                  <div className="page-title checkout">Checkout Sensors</div>
+                  <tbody>
+                    <th>Sensor Name</th>
+                    <th>Amount</th>
+                    {sensorList &&
+                      Object.keys(sensorList).map((item, key) => (
+                        <tr key={key}>
+                          <td>{sensorList[item].sensorName}</td>
+                          <td>
+                            <div className="form-group">
+                              <input
+                                type="number"
+                                min={0}
+                                className="form-control"
+                                name="sensorAmount"
+                                value={updatedSensorList[item].sensoramount}
+                                onChange={(e) => {
+                                  handleAmountChange(
+                                    sensorList[item],
+                                    e.target.value
+                                  );
+                                }}
+                              ></input>
+                            </div>
+                          </td>
+                        </tr>
+                      ))}
+
+                    <th>
+                      <label htmlFor="rewardAmount">Reward Amount</label>
+                    </th>
+                    <td>
+                      <div className="form-group">
                         <input
                           type="number"
-                          min={0}
-                          name="sensorAmount"
-                          value={updatedSensorList[item].sensoramount}
+                          min={1}
+                          className="form-control"
+                          name="rewardAmount"
+                          id="rewardAmount"
                           onChange={(e) => {
-                            handleAmountChange(
-                              sensorList[item],
-                              e.target.value
-                            );
+                            handleRewardAmountChange(e.target.value);
                           }}
-                        ></input>
-                      </td>
-                    </tr>
-                  ))}
-
-                <th>
-                  <label htmlFor="rewardAmount">Reward Amount</label>
-                </th>
-                <td>
-                  <input
-                    type="number"
-                    min={1}
-                    name="rewardAmount"
-                    id="rewardAmount"
-                    onChange={(e) => {
-                      handleRewardAmountChange(e.target.value);
-                    }}
-                  />
-                </td>
-              </tbody>
-            </table>
-
-            <button
-              type="submit"
-              onClick={handleIntegrate}
-              className="btn btn-add bi-file-plus-fill"
-            >
-              Integrate
-            </button>
+                        />
+                      </div>
+                    </td>
+                  </tbody>
+                </table>
+                <div className="form-group">
+                  <button
+                    type="submit"
+                    onClick={handleIntegrate}
+                    className="btn btn-add bi-file-plus-fill"
+                  >
+                    Integrate
+                  </button>
+                </div>
+              </form>
+            )}
           </div>
         </div>
       </div>
