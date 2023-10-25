@@ -19,7 +19,7 @@ import Client from "./components/Client";
 import Checkout from "./components/Checkout";
 import PublicKey from "./components/PublicKey";
 import Wallet from "./components/Wallet";
-
+import MapComponent from './components/MapComponent';
 const App = () => {
   const [currentUser, setCurrentUser] = useState(undefined);
   const { broks, sensors } = useContext(Context);
@@ -44,11 +44,13 @@ const App = () => {
         </div>
         <div className="col py-3">
           <Routes>
+            
+
             <Route exact path={"/dashboard"} element={<Home />} />
             <Route exact path={"/"} element={<Home />} />
             <Route exact path={"/home"} element={<Home />} />
             <Route exact path="/broker" element={<Broker />} />
-            <Route exact path="/provider" element={<Provider />} />
+            <Route exact path="/Provider" element={<Provider />} />
             <Route exact path="/sensor" element={<Sensor />} />
             <Route exact path="/sensorquery" element={<SensorQuery />} />
             <Route exact path="/client" element={<Client />} />
@@ -59,7 +61,7 @@ const App = () => {
             <Route path="/brokerList" element={<BrokerList />} />
             <Route path="/sensorList" element={<SensorList />} />
             <Route path="/checkout" element={<Checkout />} />
-
+            <Route exact path="/MapComponent" element={<MapComponent />} />
             <Route path="/wallet" element={<Wallet />} />
             <Route path="/public-key" element={<PublicKey />} />
           </Routes>
