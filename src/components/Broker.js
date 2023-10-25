@@ -106,7 +106,7 @@ const Broker = () => {
                   </div>
                 )}
                 <div className="form-group">
-                  <label htmlFor="rewardAmount">Reward Amount*</label>
+                  <label htmlFor="rewardAmount">Reward Amount</label>
                   <input
                     type="number"
                     min={0}
@@ -124,7 +124,7 @@ const Broker = () => {
                   </div>{" "}
                 </div>
                 <div className="form-group">
-                  <label htmlFor="brokerName">Broker Name* </label>
+                  <label htmlFor="brokerName">Broker Name </label>
                   <input
                     type="text"
                     id="brokerName"
@@ -141,7 +141,7 @@ const Broker = () => {
                   </div>
                 </div>
                 <div className="form-group">
-                  <label htmlFor="endpoint">Endpoint*</label>
+                  <label htmlFor="endpoint">Endpoint</label>
                   <input
                     type="text"
                     id="endpoint"
@@ -162,7 +162,7 @@ const Broker = () => {
                     type="submit"
                     className="btn btn-add bi-file-plus-fill"
                   >
-                    Register
+                    &nbsp; Register
                   </button>
                 </div>
               </form>

@@ -129,7 +129,7 @@ function Checkout() {
               onClick={handleIntergrate}
               className="btn btn-add bi-file-plus-fill"
             >
-              Integrate
+              &nbsp;Integrate
             </button>
           </div>
         </div>
