@@ -14,6 +14,8 @@ function FilterQuery() {
     const query = `SELECT ?sensor ?lat ?long ?measures WHERE {?sensor <http://www.w3.org/ns/sosa/observes> ?observes. ?sensor <http://www.w3.org/ns/sosa/hasFeatureOfInterest> ?location. ?observes <http://www.w3.org/2000/01/rdf-schema#label> ?measures. ?location <http://www.w3.org/2003/01/geo/wgs84_pos#lat> ?lat. ?location <http://www.w3.org/2003/01/geo/wgs84_pos#long> ?long. ?observes <http://www.w3.org/2000/01/rdf-schema#label> "${searchText}"}`;
 
 
+    const queryCountry = `SELECT ?sensor ?lat ?long ?measures WHERE {?sensor <http://www.w3.org/ns/sosa/observes> ?observes. ?sensor <http://www.w3.org/ns/sosa/hasFeatureOfInterest> ?location. ?observes <http://www.w3.org/2000/01/rdf-schema#label> ?measures. ?location <http://www.w3.org/2003/01/geo/wgs84_pos#lat> ?lat. ?location <http://www.w3.org/2003/01/geo/wgs84_pos#long> ?long. ?observes <http://www.w3.org/2000/01/rdf-schema#label> "${searchText}"}`;
+
     console.log(query);
 
     SensorService.querySensor(query).then((response) => {

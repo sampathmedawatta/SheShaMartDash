@@ -6,6 +6,7 @@ import BrokerService from "../services/broker.service";
 import ClientSubMenu from "../components/UI/SubMenu/ClientSubMenu";
 import { Context } from "../context/context";
 import { useNavigate } from "react-router-dom";
+import FilterQuery from "../components/FilterQuery";
 
 const SensorQuery = () => {
   const [showAlert, setShowAlert] = useState(false);
@@ -270,7 +271,9 @@ const SensorQuery = () => {
               {isAdvanceSearchChecked ? (
                 <div id="yasgui"></div>
               ) : (
-                <div id="query-builder">query-builder</div>
+                <div id="query-builder">
+                  <FilterQuery />
+                </div>
               )}
               <br></br>
               <div className="title-heders">Results</div>
