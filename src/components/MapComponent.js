@@ -81,7 +81,7 @@ const MapComponent = () => {
             image: new Circle({
               radius: 6,
               fill: new Fill({ color: 'red' }),
-              stroke: new Stroke({ color: 'black', width: 2 }),
+              stroke: new Stroke({ color: 'black', width: 4 }),
             }),
           })
         );
@@ -116,10 +116,11 @@ const MapComponent = () => {
 
     const displayLocationInfo = (sensors, sensorCount, popup, coordinates) => {
       let sensorInfo = sensors
-        .map(sensor => (
-          `<a href="${sensor.datatype}">${sensor.sensor}</a>: ${sensor.datatype}`
-        ))
-        .join('<br>');
+        .map(
+          (sensor) =>
+            `<div className="popup"> <a href="${sensor.datatype}">${sensor.sensor}</a>: ${sensor.datatype} </div>`
+        )
+        .join("<br>");
 
       if (sensorCount > 1) {
         sensorInfo = `<strong>Total Sensors: ${sensorCount}</strong><br>${sensorInfo}`;

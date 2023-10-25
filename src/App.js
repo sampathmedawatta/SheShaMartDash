@@ -60,6 +60,7 @@ const App = () => {
               <Route path="/brokerList" element={<BrokerList />} />
               <Route path="/sensorList" element={<SensorList />} />
               <Route path="/checkout" element={<Checkout />} />
+              <Route path="/integrate" element={<Integrate />} />
               <Route
                 exact
                 path="/MapComponent"
