@@ -21,8 +21,8 @@ const navigate = useNavigate();
     <div>
       {showPopup && (
         <div className="row">
-          <div className="col-12 popup">
-            <div className="form-group col-5 mt-3 popup-content">
+          <div className="col-12">
+            <div className="form-group col-5 mt-3">
               <p>Public key is not available! Please enter Public Key.</p>
               <button
                 onClick={handleClosePopup}
