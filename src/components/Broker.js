@@ -86,7 +86,7 @@ const Broker = () => {
           <div className="col-12">
             <br />
             <div className="col-10 brok">
-              <div className="page-title">Broker Registration</div>
+              <div className="page-title history">Broker Registration</div>
               <br></br>
               <form onSubmit={handleSubmit}>
                 {response.status && !response.error && (
@@ -102,7 +102,7 @@ const Broker = () => {
                     className="alert alert-danger alert-dismissible fade show"
                     role="alert"
                   >
-                    Broker Registeration Failed!
+                    Broker Registration Failed!
                   </div>
                 )}
                 <div className="form-group">
@@ -157,7 +157,7 @@ const Broker = () => {
                     Please enter an Endpoint
                   </div>
                 </div>
-                <div className="form-group ">
+                <div className="form-group button">
                   <button
                     type="submit"
                     className="btn btn-add bi-file-plus-fill"

@@ -35,8 +35,9 @@ const App = () => {
                 className="d-flex align-items-center pb-3 mb-md-0 me-md-auto text-white text-decoration-none"
               >
                 <br></br>
+                <img className="logo" src="/sslogo.svg"/>
                 <span className="fs-5 d-none d-sm-inline ">
-                  <h3>SenShaMart</h3>
+                  <h3 className="sstitle">&nbsp;SenShaMart</h3>
                 </span>
               </Link>
               <Sidebar />

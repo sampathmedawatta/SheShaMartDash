@@ -14,7 +14,7 @@ body{
   padding-top: 10px;
 }
 .sidebar-menu{   
-  font-size: 18px;
+  font-size: 17px;
   padding: 2px;
   margin-top: 2em;
   font-weight: bold;
@@ -31,6 +31,15 @@ body{
 }
 .ms-1:hover {
   color: #47c4df;
+}
+.logo{
+  width: 30px;
+}
+.sstitle{
+  margin-bottom: 0;
+  font-size: 21px;
+  font-weight: 450;
+  letter-spacing: 0;
 }
 
 label::after {
@@ -120,6 +129,12 @@ label::after {
   font-size: 20px;
   font-weight: bold;
 }
+.page-title.sensor-query{
+  margin-bottom: .2em;
+}
+.page-title.history{
+  margin-bottom: .2em;
+}
 .page-title.checkout{
   padding-left: .5em;
   margin-bottom: .5em;
@@ -186,6 +201,13 @@ section {
 .col-10.sensor-form{
   padding: 2em;
   margin-left: 2em;
+  background-color: white;
+  border-radius: 20px;
+  box-shadow: rgba(149, 157, 165, 0.2) 0px 8px 24px;
+}
+.col-10.query-form{
+  padding: 1.5em 1.5em 1em 1.5em;
+  margin-left: 1em;
   background-color: white;
   border-radius: 20px;
   box-shadow: rgba(149, 157, 165, 0.2) 0px 8px 24px;
@@ -377,7 +399,9 @@ h4 {
   outline: 0 !important;
   border: none;
 }
-
+.bi-search{
+  margin-top: 0;
+}
 /* form css */
 .form-group.pk-req{
   padding: 2em 2em .8em 2em;
@@ -396,6 +420,9 @@ h4 {
   border: solid 1px;
   border-color: #e0e6f7;
   border-radius: 20px;
+}
+.form-group.button{
+  margin-bottom: .5em;
 }
 
 .form-control {
@@ -520,6 +547,26 @@ font-weight: bold;
   font-weight: 500;
   color: #696767;
   text-transform: capitalize;
+}
+/* mini table */
+.mini{
+  border: 1px solid #e4f1f3;
+  border-radius: 10px;
+  margin-bottom: .1em;
+}
+.mini tr th{
+  font-weight: 450;
+  color: black;
+  background: #ffffff;
+}
+.mini td{
+  font-weight: 400;
+  border-top: 1px solid #e4f1f3;
+  color: black;
+  background: #ffffff;
+}
+.mini tbody tr:nth-child(even) {
+  background-color: #ffffff;
 }
 /* Apply a border to the right of all but the last column */
 table th:not(:last-child),

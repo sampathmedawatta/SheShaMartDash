@@ -166,7 +166,7 @@ function FilterQuery() {
               className="btn btn-add bi bi-search"
               onClick={handleSearch}
             >
-              Search
+              &nbsp; Search
             </button>
           </div>
 
@@ -180,9 +180,8 @@ function FilterQuery() {
 
   return (
     <div className="row">
-      <div className="col-10 sensor-form">
-        <h5>Basic Search !</h5>
-        <br />
+      <div className="col-10 query-form">
+        <h5>Basic Search</h5>
         <form>
           <div className="form-group">
             <label htmlFor="querytype">Select Filter By</label>
