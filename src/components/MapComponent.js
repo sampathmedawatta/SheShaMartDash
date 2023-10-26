@@ -11,16 +11,14 @@ import Point from 'ol/geom/Point';
 import { fromLonLat } from 'ol/proj';
 import Popup from 'ol-ext/overlay/Popup';
 import Select from 'ol/interaction/Select';
-
 import { click } from 'ol/events/condition';
-
-// Import the necessary symbols from OpenLayers
-import { Style, Circle, Fill, Stroke } from 'ol/style';
-
+import { Style, Icon } from 'ol/style';
 import locationsData from './maps'; // Import the JSON data
 
 const MapComponent = () => {
   useEffect(() => {
+    const initialCenter = fromLonLat([0, 0]); // Specify the initial center (longitude, latitude)
+
     const map = new Map({
       target: 'map',
       layers: [
@@ -29,7 +27,7 @@ const MapComponent = () => {
         }),
       ],
       view: new View({
-        center: fromLonLat([0, 0]),
+        center: initialCenter,
         zoom: 2,
       }),
     });
@@ -52,7 +50,6 @@ const MapComponent = () => {
       if (!isNaN(lat) && !isNaN(long)) {
         const coordinates = fromLonLat([long, lat]);
 
-        // Check if a cluster exists at these coordinates
         if (!locations[coordinates]) {
           locations[coordinates] = {
             cluster: new Feature({
@@ -62,7 +59,6 @@ const MapComponent = () => {
           };
         }
 
-        // Add sensor to the cluster
         locations[coordinates].cluster.get('sensors').push({
           sensor,
           datatype,
@@ -78,10 +74,9 @@ const MapComponent = () => {
 
         cluster.setStyle(
           new Style({
-            image: new Circle({
-              radius: 6,
-              fill: new Fill({ color: 'red' }),
-              stroke: new Stroke({ color: 'black', width: 4 }),
+            image: new Icon({
+              src: 'data:image/svg+xml,' + encodeURIComponent('<svg xmlns="http://www.w3.org/2000/svg" width="32" height="48" viewBox="0 0 32 48"><path fill="red" d="M16 0c-8.837 0-16 7.163-16 16 0 17.063 16 32 16 32s16-14.937 16-32c0-8.837-7.163-16-16-16zm0 24c-4.418 0-8-3.582-8-8s3.582-8 8-8 8 3.582 8 8-3.582 8-8 8z"/></svg>'),
+              anchor: [0.5, 1],
             }),
           })
         );
@@ -116,18 +111,45 @@ const MapComponent = () => {
 
     const displayLocationInfo = (sensors, sensorCount, popup, coordinates) => {
       let sensorInfo = sensors
-        .map(
-          (sensor) =>
-            `<div className="popup"> <a href="${sensor.datatype}">${sensor.sensor}</a>: ${sensor.datatype} </div>`
-        )
-        .join("<br>");
+        .map((sensor, index) => (
+          `<div>
+            <strong>Sensor Name:</strong> ${sensor.sensor}<br>
+            <strong>Data Type:</strong> <a href="${sensor.datatype}" target="_blank">${sensor.datatype}</a>
+          </div>
+          <button onclick="window.open('${sensor.datatype}', '_blank')">Go to Data ${index + 1}</button>`
+        ))
+        .join('<br>');
 
       if (sensorCount > 1) {
-        sensorInfo = `<strong>Total Sensors: ${sensorCount}</strong><br>${sensorInfo}`;
+        sensorInfo = `<div><strong>Total Sensors: ${sensorCount}</strong></div><br>${sensorInfo}`;
       }
 
-      popup.show(coordinates, sensorInfo);
+      const popupContent = `
+        <div style="background: white; padding: 10px; border: 1px solid #ccc; border-radius: 4px;">
+          ${sensorInfo}
+          <button id="close-popup" style="position: absolute; top: 10px; left: 1px;">X</button>
+        </div>
+      `;
+
+      popup.show(coordinates, popupContent);
+
+      // Attach a click event handler to the close button
+      const closeButton = document.getElementById('close-popup');
+      closeButton.addEventListener('click', () => {
+        popup.hide();
+      });
     };
+
+    // Calculate the extent of all features and zoom to it with some padding
+    const extent = vectorSource.getExtent();
+    const padding = 0.2; // Adjust this factor for the amount of padding you want
+    const deltaX = (extent[2] - extent[0]) * padding;
+    const deltaY = (extent[3] - extent[1]) * padding;
+    extent[0] -= deltaX;
+    extent[1] -= deltaY;
+    extent[2] += deltaX;
+    extent[3] += deltaY;
+    map.getView().fit(extent, map.getSize());
   }, []);
 
   return (

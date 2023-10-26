@@ -13,7 +13,7 @@
             },
             "lat": {
                 "termType": "Literal",
-                "value": "-37.821658",
+                "value": "-36.821658",
                 "language": "",
                 "datatype": {
                     "termType": "NamedNode",
@@ -46,7 +46,7 @@
             },
             "lat": {
                 "termType": "Literal",
-                "value": "-37.822151",
+                "value": "-37.821658",
                 "language": "",
                 "datatype": {
                     "termType": "NamedNode",
@@ -55,7 +55,7 @@
             },
             "long": {
                 "termType": "Literal",
-                "value": "145.038956",
+                "value": "145.03904",
                 "language": "",
                 "datatype": {
                     "termType": "NamedNode",
@@ -79,7 +79,7 @@
             },
             "lat": {
                 "termType": "Literal",
-                "value": "-37.669010",
+                "value": "-37.821658",
                 "language": "",
                 "datatype": {
                     "termType": "NamedNode",
@@ -88,7 +88,7 @@
             },
             "long": {
                 "termType": "Literal",
-                "value": "144.841034",
+                "value": "145.03904",
                 "language": "",
                 "datatype": {
                     "termType": "NamedNode",
