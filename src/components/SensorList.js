@@ -17,72 +17,19 @@ function SensorList() {
      }
    }, []);
 
-  const { setSensors } = useContext(Context);
   const [registeredSensors, setRegisteredSensors] = useState(null);
-  const { sensorList, setSensorList } = useContext(Context);
-  const navigate = useNavigate();
 
-  const [registeredBrokers, setRegisteredBrokers] = useState(null);
   useEffect(() => {
-    async function fetchBrokerData() {
-      const getList = await BrokerService.getBrokers();
-      if (getList !== null) {
-        setRegisteredBrokers(getList);
-      }
-    }
+   
      async function fetchSensorData() {
        const registeredSensors = await SensorService.getSensors();
        if (registeredSensors !== null) {
         
-      //  const filteredSensors = registeredSensors.filter(
-      //    (sensor) => sensor.hash === savedPublicKey
-      //  );
-      //  console.log(registeredSensors);
-      //   console.log(filteredSensors);
-
          setRegisteredSensors(registeredSensors);
-         setSensors(registeredSensors);
        }
      }
-
-     fetchBrokerData();
      fetchSensorData();
   }, []);
-
-  const sensorExists = (sensor) => {
-    return sensorList.some((snr) => snr.sensorHash === sensor.hash);
-  };
-
-  const getBroker = (name) => {
-    if (registeredBrokers !== null) {
-      const foundBroker = Object.values(registeredBrokers).find(
-        (broker) => broker.metadata.name === name
-      );
-      return foundBroker.hash;
-    }
-  };
-  const toggleCheckbox = (sensor) => {
-
-    const exists = sensorExists(sensor);
-    if (exists) {
-      setSensorList(sensorList.filter((snr) => snr.sensorHash !== sensor.hash));
-    } else {
-
-      setSensorList([
-        ...sensorList,
-        {
-          amount: 0,
-          sensorName: sensor.metadata.name,
-          sensorHash: sensor.hash,
-          brokerHash: getBroker(sensor.metadata.integrationBroker), 
-        },
-      ]);
-    }
-  };
-
-  const handleCheckout = () => {
-     navigate("/checkout");
-  };
 
   return (
     <div>
@@ -110,7 +57,6 @@ function SensorList() {
                   <table className="table table-light">
                     <thead>
                       <tr>
-                        <th>Select</th>
                         <th>Name</th>
                         <th>Cost Per Minute</th>
                         <th>Cost Per KB</th>
@@ -121,18 +67,6 @@ function SensorList() {
                     <tbody>
                       {Object.keys(registeredSensors).map((item, key) => (
                         <tr key={key}>
-                          <td>
-                            <input
-                              type="checkbox"
-                              checked={
-                                sensorList &&
-                                sensorExists(registeredSensors[item])
-                              }
-                              onChange={() =>
-                                toggleCheckbox(registeredSensors[item])
-                              }
-                            />
-                          </td>
                           <td>
                             <Link
                               to={`/sensorDetails/${registeredSensors[item].metadata.name}`}
@@ -152,12 +86,6 @@ function SensorList() {
                       ))}
                     </tbody>
                   </table>
-                  <button
-                    onClick={handleCheckout}
-                    className="btn btn-add bi-file-plus-fill"
-                  >
-                    Checkout
-                  </button>
                 </div>
               )}
             </div>

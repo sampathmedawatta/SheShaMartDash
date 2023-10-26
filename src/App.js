@@ -8,7 +8,6 @@ import Sidebar from "./components/UI/Sidebar";
 import Home from "./components/Home";
 import Broker from "./components/Broker";
 import Provider from "./components/Provider";
-import EventBus from "./common/EventBus";
 import BrokerList from "./components/BrokerList";
 import BrokerDetails from "./components/BrokerDetails";
 import Sensor from "./components/Sensor";
@@ -16,14 +15,14 @@ import SensorQuery from "./components/SensorQuery";
 import SensorList from "./components/SensorList";
 import { Context } from "./context/context";
 import Client from "./components/Client";
-import Checkout from "./components/Checkout";
 import Integrate from "./components/Integrate";
 import PublicKey from "./components/PublicKey";
 import Wallet from "./components/Wallet";
+import SensorHistory from "./components/SensorHistory";
+import FilterQuery from "./components/FilterQuery";
 
 const App = () => {
-  const [currentUser, setCurrentUser] = useState(undefined);
-  const { broks, sensors } = useContext(Context);
+  const { broks } = useContext(Context);
  
   return (
     <div>
@@ -53,22 +52,23 @@ const App = () => {
               <Route exact path="/sensor" element={<Sensor />} />
               <Route exact path="/sensorquery" element={<SensorQuery />} />
               <Route exact path="/client" element={<Client />} />
+              <Route exact path="/filterquery" element={<FilterQuery />} />
               <Route
                 path="/BrokerDetails/:id"
                 element={<BrokerDetails data={broks} />}
               />
               <Route path="/brokerList" element={<BrokerList />} />
               <Route path="/sensorList" element={<SensorList />} />
-              <Route path="/checkout" element={<Checkout />} />
+              <Route path="/sensor-history" element={<SensorHistory />} />
               <Route path="/integrate" element={<Integrate />} />
 
-            <Route path="/wallet" element={<Wallet />} />
-            <Route path="/public-key" element={<PublicKey />} />
-          </Routes>
+              <Route path="/wallet" element={<Wallet />} />
+              <Route path="/public-key" element={<PublicKey />} />
+            </Routes>
+          </div>
         </div>
       </div>
-    </div>
-    <footer className="footer text-center py-2">
+      <footer className="footer text-center py-2">
         &copy; 2023 SenShaMart
       </footer>
     </div>

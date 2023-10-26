@@ -397,13 +397,14 @@ h4 {
   border-color: #e0e6f7;
   border-radius: 20px;
 }
+
 .form-control {
   border: 1px solid #e0e6f7;
   border-radius: 8px;
   background-color: #fff;
-  padding: 11px 15px 13px 15px;
   width: 100%;
   color: #a0abb8;
+  font-size: 14px;
 }
 .form-control::-moz-placeholder {
   color: #a0abb8;
@@ -453,6 +454,10 @@ ul {
   text-decoration: none;
 }
 
+.tabular{
+font-size: 14px !important;
+font-weight: bold;
+}
 /* tables */
 .table{
   border-radius: 20px;

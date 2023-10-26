@@ -10,8 +10,8 @@ const headers = {
   //Authorization: "Bearer your-access-token", // Add any custom headers as needed
 };
 
-const getIntegrations = () => {
-  return axiosInstance
+const getIntegrations = async() => {
+  return await axiosInstance
     .get("/Integrations", headers)
     .then((response) => {
       return response.data;
