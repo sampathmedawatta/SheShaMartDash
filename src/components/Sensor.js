@@ -276,9 +276,9 @@ const Sensor = () => {
                 </div>
                   <button
                     type="submit"
-                    className="btn btn-add bi-file-plus-fill"
+                    className="btn btn-add bi bi-plus-circle-fill"
                   >
-                    Register
+                    &nbsp; Register
                   </button>
               </form>
             </div>
