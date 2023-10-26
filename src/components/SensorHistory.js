@@ -57,6 +57,8 @@ function SensorHistory() {
                     <thead>
                       <tr>
                         <th>Compensation Count</th>
+                        <th>Witnes Count</th>
+                        <th>Witnesses</th>
                         <th>Counter</th>
                         <th>Reward Amount</th>
                         <th>Sensor Details</th>
@@ -66,6 +68,23 @@ function SensorHistory() {
                       {Object.keys(registeredSensors).map((item, index) => (
                         <tr key={index}>
                           <td>{registeredSensors[item].compensationCount}</td>
+                          <td>{registeredSensors[item].witnessCount}</td>
+                          <td>
+                            <ul>
+                              {Object.keys(
+                                registeredSensors[item].witnesses
+                              ).map((witnessKey, witnessIndex) => (
+                                <li key={witnessIndex}>
+                                  {witnessKey}:{" "}
+                                  {
+                                    registeredSensors[item].witnesses[
+                                      witnessKey
+                                    ]
+                                  }
+                                </li>
+                              ))}
+                            </ul>
+                          </td>
                           <td>{registeredSensors[item].counter}</td>
                           <td>{registeredSensors[item].rewardAmount}</td>
                           <td>
