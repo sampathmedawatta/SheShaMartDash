@@ -120,6 +120,9 @@ label::after {
   font-size: 20px;
   font-weight: bold;
 }
+.page-title.checkout{
+  padding-left: .5em;
+} 
 .fs-2{
   position: absolute;
   font-size: 35px;
@@ -130,6 +133,7 @@ label::after {
   color: #fff;
   letter-spacing: .1rem;
 }
+
 
 /* icons */
 .home-icon{
@@ -160,6 +164,7 @@ section {
 /* to remove spaces in header and footer */
 .col-3{
   padding-right: 0;
+  max-width: 100%;
 }
 .col-4{
   padding-left: 2em;
@@ -190,6 +195,9 @@ section {
 }
 .col-12.popup{
   padding-left: 1em;
+}
+.p-1{
+  max-width: 100%;
 }
 
 .pt-3, .py-3{
@@ -323,10 +331,11 @@ h4 {
   transition: 0.2s;
   border: 1px solid transparent;
   text-decoration: none;
+  position: relative; display:block; clear: right;
 }
 .btn-add {
   content: '\F3AA';
-  background: #296124;
+  background: #33672e;
   color: #fff;
   border-radius: 12px;
   font-weight: bold;
@@ -385,13 +394,14 @@ h4 {
   border-color: #e0e6f7;
   border-radius: 20px;
 }
+
 .form-control {
   border: 1px solid #e0e6f7;
   border-radius: 8px;
   background-color: #fff;
-  padding: 11px 15px 13px 15px;
   width: 100%;
   color: #a0abb8;
+  font-size: 14px;
 }
 .form-control::-moz-placeholder {
   color: #a0abb8;
@@ -441,6 +451,10 @@ ul {
   text-decoration: none;
 }
 
+.tabular{
+font-size: 14px !important;
+font-weight: bold;
+}
 /* tables */
 .table{
   border-radius: 20px;
@@ -454,9 +468,12 @@ ul {
   border-radius: 20px;
   box-shadow: rgba(149, 157, 165, 0.2) 0px 8px 24px;
 }
-.table-light{
+.table-{
   border-radius: 20px;
   box-shadow: rgba(149, 157, 165, 0.2) 0px 8px 24px;
+}
+.table-light.checkout{
+  padding: 1em;
 }
 .table thead th {
   vertical-align: bottom;
@@ -479,6 +496,15 @@ ul {
   /*border-bottom: 1px solid #a0abb8;*/
   padding-bottom: .2em;
   padding-left: 1.1em;
+  padding-top: 1em;
+}
+.title-heders2{
+  font-weight: bold;
+  text-transform: capitalize;
+  color: #235165;
+  font-size: 1.50rem;
+  /*border-bottom: 1px solid #a0abb8;*/
+  padding-bottom: .2em;
   padding-top: 1em;
 }
 .table tr th {
@@ -610,14 +636,36 @@ input::file-selector-button {
   transition: all 0.25s cubic-bezier(0.02, 0.01, 0.47, 1);
 }
 
-.popup{
-  background-color: white;
+.popup {
+  position: fixed;
+  top: 0;
+  left: 0;
+  width: 100%;
+  height: 100%;
+  background: rgba(0, 0, 0, 0.6);
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  z-index: 1000;
 }
+
+.popup-content {
+  background: white;
+  padding: 20px;
+  border-radius: 5px;
+  box-shadow: 0px 0px 10px rgba(0, 0, 0, 0.3);
+}
+
+button {
+  margin-top: 10px;
+}
+
 /* footer */
 .footer{
-  background-color: #235165;
-  color: #fff;
+  max-width: 100%;
   font-size: 08px;
+  color: #fff;
+  background-color: #235165;
  }
 
 /*

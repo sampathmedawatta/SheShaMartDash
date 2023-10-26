@@ -70,26 +70,21 @@ function Checkout() {
       <div className="row">
         <div className="col-12">
           <br />
-          <div className="col-4">
-            <div className="page-title">Checkout Sensors</div>
-            <br></br>
-
+          <div className="col-10">
             {response.status && (
               <div
                 className="alert alert-success alert-dismissible fade show"
                 role="alert"
               >
-                Sensor Intergrated Successfully.
+                Sensor Integrated Successfully.
               </div>
             )}
-            <table className="table table-light">
-              <thead>
-                <tr>
+            <table className="table table-light checkout">
+            <br></br>
+            <div className="page-title checkout">Checkout Sensors</div>
+            <tbody>
                   <th>Sensor Name</th>
                   <th>Amount</th>
-                </tr>
-              </thead>
-              <tbody>
                 {sensorList &&
                   Object.keys(sensorList).map((item, key) => (
                     <tr key={key}>
@@ -110,11 +105,12 @@ function Checkout() {
                       </td>
                     </tr>
                   ))}
-              </tbody>
-            </table>
 
-            <div className="form-group">
-              <label htmlFor="rewardAmount">reward Amount</label>
+
+            <th>
+              <label htmlFor="rewardAmount">Reward Amount</label>
+            </th>
+              <td>
               <input
                 type="number"
                 min={1}
@@ -124,13 +120,16 @@ function Checkout() {
                   handleRewardAmountChange( e.target.value);
                 }}
               />
-            </div>
+           </td>
+            </tbody>
+            </table>
+
             <button
               type="submit"
               onClick={handleIntergrate}
               className="btn btn-add bi-file-plus-fill"
             >
-              Intergrate
+              Integrate
             </button>
           </div>
         </div>

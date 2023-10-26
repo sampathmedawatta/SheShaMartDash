@@ -6,6 +6,7 @@ import BrokerService from "../services/broker.service";
 import ClientSubMenu from "../components/UI/SubMenu/ClientSubMenu";
 import { Context } from "../context/context";
 import { useNavigate } from "react-router-dom";
+import FilterQuery from "../components/FilterQuery";
 
 const SensorQuery = () => {
   const [showAlert, setShowAlert] = useState(false);
@@ -13,13 +14,19 @@ const SensorQuery = () => {
   const [sensorData, setSensorData] = useState([]);
   const [isAdvanceSearchChecked, setIsAdvanceSearchChecked] = useState(false);
   const navigate = useNavigate();
+  const { sensorList, setSensorList } = useContext(Context);
+  const [registeredSensors, setRegisteredSensors] = useState([]);
+  const [registeredBrokers, setRegisteredBrokers] = useState([]);
 
   const [shouldShowMapButton, setShouldShowMapButton] = useState(false);
+  const [shouldTabular, setShouldTabular] = useState(false);
   let yasguiInstance = null;
 
   useEffect(() => {
+    setSensorList([]);
     const loadYasgui = () => {
       if (yasguiInstance) {
+        
         yasguiInstance.destroy(); // Destroy the existing Yasgui
       }
 
@@ -46,10 +53,9 @@ const SensorQuery = () => {
 
           SensorService.querySensor(inputQuery).then((response) => {
             if (response.status === 200 && response.data.result === true) {
-             
               setSensorData(response.data.values);
-              setSensorList(response.data.values);
-            
+              setShouldTabular(true);
+
               if (sensorData.length === 0) {
                 setShowNoResultFound(true);
               } else {
@@ -92,9 +98,8 @@ const SensorQuery = () => {
         setSensorData([]); // Clear the data
         setShowAlert(false);
         setShowNoResultFound(false);
+        document.querySelector(".yasqe").style.display = "none";
         //document.querySelector("div.alert.alert-warning").style.display = "none";
-
-        // Optionally, you can hide Yasgui here if needed.
       }
     });
   }, []);
@@ -125,10 +130,6 @@ const SensorQuery = () => {
   const handleViewMapClick = () => {
     // Handle the logic to display the map here
   };
-
-  const { sensorList, setSensorList } = useContext(Context);
-  const [registeredSensors, setRegisteredSensors] = useState([]);
-  const [registeredBrokers, setRegisteredBrokers] = useState([]);
 
   useEffect(() => {
     async function fetchBrokerData() {
@@ -241,7 +242,7 @@ const SensorQuery = () => {
       <div className="row">
         <div className="col-12">
           <br />
-          <div className="col-12">
+          <div className="col-10">
             <div className="page-title">Sensor Query</div>
             <br></br>
             <div>
@@ -270,13 +271,13 @@ const SensorQuery = () => {
               {isAdvanceSearchChecked ? (
                 <div id="yasgui"></div>
               ) : (
-                <div id="query-builder">query-builder</div>
+                <div id="query-builder">
+                  <FilterQuery />
+                </div>
               )}
+              <div className="title-heders2">Results</div>
               <br></br>
-              <div className="title-heders">Results</div>
-              <br></br>
-              <br></br>
-              <br></br>
+
               <button
                 type="submit"
                 className="btn btn-map bi bi-geo-alt-fill float-left"
@@ -296,7 +297,12 @@ const SensorQuery = () => {
               )}
               <br></br>
               <br></br>
-              <h5> Query Results in Tabular Format</h5>
+              <span
+                className="tabularview tabular"
+                style={{ display: shouldShowMapButton ? "block" : "none" }}
+              >
+                Query Results in Tabular Format
+              </span>
               {showNoResultFound && sensorData.length === 0 ? (
                 <div className="alert alert-warning" role="alert">
                   No result found.

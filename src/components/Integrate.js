@@ -1,12 +1,24 @@
-import React, { useContext, useState } from "react";
+import React, { useContext, useState, useEffect } from "react";
 import { Context } from "../context/context";
 import ClientSubMenu from "../components/UI/SubMenu/ClientSubMenu";
 import PaymentService from "../services/payment.service";
+import ValidatePublicKey from "../components/ValidatePublicKey";
 
 function Integrate() {
   const [response, setResponse] = useState({});
   const [rewAmount, setrewAmount] = useState(0);
   const { sensorList, setSensorList } = useContext(Context);
+
+   const { savedPublicKey } = useContext(Context);
+   const [showPopup, setShowPopup] = useState(false);
+
+
+   useEffect(() => {
+     if (!savedPublicKey) {
+       setShowPopup(true);
+     } 
+   }, []);
+
   // Create a new array with the updated sensor
   const updatedSensorList = [...sensorList];
 
@@ -62,77 +74,97 @@ function Integrate() {
 
         <div className="col-12">
           <div className="title-heders">Client</div>
+          {showPopup && <ValidatePublicKey />}
         </div>
       </div>
 
-      <div className="row">
-        <div className="col-12">
-          <br />
-          <div className="col-4">
-            <div className="page-title">Integrate Sensors</div>
-            <br></br>
+      {!showPopup && (
+        <div className="row">
+          <div className="col-12">
+            <br />
+            <div className="col-7">
+              {response.status && (
+                <div
+                  className="alert alert-success alert-dismissible fade show"
+                  role="alert"
+                >
+                  Sensor Integrated Successfully.
+                </div>
+              )}
 
-            {response.status && (
-              <div
-                className="alert alert-success alert-dismissible fade show"
-                role="alert"
-              >
-                Sensor Intergrated Successfully.
-              </div>
-            )}
-            <table className="table table-light">
-              <thead>
-                <tr>
-                  <th>Sensor Name</th>
-                  <th>Amount</th>
-                </tr>
-              </thead>
-              <tbody>
-                {sensorList &&
-                  Object.keys(sensorList).map((item, key) => (
-                    <tr key={key}>
-                      <td>{sensorList[item].sensorName}</td>
+              {sensorList.length == 0 && (
+                <div>
+                  <br></br>
+                  <div className="page-title checkout">Checkout Sensors</div>
+                  <p>Please select sensor first.</p>
+                </div>
+              )}
+              {sensorList.length > 0 && (
+                <form>
+                  <table className="table table-light checkout">
+                    <br></br>
+                    <div className="page-title checkout">Checkout Sensors</div>
+                    <tbody>
+                      <th>Sensor Name</th>
+                      <th>Amount</th>
+                      {sensorList &&
+                        Object.keys(sensorList).map((item, key) => (
+                          <tr key={key}>
+                            <td>{sensorList[item].sensorName}</td>
+                            <td>
+                              <div className="form-group">
+                                <input
+                                  type="number"
+                                  min={0}
+                                  className="form-control"
+                                  name="sensorAmount"
+                                  value={updatedSensorList[item].sensoramount}
+                                  onChange={(e) => {
+                                    handleAmountChange(
+                                      sensorList[item],
+                                      e.target.value
+                                    );
+                                  }}
+                                ></input>
+                              </div>
+                            </td>
+                          </tr>
+                        ))}
+
+                      <th>
+                        <label htmlFor="rewardAmount">Reward Amount</label>
+                      </th>
                       <td>
-                        <input
-                          type="number"
-                          min={0}
-                          name="sensorAmount"
-                          value={updatedSensorList[item].sensoramount}
-                          onChange={(e) => {
-                            handleAmountChange(
-                              sensorList[item],
-                              e.target.value
-                            );
-                          }}
-                        ></input>
+                        <div className="form-group">
+                          <input
+                            type="number"
+                            min={1}
+                            className="form-control"
+                            name="rewardAmount"
+                            id="rewardAmount"
+                            onChange={(e) => {
+                              handleRewardAmountChange(e.target.value);
+                            }}
+                          />
+                        </div>
                       </td>
-                    </tr>
-                  ))}
-              </tbody>
-            </table>
-
-            <div className="form-group">
-              <label htmlFor="rewardAmount">reward Amount</label>
-              <input
-                type="number"
-                min={1}
-                name="rewardAmount"
-                id="rewardAmount"
-                onChange={(e) => {
-                  handleRewardAmountChange(e.target.value);
-                }}
-              />
+                    </tbody>
+                  </table>
+                  <div className="form-group">
+                    <button
+                      type="submit"
+                      onClick={handleIntegrate}
+                      className="btn btn-add bi-file-plus-fill"
+                    >
+                      Integrate
+                    </button>
+                  </div>
+                </form>
+              )}
             </div>
-            <button
-              type="submit"
-              onClick={handleIntegrate}
-              className="btn btn-add bi-file-plus-fill"
-            >
-              Integrate
-            </button>
           </div>
         </div>
-      </div>
+      )}
     </div>
   );
 }
