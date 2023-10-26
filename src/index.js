@@ -8,6 +8,7 @@ import reportWebVitals from './reportWebVitals';
 import { ContextProvider } from './context/context';
 
 ReactDOM.render(
+  
   <ContextProvider>
   <BrowserRouter>
     <App />

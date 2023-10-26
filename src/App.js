@@ -18,7 +18,7 @@ import Client from "./components/Client";
 import Integrate from "./components/Integrate";
 import PublicKey from "./components/PublicKey";
 import Wallet from "./components/Wallet";
-import SensorHistory from "./components/SensorHistory";
+import MapComponent from './components/MapComponent';import SensorHistory from "./components/SensorHistory";
 import FilterQuery from "./components/FilterQuery";
 
 const App = () => {
@@ -62,14 +62,18 @@ const App = () => {
               <Route path="/sensorList" element={<SensorList />} />
               <Route path="/sensor-history" element={<SensorHistory />} />
               <Route path="/integrate" element={<Integrate />} />
-
-              <Route path="/wallet" element={<Wallet />} />
-              <Route path="/public-key" element={<PublicKey />} />
-            </Routes>
+              <Route
+                exact
+                path="/MapComponent"
+                element={<MapComponent />}
+              />{" "}
+                <Route path="/wallet" element={<Wallet />} />
+                <Route path="/public-key" element={<PublicKey />} />
+              </Routes>
+            </div>
           </div>
         </div>
-      </div>
-      <footer className="footer text-center py-2">
+        <footer className="footer text-center py-2">
         &copy; 2023 SenShaMart
       </footer>
     </div>
