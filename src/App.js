@@ -17,9 +17,11 @@ import SensorList from "./components/SensorList";
 import { Context } from "./context/context";
 import Client from "./components/Client";
 import Checkout from "./components/Checkout";
+import Integrate from "./components/Integrate";
 import PublicKey from "./components/PublicKey";
 import Wallet from "./components/Wallet";
 import SensorHistory from "./components/SensorHistory";
+import FilterQuery from "./components/FilterQuery";
 
 const App = () => {
   const [currentUser, setCurrentUser] = useState(undefined);
@@ -53,23 +55,25 @@ const App = () => {
               <Route exact path="/sensor" element={<Sensor />} />
               <Route exact path="/sensorquery" element={<SensorQuery />} />
               <Route exact path="/client" element={<Client />} />
-              <Route
+              <Route exact path="/filterquery" element={<FilterQuery />} />
+            <Route
                 path="/BrokerDetails/:id"
                 element={<BrokerDetails data={broks} />}
               />
               <Route path="/brokerList" element={<BrokerList />} />
               <Route path="/sensorList" element={<SensorList />} />
               <Route path="/checkout" element={<Checkout />} />
-              <Route path="/wallet" element={<Wallet />} />
-              <Route path="/public-key" element={<PublicKey />} />
-              <Route path="/sensor-history" element={<SensorHistory />} />
-            </Routes>
-          </div>
+              <Route path="/integrate" element={<Integrate />} />
+
+            <Route path="/wallet" element={<Wallet />} />
+            <Route path="/public-key" element={<PublicKey />} />
+          </Routes>
         </div>
-        <footer className="footer text-center py-2">
-          &copy; 2023 SenShaMart
-        </footer>
       </div>
+    </div>
+    <footer className="footer text-center py-2">
+        &copy; 2023 SenShaMart
+      </footer>
     </div>
   );
 };

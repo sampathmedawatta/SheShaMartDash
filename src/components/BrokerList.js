@@ -38,7 +38,6 @@ const [registeredBrokers, setRegisteredBrokers] = useState(null);
           <br />
           <div className="col-10">
             <div className="page-title">Broker List</div>
-            <br></br>
             {registeredBrokers !== null && (
               <div className="table-responsive">
                 <table className="table table-light">
