@@ -243,7 +243,7 @@ const SensorQuery = () => {
         <div className="col-12">
           <br />
           <div className="col-10">
-            <div className="page-title">Sensor Query</div>
+            <div className="page-title sensor-query">Sensor Query</div>
             <br></br>
             <div>
               <div className="form-check form-check-inline">
@@ -305,7 +305,7 @@ const SensorQuery = () => {
               </span>
               {showNoResultFound && sensorData.length === 0 ? (
                 <div className="alert alert-warning" role="alert">
-                  No result found.
+                  No results found.
                 </div>
               ) : (
                 sensorData.length > 0 && (

@@ -28,7 +28,7 @@ const navigate = useNavigate();
                 onClick={handleClosePopup}
                 className="btn btn-add bi-file-plus-fill"
               >
-                Add Public Key
+                &nbsp;Add Public Key
               </button>
             </div>
           </div>

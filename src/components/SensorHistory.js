@@ -49,7 +49,7 @@ function SensorHistory() {
           <div className="col-12">
             <br />
             <div className="col-10">
-              <div className="page-title">Sensor Integrate History</div>
+              <div className="page-title history">Sensor Integrate History</div>
               <br></br>
               {registeredSensors !== null && (
                 <div>
@@ -57,7 +57,7 @@ function SensorHistory() {
                     <thead>
                       <tr>
                         <th>Compensation Count</th>
-                        <th>Witnes Count</th>
+                        <th>Witness Count</th>
                         <th>Witnesses</th>
                         <th>Counter</th>
                         <th>Reward Amount</th>
@@ -88,7 +88,7 @@ function SensorHistory() {
                           <td>{registeredSensors[item].counter}</td>
                           <td>{registeredSensors[item].rewardAmount}</td>
                           <td>
-                            <table className="table table-light">
+                            <table className="table table-light mini">
                               <thead>
                                 <tr>
                                   <th>Sensor Name</th>

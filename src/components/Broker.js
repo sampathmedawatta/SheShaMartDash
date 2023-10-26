@@ -86,7 +86,7 @@ const Broker = () => {
           <div className="col-12">
             <br />
             <div className="col-10 brok">
-              <div className="page-title">Broker Registration</div>
+              <div className="page-title history">Broker Registration</div>
               <br></br>
               <form onSubmit={handleSubmit}>
                 {response.status && !response.error && (
@@ -102,11 +102,11 @@ const Broker = () => {
                     className="alert alert-danger alert-dismissible fade show"
                     role="alert"
                   >
-                    Broker Registeration Failed!
+                    Broker Registration Failed!
                   </div>
                 )}
                 <div className="form-group">
-                  <label htmlFor="rewardAmount">Reward Amount*</label>
+                  <label htmlFor="rewardAmount">Reward Amount</label>
                   <input
                     type="number"
                     min={0}
@@ -124,7 +124,7 @@ const Broker = () => {
                   </div>{" "}
                 </div>
                 <div className="form-group">
-                  <label htmlFor="brokerName">Broker Name* </label>
+                  <label htmlFor="brokerName">Broker Name </label>
                   <input
                     type="text"
                     id="brokerName"
@@ -141,7 +141,7 @@ const Broker = () => {
                   </div>
                 </div>
                 <div className="form-group">
-                  <label htmlFor="endpoint">Endpoint*</label>
+                  <label htmlFor="endpoint">Endpoint</label>
                   <input
                     type="text"
                     id="endpoint"
@@ -157,12 +157,12 @@ const Broker = () => {
                     Please enter an Endpoint
                   </div>
                 </div>
-                <div className="form-group ">
+                <div className="form-group button">
                   <button
                     type="submit"
                     className="btn btn-add bi-file-plus-fill"
                   >
-                    Register
+                    &nbsp; Register
                   </button>
                 </div>
               </form>
