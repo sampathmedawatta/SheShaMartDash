@@ -16,14 +16,13 @@ function ClientSubMenu() {
             </Link>
           </li>
           <li className="top-menu">
-            <Link to={"/sensorHistory"} className="">
+            <Link to={"/sensor-history"} className="">
               <div className="menu-space clnt"> Sensor History</div>
             </Link>
           </li>
         </ul>
       </div>
     </nav>
-
   );
 }
 
