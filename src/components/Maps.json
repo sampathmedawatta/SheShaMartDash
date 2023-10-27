@@ -31,7 +31,7 @@
             },
             "sensor": {
                 "termType": "NamedNode",
-                "value": "metaSample"
+                "value": "metaSample1"
             }
         },
         {
@@ -97,7 +97,7 @@
             },
             "sensor": {
                 "termType": "NamedNode",
-                "value": "test sensor "
+                "value": "test sensor 3"
             }
         }
     ]

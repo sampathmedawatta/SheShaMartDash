@@ -129,6 +129,8 @@ const SensorQuery = () => {
 
   const handleViewMapClick = () => {
     // Handle the logic to display the map here
+
+    // get date from "sensorData"
   };
 
   useEffect(() => {
