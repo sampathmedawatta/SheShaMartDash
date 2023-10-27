@@ -47,6 +47,7 @@ const MapComponent = () => {
       const long = parseFloat(location.long.value);
       const sensor = location.sensor.value;
       const datatype = location.measures.datatype.value;
+      const measures = location.measures.value;
 
       if (!isNaN(lat) && !isNaN(long)) {
         const coordinates = fromLonLat([long, lat]);
@@ -60,9 +61,9 @@ const MapComponent = () => {
           };
         }
 
-        locations[coordinates].cluster.get('sensors').push({
+        locations[coordinates].cluster.get("sensors").push({
           sensor,
-          datatype,
+          measures,
         });
       }
     });
@@ -111,32 +112,28 @@ const MapComponent = () => {
     });
 
     const displayLocationInfo = (sensors, sensorCount, popup, coordinates) => {
+
+      console.log(sensors);
       let sensorInfo = sensors
-        .map((sensor, index) => (
-          `<div>
-            <strong>Sensor Name:</strong> ${sensor.sensor}<br>
-            <strong>Data Type:</strong> <a href="${sensor.datatype}" target="_blank">${sensor.datatype}</a>
+        .map(
+          (sensor, index) =>
+            `<div>
+            <strong>Sensor Name: </strong> ${sensor.sensor}<br>
+            <strong>Measures: </strong>${sensor.measures}<br>
           </div>
-          <button 
-          style=" padding: 10px; border-radius: 10px;
-          border: none; background-color: #74cb97; color: white" 
-          onclick="window.open('${sensor.datatype}', '_blank')">Go to Data ${index + 1}</button>`
-        ))
-        .join('<br/>');
+          <button class="map-button"
+          onclick="integrateSensor(${sensor.sensor})">Integrate</button>`
+        )
+        .join("<br/>");
 
       if (sensorCount > 1) {
         sensorInfo = `<div><strong>Total Sensors: ${sensorCount}</strong></div><br>${sensorInfo}`;
       }
 
       const popupContent = `
-        <div style="background: white; padding: 14px; border-radius: 18px;  
-        text-decoration: none; box-shadow: rgba(149, 157, 165, 0.2) 0px 8px 24px;">
+        <div class="map-popup">
           ${sensorInfo}
-          <button id="close-popup" 
-          style="position: absolute; top: 10px; right: 10px;
-          border-radius: 20px; 
-          border: none; background-color: #fd5050; color: white;
-          ">X</button>
+          <button id="close-popup" class="closeButton">X</button>
         </div>
       `;
 

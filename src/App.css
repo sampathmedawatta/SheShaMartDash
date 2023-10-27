@@ -757,6 +757,44 @@ button {
 .alert-exit {
   opacity: 1;
 }
+
+.closeButton{
+  position: absolute;
+    top: 0px;
+    right: 10px;
+    border-radius: 20px;
+    border: none;
+    background-color: #fd5050;
+    color: white;
+}
+
+.closeBox {
+  position: absolute;
+  top: 10px;
+  right: 10px;
+  border-radius: 20px;
+  border: none;
+  background-color: #fd5050;
+  color: white;
+}
+
+.map-popup{
+  background: white;
+    line-height: 20px;
+    padding: 25px;
+    border-radius: 18px;
+    text-decoration: none;
+    box-shadow: rgba(149, 157, 165, 0.2) 0px 8px 24px;
+}
+.map-button{
+  padding: 10px;
+    border-radius: 10px;
+    border: none;
+    background-color: #74cb97;
+    color: white
+}
+
+
 .alert-exit-active {
   opacity: 0;
   transform: scale(0.9);
