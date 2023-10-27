@@ -49,7 +49,7 @@ function SensorHistory() {
           <div className="col-12">
             <br />
             <div className="col-10">
-              <div className="page-title history">Sensor Integrate History</div>
+              <div className="page-title history">Sensor Integration History</div>
               <br></br>
               {registeredSensors !== null && (
                 <div>

@@ -13,9 +13,9 @@ const Popup = () => {
         <div className="popup">
           <div className="popup-content">
             <div className="row">
-              <div className="col-12">
+              <div className="col-12 popup">
                 <div className="form-group col-5 mt-3">
-                  <p>Sensor is alreat integrated. </p>
+                  <p>Sensor is already integrated. </p>
                   <button
                     onClick={(handleClosePopup, togglePopup)}
                     className="btn btn-add bi-file-plus-fill"

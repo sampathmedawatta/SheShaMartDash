@@ -3,9 +3,9 @@ import { Link } from "react-router-dom";
 
 function GeneralMenu() {
   return (
-    <nav className="navbar navbar-expand-lg broker-menu navbar-dark">
+    <nav className="navbar navbar-expand-lg wallet-menu navbar-dark">
       <Link to={"/"} className="navbar-brand wall">
-        <i className="bi bi-house-door-fill"></i>
+        <div className="bi bi-house-door-fill logo-menu w">&nbsp; Home</div>
       </Link>
 
       <div className="collapse navbar-collapse" id="navbarSupportedContent">
