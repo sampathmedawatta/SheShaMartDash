@@ -1,4 +1,5 @@
 import React, { useEffect } from 'react';
+import MapMenu from "../components/UI/SubMenu/MapMenu";
 import 'ol/ol.css';
 import Map from 'ol/Map';
 import View from 'ol/View';
@@ -13,7 +14,7 @@ import Popup from 'ol-ext/overlay/Popup';
 import Select from 'ol/interaction/Select';
 import { click } from 'ol/events/condition';
 import { Style, Icon } from 'ol/style';
-import locationsData from './maps'; // Import the JSON data
+import locationsData from './Maps'; // Import the JSON data
 
 const MapComponent = () => {
   useEffect(() => {
@@ -75,7 +76,7 @@ const MapComponent = () => {
         cluster.setStyle(
           new Style({
             image: new Icon({
-              src: 'data:image/svg+xml,' + encodeURIComponent('<svg xmlns="http://www.w3.org/2000/svg" width="32" height="48" viewBox="0 0 32 48"><path fill="red" d="M16 0c-8.837 0-16 7.163-16 16 0 17.063 16 32 16 32s16-14.937 16-32c0-8.837-7.163-16-16-16zm0 24c-4.418 0-8-3.582-8-8s3.582-8 8-8 8 3.582 8 8-3.582 8-8 8z"/></svg>'),
+              src: 'data:image/svg+xml,' + encodeURIComponent('<svg xmlns="http://www.w3.org/2000/svg" width="32" height="48" viewBox="0 0 32 48"><path fill="#de2e2e" d="M16 0c-8.837 0-16 7.163-16 16 0 17.063 16 32 16 32s16-14.937 16-32c0-8.837-7.163-16-16-16zm0 24c-4.418 0-8-3.582-8-8s3.582-8 8-8 8 3.582 8 8-3.582 8-8 8z"/></svg>'),
               anchor: [0.5, 1],
             }),
           })
@@ -116,18 +117,26 @@ const MapComponent = () => {
             <strong>Sensor Name:</strong> ${sensor.sensor}<br>
             <strong>Data Type:</strong> <a href="${sensor.datatype}" target="_blank">${sensor.datatype}</a>
           </div>
-          <button onclick="window.open('${sensor.datatype}', '_blank')">Go to Data ${index + 1}</button>`
+          <button 
+          style=" padding: 10px; border-radius: 10px;
+          border: none; background-color: #74cb97; color: white" 
+          onclick="window.open('${sensor.datatype}', '_blank')">Go to Data ${index + 1}</button>`
         ))
-        .join('<br>');
+        .join('<br/>');
 
       if (sensorCount > 1) {
         sensorInfo = `<div><strong>Total Sensors: ${sensorCount}</strong></div><br>${sensorInfo}`;
       }
 
       const popupContent = `
-        <div style="background: white; padding: 10px; border: 1px solid #ccc; border-radius: 4px;">
+        <div style="background: white; padding: 14px; border-radius: 18px;  
+        text-decoration: none; box-shadow: rgba(149, 157, 165, 0.2) 0px 8px 24px;">
           ${sensorInfo}
-          <button id="close-popup" style="position: absolute; top: 10px; left: 1px;">X</button>
+          <button id="close-popup" 
+          style="position: absolute; top: 10px; right: 10px;
+          border-radius: 20px; 
+          border: none; background-color: #fd5050; color: white;
+          ">X</button>
         </div>
       `;
 
@@ -154,13 +163,26 @@ const MapComponent = () => {
 
   return (
     <div>
+    <div className="row">
+      <div className="col-12">
+        <MapMenu />
+      </div>
+
+      <div className="col-12">
+        <div className="title-heders">Sensor Map</div>
+      </div>
+    </div>
+
+    <div className="col-12 mapcont">
       <div
         id="map"
         style={{
-          width: '100%',
-          height: '100vh',
+          width: '90%',
+          height: '80vh',
         }}
       ></div>
+    </div>
+
     </div>
   );
 };

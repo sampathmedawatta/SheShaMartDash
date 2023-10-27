@@ -12,7 +12,7 @@ function Sidebar() {
           data-bs-toggle="collapse"
           className="nav-link px-0 align-middle"
         >
-          <i className="fs-4 bi-speedometer2 "></i>{" "}
+          <i className="fs-4 bi-speedometer "></i>{" "}
           <span className="ms-1 d-none d-sm-inline">Dashboard</span>{" "}
         </Link>
       </li>
@@ -24,7 +24,7 @@ function Sidebar() {
       </li>
        <li className="sidebar-menu">
         <Link to="/MapComponent" className="nav-link px-0 align-middle">
-        <i className="fs-4 bi-wallet-fill"></i>{" "}
+        <i className="fs-4 bi-globe-americas"></i>{" "}
         <span className="ms-1 d-none d-sm-inline">Maps</span>
         </Link>
 

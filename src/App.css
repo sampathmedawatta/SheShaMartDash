@@ -73,8 +73,9 @@ label::after {
   color:#2b3670;
 }
 .menu-space.wall:hover{
-  color: #235165;
+  color:#174f49;
 }
+
 .navbar{
   padding-left: 2em;
 }
@@ -105,6 +106,9 @@ label::after {
 .logo-menu.b{   
   background-color: #35a8c2;
 }
+.logo-menu.w{   
+  background-color:#5c6dc3;
+}
 .logo-menu.b:hover{   
   background-color: #1e5268;
 }
@@ -114,7 +118,12 @@ label::after {
 .logo-menu.p:hover{   
   background-color: #296124;
 }
-
+.logo-menu.w{   
+  background-color:#28716a;
+}
+.logo-menu.w:hover{   
+  background-color: #174f49;
+}
 .drop-down{
   height: 43px;
 }
@@ -221,6 +230,17 @@ section {
 }
 .p-1{
   max-width: 100%;
+}
+
+/* map */
+.mapcont{
+  margin: 1em;
+}
+.ol-viewport{
+  border-radius: 20px;
+}
+.Point{
+  color: #de2e2e;
 }
 
 .pt-3, .py-3{
@@ -345,6 +365,11 @@ h4 {
 }
 .client-menu{
   background-color:  #808fe1;
+}
+
+/* wallet menu */
+.wallet-menu{
+  background-color:  #399b93;
 }
 
 /* buttons */
