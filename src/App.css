@@ -225,11 +225,14 @@ section {
   padding-left: 0px;
   padding-right: 0px;
 }
-.col-12.popup{
+.cpopup{
   padding-left: 1em;
 }
 .p-1{
   max-width: 100%;
+}
+.pt-3, .py-3{
+  padding-top: 0rem !important;
 }
 
 /* map */
@@ -244,8 +247,12 @@ section {
   color: #de2e2e;
 }
 
-.pt-3, .py-3{
-  padding-top: 0rem !important;
+/* yasgui sparql */
+.yasqe.CodeMirror {
+  line-height: 1.5em;
+  font-size: 14px;
+  border: 0;
+  box-shadow:rgba(149, 157, 165, 0.2) 0px 8px 24px;
 }
 
 /* images */
@@ -402,22 +409,21 @@ h4 {
   border: none;
 }
 .btn-map {
-  content: '\F3AA';
-  background: #235165;
+  position: relative;
+  float: right;
+  width: 10em;
+  bottom: 10px;
+  padding: .6em;
+  margin-top: 0;
   color: #fff;
-  border-radius: 4px;
-  font-weight: bold;
-}
-.btn-map {
+  background: #5aad7b;
   content: '\F3AA';
-  background: #235165;
-  color: #fff;
-  border-radius: 4px;
-  font-weight: bold;
+  border-radius: 24px;
+  font-weight: 500;
 }
-.btn-add:hover{
+.btn-map:hover{
   content: '\F3AA';
-  background: #28716a;
+  background: #296124;
   color: #fff;
 }
 .btn-add:focus{
@@ -508,9 +514,12 @@ ul {
 }
 
 .tabular{
-font-size: 14px !important;
-font-weight: bold;
+  font-size: 20px !important;
+  font-weight: bold;
+  padding-bottom: .5em;
+  padding-top: .5em
 }
+
 /* tables */
 .table{
   border-radius: 20px;
@@ -530,6 +539,7 @@ font-weight: bold;
 }
 .table-light.checkout{
   padding: 1em;
+  box-shadow: rgba(149, 157, 165, 0.2) 0px 8px 24px;
 }
 .table thead th {
   vertical-align: bottom;
@@ -562,6 +572,9 @@ font-weight: bold;
   /*border-bottom: 1px solid #a0abb8;*/
   padding-bottom: .2em;
   padding-top: 1em;
+}
+.results{
+  padding-bottom: 0em;
 }
 .table tr th {
   vertical-align: bottom;

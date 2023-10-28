@@ -106,7 +106,7 @@ function FilterQuery() {
               className="btn btn-add bi bi-search"
               onClick={handleSearch}
             >
-              Search
+              &nbsp;Search
             </button>
           </div>
         </form>

@@ -74,7 +74,7 @@ function Integrate() {
 
         <div className="col-12">
           <div className="title-heders">Client</div>
-          {showPopup && <ValidatePublicKey />}
+          <div className="cpopup">{showPopup && <ValidatePublicKey />}</div>
         </div>
       </div>
 
@@ -132,7 +132,7 @@ function Integrate() {
                         ))}
 
                       <th>
-                        <label htmlFor="rewardAmount">Reward Amount</label>
+                        Reward Amount
                       </th>
                       <td>
                         <div className="form-group">
@@ -154,9 +154,9 @@ function Integrate() {
                     <button
                       type="submit"
                       onClick={handleIntegrate}
-                      className="btn btn-add bi-file-plus-fill"
+                      className="btn btn-add bi-plus-circle-fill"
                     >
-                      Integrate
+                      &nbsp; Integrate
                     </button>
                   </div>
                 </form>

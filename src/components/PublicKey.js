@@ -82,18 +82,18 @@ const PublicKey = () => {
                 <button
                   type="submit"
                   onClick={getPublicKey}
-                  className="btn btn-add bi-file-plus-fill"
+                  className="btn btn-add bi-plus-circle-fill"
                 >
-                  Request a Public Key
+                  &nbsp;Request a Public Key
                 </button>
               </div>
               <div className="col-3">
                 <button
                   type="submit"
                   onClick={showPublicKeyForm}
-                  className="btn btn-add bi-file-plus-fill"
+                  className="btn btn-add bi-plus-circle-fill"
                 >
-                  Save New Public Key
+                  &nbsp; Save New Public Key
                 </button>
               </div>
             </div>
@@ -117,9 +117,9 @@ const PublicKey = () => {
                     <br/>
                     <button
                       type="submit"
-                      className="btn btn-add bi-file-plus-fill"
+                      className="btn btn-add bi-plus-circle-fill"
                     >
-                      Save
+                      &nbsp; Save
                     </button>
                   </div>
                 </form>
@@ -149,7 +149,7 @@ const PublicKey = () => {
                       type="submit"
                       className="btn btn-add bi-file-plus-fill"
                     >
-                      Save
+                      &nbsp; Save
                     </button>
                   </div>
                 </form>
