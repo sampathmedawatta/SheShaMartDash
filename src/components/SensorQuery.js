@@ -487,34 +487,27 @@ const SensorQuery = () => {
                   /> */}
                 </div>
               )}
-              <div className="title-heders2">Results</div>
+              <div className="title-heders2 results">Results</div>
               <br></br>
 
-              <button
-                type="submit"
-                className="btn btn-map bi bi-geo-alt-fill float-left"
-                onClick={handleViewMapClick}
-                style={{ display: shouldShowMapButton ? "block" : "none" }}
-              >
-                View on Map
-              </button>
-
-              {sensorList.length > 0 && (
-                <button
-                  onClick={handleCheckout}
-                  className="btn btn-add bi-file-plus-fill"
-                >
-                  Integrate Sensors
-                </button>
-              )}
-              <br></br>
-              <br></br>
+              
+          
               <span
                 className="tabularview tabular"
                 style={{ display: shouldShowMapButton ? "block" : "none" }}
               >
                 Query Results in Tabular Format
+
+                <button
+                type="submit"
+                className="btn btn-map bi bi-geo-alt-fill"
+                onClick={handleViewMapClick}
+                style={{ display: shouldShowMapButton ? "block" : "none" }}
+                >
+                &nbsp; Map View
+                </button>
               </span>
+              <br/>
               {showNoResultFound && sensorData.length === 0 ? (
                 <div className="alert alert-warning" role="alert">
                   No results found.
@@ -528,6 +521,16 @@ const SensorQuery = () => {
                     </table>
                   </div>
                 )
+              )}
+              
+
+              {sensorList.length > 0 && (
+                <button
+                  onClick={handleCheckout}
+                  className="btn btn-add bi-plus-circle-fill"
+                >
+                 &nbsp; Integrate Sensors
+                </button>
               )}
             </div>
           </div>

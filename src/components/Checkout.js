@@ -108,7 +108,7 @@ function Checkout() {
 
 
             <th>
-              <label htmlFor="rewardAmount">Reward Amount</label>
+              Reward Amount
             </th>
               <td>
               <input
@@ -127,9 +127,9 @@ function Checkout() {
             <button
               type="submit"
               onClick={handleIntergrate}
-              className="btn btn-add bi-file-plus-fill"
+              className="btn btn-add bi-plus-circle-fill"
             >
-              &nbsp;Integrate
+              &nbsp; Integrate
             </button>
           </div>
         </div>

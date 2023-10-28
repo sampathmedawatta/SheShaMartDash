@@ -160,7 +160,7 @@ const Broker = () => {
                 <div className="form-group button">
                   <button
                     type="submit"
-                    className="btn btn-add bi-file-plus-fill"
+                    className="btn btn-add bi-plus-circle-fill"
                   >
                     &nbsp; Register
                   </button>
