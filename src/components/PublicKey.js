@@ -1,13 +1,16 @@
-import React, { useState, useContext } from "react";
+import React, { useState, useEffect } from "react";
 import GeneralMenu from "../components/UI/SubMenu/GeneralMenu";
 import PublicKeyService from "../services/publicKey.service";
-import { Context } from "../context/context";
 
 const PublicKey = () => {
   const [publicKeyFrom, setPublicKeyFrom] = useState(false);
   const [requestedPublicKey, setRequestedPublicKey] = useState(false);
   const [enteredPublicKey, setEnteredPublicKey] = useState("");
-  const {savedPublicKey, setSavedPublicKey } = useContext(Context);
+  const [savedPublicKey, setSavedPublicKey] = useState("");
+
+  useEffect(() => {
+    setSavedPublicKey(localStorage.getItem("publicKey"));
+  }, []);
 
   const showPublicKeyForm = () => {
     setPublicKeyFrom(!publicKeyFrom);
@@ -19,8 +22,8 @@ const PublicKey = () => {
 
     const response = await PublicKeyService.getPublicKey();
     if (response !== null) {
-    setRequestedPublicKey(!requestedPublicKey);
-    setEnteredPublicKey(response);
+      setRequestedPublicKey(!requestedPublicKey);
+      setEnteredPublicKey(response);
     }
   };
 
@@ -32,17 +35,17 @@ const PublicKey = () => {
     e.preventDefault(); // Prevent the default form submission behavior
 
     if (enteredPublicKey) {
-      
+      localStorage.setItem("publicKey", enteredPublicKey);
       setSavedPublicKey(enteredPublicKey);
     } else if (requestedPublicKey) {
+      localStorage.setItem("publicKey", requestedPublicKey);
       setSavedPublicKey(requestedPublicKey);
     }
 
-     setEnteredPublicKey("");
-     setPublicKeyFrom(false);
-     setRequestedPublicKey(false);
+    setEnteredPublicKey("");
+    setPublicKeyFrom(false);
+    setRequestedPublicKey(false);
   };
-
 
   return (
     <div>
@@ -60,7 +63,6 @@ const PublicKey = () => {
         <div className="col-12">
           <br />
           <div className="col-10">
-          
             {savedPublicKey && (
               <div className="form-group pk-req1">
                 <br></br>
@@ -113,16 +115,16 @@ const PublicKey = () => {
                     readOnly
                   />
                   <form onSubmit={handleSubmit}>
-                  <div className="form-group">
-                    <br/>
-                    <button
-                      type="submit"
-                      className="btn btn-add bi-plus-circle-fill"
-                    >
-                      &nbsp; Save
-                    </button>
-                  </div>
-                </form>
+                    <div className="form-group">
+                      <br />
+                      <button
+                        type="submit"
+                        className="btn btn-add bi-plus-circle-fill"
+                      >
+                        &nbsp; Save
+                      </button>
+                    </div>
+                  </form>
                 </div>
               </div>
             )}
@@ -130,8 +132,10 @@ const PublicKey = () => {
             {publicKeyFrom && (
               <div>
                 <div className="form-group pk-req">
-                <div className="page-title">Save New Public Key</div>
-                  <label htmlFor="newPublicKey">Enter Your Public Key Here</label>
+                  <div className="page-title">Save New Public Key</div>
+                  <label htmlFor="newPublicKey">
+                    Enter Your Public Key Here
+                  </label>
                   <input
                     type="text"
                     id="newPublicKey"
@@ -143,16 +147,16 @@ const PublicKey = () => {
                     }}
                   />
                   <form onSubmit={handleSubmit}>
-                  <div className="form-group ">
-                    <br/>
-                    <button
-                      type="submit"
-                      className="btn btn-add bi-file-plus-fill"
-                    >
-                      &nbsp; Save
-                    </button>
-                  </div>
-                </form>
+                    <div className="form-group ">
+                      <br />
+                      <button
+                        type="submit"
+                        className="btn btn-add bi-file-plus-fill"
+                      >
+                        &nbsp; Save
+                      </button>
+                    </div>
+                  </form>
                 </div>
               </div>
             )}

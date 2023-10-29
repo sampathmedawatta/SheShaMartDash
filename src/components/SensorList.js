@@ -1,18 +1,15 @@
-import React, { useState, useEffect, useContext } from "react";
+import React, { useState, useEffect } from "react";
 import SensorService from "../services/sensor.service";
-import { Link, useNavigate } from "react-router-dom";
+import { Link } from "react-router-dom";
 import ProviderSubMenu from "../components/UI/SubMenu/ProviderSubMenu";
-import BrokerService from "../services/broker.service";
-import { Context } from "../context/context";
 import ValidatePublicKey from "../components/ValidatePublicKey";
 
 function SensorList() {
 
-   const { savedPublicKey } = useContext(Context);
    const [showPopup, setShowPopup] = useState(false);
 
    useEffect(() => {
-     if (!savedPublicKey) {
+     if (!localStorage.getItem("publicKey")) {
        setShowPopup(true);
      }
    }, []);

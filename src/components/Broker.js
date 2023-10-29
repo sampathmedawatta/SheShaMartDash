@@ -1,16 +1,13 @@
-import React, { useState, useContext, useEffect } from "react";
+import React, { useState, useEffect } from "react";
 import BrokerService from "../services/broker.service";
 import BrokerSubMenu from "../components/UI/SubMenu/BrokerSubMenu";
-import { Context } from "../context/context";
 import ValidatePublicKey from "../components/ValidatePublicKey";
 
 const Broker = () => {
-
-  const { savedPublicKey } = useContext(Context);
   const [showPopup, setShowPopup] = useState(false);
 
   useEffect(() => {
-    if (!savedPublicKey) {
+    if (!localStorage.getItem("publicKey")) {
       setShowPopup(true);
     }
   }, []);
