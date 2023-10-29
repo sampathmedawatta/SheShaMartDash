@@ -6,6 +6,7 @@ import BrokerService from "../services/broker.service";
 import ClientSubMenu from "../components/UI/SubMenu/ClientSubMenu";
 import { Context } from "../context/context";
 import { useNavigate } from "react-router-dom";
+import MapComponent from "../components/MapComponent";
 
 const SensorQuery = () => {
   const [showAlert, setShowAlert] = useState(false);
@@ -14,6 +15,7 @@ const SensorQuery = () => {
   const [isAdvanceSearchChecked, setIsAdvanceSearchChecked] = useState(false);
   const navigate = useNavigate();
   const { sensorList, setSensorList } = useContext(Context);
+  const { sensorLocationList, setSensorLocationList } = useContext(Context);
   const [registeredSensors, setRegisteredSensors] = useState([]);
   const [registeredBrokers, setRegisteredBrokers] = useState([]);
 
@@ -52,20 +54,23 @@ const SensorQuery = () => {
           SensorService.querySensor(inputQuery).then((response) => {
             if (response.status === 200 && response.data.result === true) {
               setSensorData(response.data.values);
-              setShouldTabular(true);
+              
+               setShouldTabular(true);
 
-              if (sensorData.length === 0) {
-                setShowNoResultFound(true);
-              } else {
-                setShowNoResultFound(false);
-              }
+               if (sensorData.length === 0) {
+                 setShowNoResultFound(true);
+               } else {
+                 setShowNoResultFound(false);
+               }
 
-              if (
-                response.data.values[0].lat.value &&
-                response.data.values[0].long.value
-              ) {
-                setShouldShowMapButton(true);
-              }
+               if (
+                 response.data.values[0].lat.value &&
+                 response.data.values[0].long.value
+               ) {
+                 setSensorLocationList(response.data.values);
+                 setShouldShowMapButton(true);
+               }
+
             } else {
               console.log(response);
             }
@@ -125,9 +130,16 @@ const SensorQuery = () => {
     );
   };
 
+  const [isPopupVisible, setPopupVisible] = useState(false);
+
   const handleViewMapClick = () => {
     // Handle the logic to display the map here
     // get date from "sensorData"
+    togglePopup();
+  };
+
+  const togglePopup = () => {
+    setPopupVisible(!isPopupVisible);
   };
 
   useEffect(() => {
@@ -358,6 +370,8 @@ const SensorQuery = () => {
   };
 
   const handleSearch = (e) => {
+
+    // TODO Validation for form inputs
     const file = e.target.value;
     const query = buildSparqlQuery(); // Pass the selected option
   };
@@ -379,27 +393,26 @@ const SensorQuery = () => {
     if (selectedOption === "Location")
       query += `FILTER(xsd:decimal(?long) > \"${searchTextLong1}" && xsd:decimal(?long) < \"${searchTextLong2}" && xsd:decimal(?lat) > \"${searchTextLat1}" && xsd:decimal(?lat) < \"${searchTextLat2}")}`; // By location
 
-    console.log(query);
-
     SensorService.querySensor(query).then((response) => {
       if (response.status === 200 && response.data.result === true) {
-        console.log(response.data.values);
         setSensorData(response.data.values);
+        
+         setShouldTabular(true);
 
-        setShouldTabular(true);
+         if (sensorData.length === 0) {
+           setShowNoResultFound(true);
+         } else {
+           setShowNoResultFound(false);
+         }
 
-        if (sensorData.length === 0) {
-          setShowNoResultFound(true);
-        } else {
-          setShowNoResultFound(false);
-        }
-
-        if (
-          response.data.values[0].lat.value &&
-          response.data.values[0].long.value
-        ) {
-          setShouldShowMapButton(true);
-        }
+         if (
+           response.data.values[0].lat.value &&
+           response.data.values[0].long.value
+         ) {
+           setSensorLocationList(response.data.values);
+           setShouldShowMapButton(true);
+         }
+         
       } else {
         console.log(response);
       }
@@ -535,6 +548,23 @@ const SensorQuery = () => {
             </div>
           </div>
         </div>
+      </div>
+
+      <div>
+        {isPopupVisible && (
+          <div className="popup">
+            <div className="popup-content">
+              <div className="row">
+                <div className="col-12 popup">
+                  <div className="form-group col-5 mt-3 popup-content">
+                    <button onClick={togglePopup}>Close</button>
+                    <MapComponent />
+                  </div>
+                </div>
+              </div>
+            </div>
+          </div>
+        )}
       </div>
     </div>
   );

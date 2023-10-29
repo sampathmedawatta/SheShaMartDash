@@ -34,7 +34,7 @@ const App = () => {
                 className="d-flex align-items-center pb-3 mb-md-0 me-md-auto text-white text-decoration-none"
               >
                 <br></br>
-                <img className="logo" src="/sslogo.svg"/>
+                <img className="logo" src="/sslogo.svg" />
                 <span className="fs-5 d-none d-sm-inline ">
                   <h3 className="sstitle">&nbsp;SenShaMart</h3>
                 </span>
@@ -51,7 +51,7 @@ const App = () => {
               <Route exact path="/provider" element={<Provider />} />
               <Route exact path="/sensor" element={<Sensor />} />
               <Route exact path="/sensorquery" element={<SensorQuery />} />
-              <Route exact path="/client" element={<Client />} />
+              <Route exact path="/client" element={<SensorQuery />} />
               <Route
                 path="/BrokerDetails/:id"
                 element={<BrokerDetails data={broks} />}
@@ -65,13 +65,13 @@ const App = () => {
                 path="/MapComponent"
                 element={<MapComponent />}
               />{" "}
-                <Route path="/wallet" element={<Wallet />} />
-                <Route path="/public-key" element={<PublicKey />} />
-              </Routes>
-            </div>
+              <Route path="/wallet" element={<Wallet />} />
+              <Route path="/public-key" element={<PublicKey />} />
+            </Routes>
           </div>
         </div>
-        <footer className="footer text-center py-2">
+      </div>
+      <footer className="footer text-center py-2">
         &copy; 2023 SenShaMart
       </footer>
     </div>
