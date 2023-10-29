@@ -7,6 +7,7 @@ export const ContextProvider = ({ children }) => {
   const [sensors, setSensors] = useState(null);
   const [query, setQuery] = useState(null);
   const [savedPublicKey, setSavedPublicKey] = useState("");
+  const [sensorLocationList, setSensorLocationList] = useState([]);
 
   return (
     <Context.Provider
@@ -21,6 +22,8 @@ export const ContextProvider = ({ children }) => {
         setSensorList,
         savedPublicKey,
         setSavedPublicKey,
+        sensorLocationList,
+        setSensorLocationList,
       }}
     >
       {children}

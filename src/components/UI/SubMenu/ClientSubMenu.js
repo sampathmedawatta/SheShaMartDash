@@ -5,7 +5,7 @@ function ClientSubMenu() {
   return (
     <nav className="navbar navbar-expand-lg client-menu navbar-dark">
       <Link to={"/"} className="navbar-brand clnt">
-        <div className="bi bi-house-door-fill logo-menu c">        Client Mode</div>
+        <div className="bi bi-house-door-fill logo-menu c">Client Mode</div>
       </Link>
 
       <div className="collapse navbar-collapse" id="navbarSupportedContent">
