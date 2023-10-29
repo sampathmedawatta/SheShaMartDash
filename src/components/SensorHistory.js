@@ -1,16 +1,15 @@
-import React, { useState, useContext, useEffect } from "react";
+import React, { useState, useEffect } from "react";
 import { Context } from "../context/context";
 import ClientSubMenu from "../components/UI/SubMenu/ClientSubMenu";
 import ValidatePublicKey from "../components/ValidatePublicKey";
 import PaymentService from "../services/payment.service";
 
 function SensorHistory() {
-  const { savedPublicKey } = useContext(Context);
   const [showPopup, setShowPopup] = useState(false);
   const [registeredSensors, setRegisteredSensors] = useState(null);
  
   useEffect(() => {
-    if (!savedPublicKey) {
+    if (!localStorage.getItem("publicKey")) {
       setShowPopup(true);
     }
     else{
@@ -19,7 +18,7 @@ function SensorHistory() {
         if (response) {
 
           const filter = Object.values(response).filter((sensor) => {
-            return sensor.input.includes(savedPublicKey);
+            return sensor.input.includes(localStorage.getItem("publicKey"));
           });
           setRegisteredSensors(filter);
           

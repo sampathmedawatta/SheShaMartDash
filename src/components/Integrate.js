@@ -9,12 +9,10 @@ function Integrate() {
   const [rewAmount, setrewAmount] = useState(0);
   const { sensorList, setSensorList } = useContext(Context);
 
-   const { savedPublicKey } = useContext(Context);
    const [showPopup, setShowPopup] = useState(false);
 
-
    useEffect(() => {
-     if (!savedPublicKey) {
+     if (!localStorage.getItem("publicKey")) {
        setShowPopup(true);
      } 
    }, []);

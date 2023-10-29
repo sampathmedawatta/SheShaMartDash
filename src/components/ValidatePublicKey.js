@@ -1,14 +1,12 @@
-import React, { useState, useContext, useEffect } from "react";
-import { Context } from "../context/context";
+import React, { useState, useEffect } from "react";
 import { useNavigate } from "react-router-dom";
 
 function ValidatePublicKey() {
 const navigate = useNavigate();
-  const { savedPublicKey } = useContext(Context);
    const [showPopup, setShowPopup] = useState(false);
 
    useEffect(() => {
-     if (!savedPublicKey) {
+     if (!localStorage.getItem("publicKey")) {
        setShowPopup(true);
      }
    }, []);

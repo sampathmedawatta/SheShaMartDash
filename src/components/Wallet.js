@@ -1,22 +1,20 @@
-import React, { useState, useContext, useEffect } from "react";
-import { Context } from "../context/context";
+import React, { useState, useEffect } from "react";
 import GeneralMenu from "../components/UI/SubMenu/GeneralMenu";
 import ValidatePublicKey from "../components/ValidatePublicKey";
 import WalletService from "../services/wallet.service";
 
 const Wallet = () => {
-    const { savedPublicKey } = useContext(Context);
     const [showPopup, setShowPopup] = useState(false);
     const [balance, setBalance] = useState({});
 
     useEffect(() => {
-        if (!savedPublicKey) {
+        if (!localStorage.getItem("publicKey")) {
         setShowPopup(true);
         }
 
         async function fetchWalletData() {
           const walletData = await WalletService.getWallet({
-            publicKey: savedPublicKey,
+            publicKey: localStorage.getItem("publicKey"),
           });
 
           setBalance(walletData);

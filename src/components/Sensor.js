@@ -1,19 +1,17 @@
-import React, { useState, useContext, useEffect } from "react";
+import React, { useState, useEffect } from "react";
 import SensorService from "../services/sensor.service";
 import BrokerService from "../services/broker.service";
 import ProviderSubMenu from "../components/UI/SubMenu/ProviderSubMenu";
 import DropDown from "../components/UI/DropDown";
 import TurtleFileReader from "../components/UI/TurtleFileReader";
 import N3 from "n3";
-import { Context } from "../context/context";
 import ValidatePublicKey from "../components/ValidatePublicKey";
 
 const Sensor = () => {
-  const { savedPublicKey } = useContext(Context);
   const [showPopup, setShowPopup] = useState(false);
 
   useEffect(() => {
-    if (!savedPublicKey) {
+    if (!localStorage.getItem("publicKey")) {
       setShowPopup(true);
     }
   }, []);
