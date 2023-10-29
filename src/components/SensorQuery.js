@@ -15,7 +15,7 @@ const SensorQuery = () => {
   const [isAdvanceSearchChecked, setIsAdvanceSearchChecked] = useState(false);
   const navigate = useNavigate();
   const { sensorList, setSensorList } = useContext(Context);
-  const { sensorLocationList, setSensorLocationList } = useContext(Context);
+  const { setSensorLocationList } = useContext(Context);
   const [registeredSensors, setRegisteredSensors] = useState([]);
   const [registeredBrokers, setRegisteredBrokers] = useState([]);
 
@@ -67,7 +67,12 @@ const SensorQuery = () => {
                  response.data.values[0].lat.value &&
                  response.data.values[0].long.value
                ) {
-                 setSensorLocationList(response.data.values);
+                 setSensorLocationList(
+                  {
+                   locationList: response.data.values,
+                   registeredSensors: registeredSensors,
+                   registeredBrokers: registeredBrokers
+                  } );
                  setShouldShowMapButton(true);
                }
 
@@ -135,6 +140,13 @@ const SensorQuery = () => {
   const handleViewMapClick = () => {
     // Handle the logic to display the map here
     // get date from "sensorData"
+
+     setSensorLocationList({
+       locationList: sensorData,
+       registeredSensors: registeredSensors,
+       registeredBrokers: registeredBrokers,
+     });
+
     togglePopup();
   };
 

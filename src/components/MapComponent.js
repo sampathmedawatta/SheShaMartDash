@@ -21,10 +21,8 @@ const MapComponent = () => {
   const { sensorList, setSensorList } = useContext(Context);
   const navigate = useNavigate();
 
-  console.log("Location Data:  " + sensorLocationList);
-
   useEffect(() => {
-    const initialCenter = fromLonLat([0, 0]); // Specify the initial center (longitude, latitude)
+    const initialCenter = fromLonLat([145.03818, -37.82635]); // Specify the initial center (longitude, latitude)
 
     const map = new Map({
       target: "map",
@@ -35,7 +33,7 @@ const MapComponent = () => {
       ],
       view: new View({
         center: initialCenter,
-        zoom: 2,
+        zoom: 0,
       }),
     });
 
@@ -48,7 +46,7 @@ const MapComponent = () => {
 
     const locations = {};
 
-    sensorLocationList.forEach((location) => {
+    sensorLocationList.locationList.forEach((location) => {
       const lat = parseFloat(location.lat.value);
       const long = parseFloat(location.long.value);
       const sensor = location.sensor.value;
@@ -126,19 +124,42 @@ const MapComponent = () => {
     });
 
     const handleIntegrate = (selectdSensor) => {
-      console.log("Integrate button clicked : " + selectdSensor);
+     
+      try{
+
+        const filteredSensor = Object.values(
+          sensorLocationList.registeredSensors
+        ).filter((sensor) => {
+          return sensor.metadata.name
+            .toLowerCase()
+            .includes(selectdSensor.sensor.toLowerCase());
+        });
+
+        const filteredBroker = Object.values(
+          sensorLocationList.registeredBrokers
+        ).filter((broker) => {
+          return broker.metadata.name
+            .toLowerCase()
+            .includes(
+              filteredSensor[0].metadata.integrationBroker.toLowerCase()
+            );
+        });
 
       setSensorList([
         ...sensorList,
         {
           amount: 0,
           sensorName: selectdSensor.sensor,
-          sensorHash: "",
-          brokerHash: "",
+          sensorHash: filteredSensor[0].hash,
+          brokerHash: filteredBroker[0].hash,
         },
       ]);
 
       navigate("/integrate");
+    }
+    catch(exception){
+      console.log("Something went worng! Can not proceed to integration");
+    }
     };
 
     const displayLocationInfo = (sensors, sensorCount, popup, coordinates) => {
