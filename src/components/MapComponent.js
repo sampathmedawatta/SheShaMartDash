@@ -162,6 +162,22 @@ const MapComponent = () => {
     }
     };
 
+     const isSensorintegrated = (sensor) => {
+       const integratedSensor = Object.values(
+         sensorLocationList.integratedSensors
+       ).filter((sensor) => {
+         return sensor.outputs.some((output) =>
+           output.sensorName.includes(sensor)
+         );
+       });
+
+       if (integratedSensor) {
+         return true;
+       } else {
+         return false;
+       }
+     };
+
     const displayLocationInfo = (sensors, sensorCount, popup, coordinates) => {
       console.log(sensors);
       let sensorInfo = sensors
@@ -171,7 +187,10 @@ const MapComponent = () => {
             <strong>Sensor Name: </strong> ${sensor.sensor}<br>
             <strong>Measures: </strong>${sensor.measures}<br>
           </div>
-         <button id="integrateSensor" class="map-button integrateSensor">Integrate</button>`
+           <button id="integrateSensor" class="map-button integrateSensor" style="display:${
+             isSensorintegrated(sensor.sensor) ? "none" : "block"
+           }" >Integrate</button>
+           ${isSensorintegrated(sensor.sensor) && "Integrated"} <br>`
         )
         .join("<br/>");
 

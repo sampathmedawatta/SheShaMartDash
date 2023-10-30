@@ -1,14 +1,21 @@
 import React, { useState, useEffect } from "react";
-import { Context } from "../context/context";
+import HashLoader from "react-spinners/HashLoader";
 import ClientSubMenu from "../components/UI/SubMenu/ClientSubMenu";
 import ValidatePublicKey from "../components/ValidatePublicKey";
 import PaymentService from "../services/payment.service";
 
 function SensorHistory() {
+  const [loading, setLoading] = useState(true);
   const [showPopup, setShowPopup] = useState(false);
   const [registeredSensors, setRegisteredSensors] = useState(null);
  
   useEffect(() => {
+
+     setLoading(true);
+     setTimeout(() => {
+       setLoading(false);
+     }, 8000);
+
     if (!localStorage.getItem("publicKey")) {
       setShowPopup(true);
     }
@@ -20,6 +27,7 @@ function SensorHistory() {
           const filter = Object.values(response).filter((sensor) => {
             return sensor.input.includes(localStorage.getItem("publicKey"));
           });
+          setLoading(false);
           setRegisteredSensors(filter);
           
         }
@@ -48,8 +56,17 @@ function SensorHistory() {
           <div className="col-12">
             <br />
             <div className="col-10">
-              <div className="page-title history">Sensor Integration History</div>
+              <div className="page-title history">
+                Sensor Integration History
+              </div>
               <br></br>
+
+              {loading && (
+                <div className="spinner">
+                  <HashLoader color="#808fe1" size={100} speedMultiplier={1} />
+                </div>
+              )}
+
               {registeredSensors !== null && (
                 <div>
                   <table className="table table-light">
