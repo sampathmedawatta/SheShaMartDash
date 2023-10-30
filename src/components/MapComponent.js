@@ -220,7 +220,8 @@ const MapComponent = () => {
     <div>
       <div className="row">
         <div className="col-12">
-          <div className="title-heders"> Available Sensors on Map View</div>
+          <div className="title-heders"> Sensor Map </div>
+          <div className="caption map"> Showing sensor location results</div>
         </div>
       </div>
 
@@ -228,8 +229,8 @@ const MapComponent = () => {
         <div
           id="map"
           style={{
-            width: "90%",
-            height: "80vh",
+            width: "100%",
+            height: "70vh",
           }}
         ></div>
       </div>

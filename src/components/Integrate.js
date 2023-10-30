@@ -91,10 +91,9 @@ function Integrate() {
               )}
 
               {sensorList.length == 0 && (
-                <div>
-                  <br></br>
-                  <div className="page-title checkout">Checkout Sensors</div>
-                  <p>Please select sensor first.</p>
+                <div className="error-checkout" >
+                  <div className="page-title">Checkout Error</div>
+                  <span>Please select sensor first.</span>
                 </div>
               )}
               {sensorList.length > 0 && (
