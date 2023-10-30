@@ -3,6 +3,7 @@ import Yasgui from "@triply/yasgui";
 import "@triply/yasgui/build/yasgui.min.css";
 import SensorService from "../services/sensor.service";
 import BrokerService from "../services/broker.service";
+import PaymentService from "../services/payment.service";
 import ClientSubMenu from "../components/UI/SubMenu/ClientSubMenu";
 import { Context } from "../context/context";
 import { useNavigate } from "react-router-dom";
@@ -18,6 +19,7 @@ const SensorQuery = () => {
   const { setSensorLocationList } = useContext(Context);
   const [registeredSensors, setRegisteredSensors] = useState([]);
   const [registeredBrokers, setRegisteredBrokers] = useState([]);
+  const [integratedSensors, setIntegratedSensors] = useState(null);
 
   const [shouldShowMapButton, setShouldShowMapButton] = useState(false);
   const [shouldTabular, setShouldTabular] = useState(false);
@@ -54,28 +56,26 @@ const SensorQuery = () => {
           SensorService.querySensor(inputQuery).then((response) => {
             if (response.status === 200 && response.data.result === true) {
               setSensorData(response.data.values);
-              
-               setShouldTabular(true);
 
-               if (sensorData.length === 0) {
-                 setShowNoResultFound(true);
-               } else {
-                 setShowNoResultFound(false);
-               }
+              setShouldTabular(true);
 
-               if (
-                 response.data.values[0].lat.value &&
-                 response.data.values[0].long.value
-               ) {
-                 setSensorLocationList(
-                  {
-                   locationList: response.data.values,
-                   registeredSensors: registeredSensors,
-                   registeredBrokers: registeredBrokers
-                  } );
-                 setShouldShowMapButton(true);
-               }
+              if (sensorData.length === 0) {
+                setShowNoResultFound(true);
+              } else {
+                setShowNoResultFound(false);
+              }
 
+              if (
+                response.data.values[0].lat.value &&
+                response.data.values[0].long.value
+              ) {
+                setSensorLocationList({
+                  locationList: response.data.values,
+                  registeredSensors: registeredSensors,
+                  registeredBrokers: registeredBrokers,
+                });
+                setShouldShowMapButton(true);
+              }
             } else {
               console.log(response);
             }
@@ -130,7 +130,7 @@ const SensorQuery = () => {
               .join(" ")}
           </th>
         ))}
-        <th>Select</th>
+        <th>Integrate</th>
       </tr>
     );
   };
@@ -141,11 +141,12 @@ const SensorQuery = () => {
     // Handle the logic to display the map here
     // get date from "sensorData"
 
-     setSensorLocationList({
-       locationList: sensorData,
-       registeredSensors: registeredSensors,
-       registeredBrokers: registeredBrokers,
-     });
+    setSensorLocationList({
+      locationList: sensorData,
+      registeredSensors: registeredSensors,
+      registeredBrokers: registeredBrokers,
+      integratedSensors: integratedSensors,
+    });
 
     togglePopup();
   };
@@ -168,6 +169,18 @@ const SensorQuery = () => {
       }
     }
 
+    function fetchIntergrationsData() {
+      PaymentService.getIntegrations().then((response) => {
+        if (response) {
+          const filter = Object.values(response).filter((sensor) => {
+            return sensor.input.includes(localStorage.getItem("publicKey"));
+          });
+          setIntegratedSensors(filter);
+        }
+      });
+    }
+
+    fetchIntergrationsData();
     fetchBrokerData();
     fetchSensorData();
   }, []);
@@ -233,6 +246,23 @@ const SensorQuery = () => {
     }
   };
 
+  const isSensorintegrated = (index) => {
+    const val = sensorData[index];
+    const integratedSensor = Object.values(integratedSensors).filter(
+      (sensor) => {
+        return sensor.outputs.some((output) =>
+          output.sensorName.includes(val.sensor.value)
+        );
+      }
+    );
+
+    if (integratedSensor) {
+      return true;
+    } else {
+      return false;
+    }
+  };
+
   const renderTableRows = () => {
     return sensorData.map((data, index) => (
       <tr key={index}>
@@ -241,12 +271,16 @@ const SensorQuery = () => {
         ))}
 
         <td>
-          <input
-            type="checkbox"
-            id={`checkbox-${index}`}
-            checked={sensorExists(index)}
-            onChange={() => toggleCheckbox(index)}
-          />
+          {!isSensorintegrated(index) ? (
+            <input
+              type="checkbox"
+              id={`checkbox-${index}`}
+              checked={sensorExists(index)}
+              onChange={() => toggleCheckbox(index)}
+            />
+          ) : (
+            <span>Integrated</span>
+          )}
         </td>
       </tr>
     ));
@@ -382,7 +416,6 @@ const SensorQuery = () => {
   };
 
   const handleSearch = (e) => {
-
     // TODO Validation for form inputs
     const file = e.target.value;
     const query = buildSparqlQuery(); // Pass the selected option
@@ -408,23 +441,22 @@ const SensorQuery = () => {
     SensorService.querySensor(query).then((response) => {
       if (response.status === 200 && response.data.result === true) {
         setSensorData(response.data.values);
-        
-         setShouldTabular(true);
 
-         if (sensorData.length === 0) {
-           setShowNoResultFound(true);
-         } else {
-           setShowNoResultFound(false);
-         }
+        setShouldTabular(true);
 
-         if (
-           response.data.values[0].lat.value &&
-           response.data.values[0].long.value
-         ) {
-           setSensorLocationList(response.data.values);
-           setShouldShowMapButton(true);
-         }
-         
+        if (sensorData.length === 0) {
+          setShowNoResultFound(true);
+        } else {
+          setShowNoResultFound(false);
+        }
+
+        if (
+          response.data.values[0].lat.value &&
+          response.data.values[0].long.value
+        ) {
+          setSensorLocationList(response.data.values);
+          setShouldShowMapButton(true);
+        }
       } else {
         console.log(response);
       }
@@ -450,27 +482,30 @@ const SensorQuery = () => {
           <br />
           <div className="col-10">
             <div className="page-title sensor-query">Sensor Query</div>
-            <div className="caption"> Choose between basic or advanced search to query sensors</div>
-            <br/>
+            <div className="caption">
+              {" "}
+              Choose between basic or advanced search to query sensors
+            </div>
+            <br />
             <div>
               <div className="form-check form-check-inline">
-
                 <label className="switch">
-                <input
-                  className="form-check-input"
-                  type="checkbox"
-                  id="advanceSearch"
-                  checked={isAdvanceSearchChecked}
-                  onChange={(e) => setIsAdvanceSearchChecked(e.target.checked)}
-                />
-                  
-                <span class="slider round"></span>
-                </label> 
+                  <input
+                    className="form-check-input"
+                    type="checkbox"
+                    id="advanceSearch"
+                    checked={isAdvanceSearchChecked}
+                    onChange={(e) =>
+                      setIsAdvanceSearchChecked(e.target.checked)
+                    }
+                  />
+
+                  <span class="slider round"></span>
+                </label>
 
                 <label className="form-check-label advanced">
                   Select for Advanced Search
                 </label>
-                
               </div>
             </div>
             <br></br>
@@ -519,30 +554,34 @@ const SensorQuery = () => {
                   /> */}
                 </div>
               )}
-              <div className="title-heders2 results"
+              <div
+                className="title-heders2 results"
                 style={{ display: shouldShowMapButton ? "block" : "none" }}
-              >Results</div>
-    
+              >
+                Results
+              </div>
+
               <span
                 className="tabularview tabular"
                 style={{ display: shouldShowMapButton ? "block" : "none" }}
               >
                 Advanced Search Results
-                
                 <button
-                type="submit"
-                className="btn btn-map bi bi-geo-alt-fill"
-                onClick={handleViewMapClick}
-                style={{ display: shouldShowMapButton ? "block" : "none" }}
+                  type="submit"
+                  className="btn btn-map bi bi-geo-alt-fill"
+                  onClick={handleViewMapClick}
+                  style={{ display: shouldShowMapButton ? "block" : "none" }}
                 >
-                &nbsp; Map View
+                  &nbsp; Map View
                 </button>
               </span>
-              <div className="caption"
-                style={{ display: shouldShowMapButton ? "block" : "none" }}>
+              <div
+                className="caption"
+                style={{ display: shouldShowMapButton ? "block" : "none" }}
+              >
                 Showing results in tabular format
               </div>
-              <br/>
+              <br />
               {showNoResultFound && sensorData.length === 0 ? (
                 <div className="alert alert-warning" role="alert">
                   No results found.
@@ -557,14 +596,13 @@ const SensorQuery = () => {
                   </div>
                 )
               )}
-              
 
               {sensorList.length > 0 && (
                 <button
                   onClick={handleCheckout}
                   className="btn btn-add bi-plus-circle-fill"
                 >
-                 &nbsp; Integrate Sensors
+                  &nbsp; Integrate Sensors
                 </button>
               )}
             </div>
@@ -579,7 +617,9 @@ const SensorQuery = () => {
               <div className="row">
                 <div className="col-12 popup">
                   <div className="form-group col-5 mt-3 popup-content">
-                    <button className="closeMapPopup" onClick={togglePopup}>Close</button>
+                    <button className="closeMapPopup" onClick={togglePopup}>
+                      Close
+                    </button>
                     <MapComponent />
                   </div>
                 </div>
