@@ -56,6 +56,9 @@ const PublicKey = () => {
 
         <div className="col-12">
           <div className="title-heders">Public Key</div>
+            <div className="caption map">
+              View your own public key or request for a new one
+            </div>
         </div>
       </div>
 
@@ -148,10 +151,9 @@ const PublicKey = () => {
                   />
                   <form onSubmit={handleSubmit}>
                     <div className="form-group ">
-                      <br />
                       <button
                         type="submit"
-                        className="btn btn-add bi-file-plus-fill"
+                        className="btn btn-add bi-plus-circle-fill"
                       >
                         &nbsp; Save
                       </button>

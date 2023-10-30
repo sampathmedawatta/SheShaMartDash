@@ -305,7 +305,7 @@ const SensorQuery = () => {
               className="btn btn-add bi bi-search"
               onClick={handleSearch}
             >
-              Search
+              &nbsp; Search
             </button>
           </div>
         </form>
@@ -450,9 +450,12 @@ const SensorQuery = () => {
           <br />
           <div className="col-10">
             <div className="page-title sensor-query">Sensor Query</div>
-            <br></br>
+            <div className="caption"> Choose between basic or advanced search to query sensors</div>
+            <br/>
             <div>
               <div className="form-check form-check-inline">
+
+                <label className="switch">
                 <input
                   className="form-check-input"
                   type="checkbox"
@@ -460,17 +463,21 @@ const SensorQuery = () => {
                   checked={isAdvanceSearchChecked}
                   onChange={(e) => setIsAdvanceSearchChecked(e.target.checked)}
                 />
+                  
+                <span class="slider round"></span>
+                </label> 
 
-                <label className="form-check-label">
-                  Select for Advance Search
+                <label className="form-check-label advanced">
+                  Select for Advanced Search
                 </label>
+                
               </div>
             </div>
             <br></br>
             <div id="result">
               {showAlert ? (
                 <div className="alert alert-danger" role="alert">
-                  SPARQL compiler Error. Please fix the SPARQL query!
+                  SPARQL compiler error. Please fix the SPARQL query!
                 </div>
               ) : null}
 
@@ -512,17 +519,16 @@ const SensorQuery = () => {
                   /> */}
                 </div>
               )}
-              <div className="title-heders2 results">Results</div>
-              <br></br>
-
-              
-          
+              <div className="title-heders2 results"
+                style={{ display: shouldShowMapButton ? "block" : "none" }}
+              >Results</div>
+    
               <span
                 className="tabularview tabular"
                 style={{ display: shouldShowMapButton ? "block" : "none" }}
               >
-                Query Results in Tabular Format
-
+                Advanced Search Results
+                
                 <button
                 type="submit"
                 className="btn btn-map bi bi-geo-alt-fill"
@@ -532,6 +538,10 @@ const SensorQuery = () => {
                 &nbsp; Map View
                 </button>
               </span>
+              <div className="caption"
+                style={{ display: shouldShowMapButton ? "block" : "none" }}>
+                Showing results in tabular format
+              </div>
               <br/>
               {showNoResultFound && sensorData.length === 0 ? (
                 <div className="alert alert-warning" role="alert">
@@ -569,7 +579,7 @@ const SensorQuery = () => {
               <div className="row">
                 <div className="col-12 popup">
                   <div className="form-group col-5 mt-3 popup-content">
-                    <button onClick={togglePopup}>Close</button>
+                    <button className="closeMapPopup" onClick={togglePopup}>Close</button>
                     <MapComponent />
                   </div>
                 </div>
