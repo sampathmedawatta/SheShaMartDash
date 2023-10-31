@@ -8,6 +8,7 @@ function Integrate() {
   const [response, setResponse] = useState({});
   const [rewAmount, setrewAmount] = useState(0);
   const { sensorList, setSensorList } = useContext(Context);
+ const [errors, setErrors] = useState({});
 
    const [showPopup, setShowPopup] = useState(false);
 
@@ -51,6 +52,12 @@ function Integrate() {
       outputs: sensorList,
     };
 
+    const validationErrors = {};
+    if (rewAmount < 0) {
+      validationErrors.rewardAmount = "Reward amount is required";
+    }
+
+    setErrors(validationErrors);
     PaymentService.Integration(params).then((response) => {
       if (response.status === 200 && response.data.result === true) {
         setSensorList([]);
@@ -91,7 +98,7 @@ function Integrate() {
               )}
 
               {sensorList.length == 0 && (
-                <div className="error-checkout" >
+                <div className="error-checkout">
                   <div className="page-title">Checkout Error</div>
                   <span>Please select sensor first.</span>
                 </div>
@@ -123,14 +130,17 @@ function Integrate() {
                                     );
                                   }}
                                 ></input>
+                                {errors.sensoramount && (
+                                  <span className="form-error">
+                                    {errors.sensoramount}
+                                  </span>
+                                )}
                               </div>
                             </td>
                           </tr>
                         ))}
 
-                      <th>
-                        Reward Amount
-                      </th>
+                      <th>Reward Amount</th>
                       <td>
                         <div className="form-group">
                           <input
@@ -143,6 +153,11 @@ function Integrate() {
                               handleRewardAmountChange(e.target.value);
                             }}
                           />
+                          {errors.rewardAmount && (
+                            <span className="form-error">
+                              {errors.rewardAmount}
+                            </span>
+                          )}
                         </div>
                       </td>
                     </tbody>
