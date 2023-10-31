@@ -12,7 +12,6 @@ import MapComponent from "../components/MapComponent";
 const SensorQuery = () => {
   const [showAlert, setShowAlert] = useState(false);
   const [showNoResultFound, setShowNoResultFound] = useState(false);
-  const [invaliCordinates, setInvalidCordinates] = useState(false);
   const [sensorData, setSensorData] = useState([]);
   const [errors, setErrors] = useState({});
   const [isAdvanceSearchChecked, setIsAdvanceSearchChecked] = useState(false);
@@ -335,10 +334,9 @@ const SensorQuery = () => {
               className="form-control"
               onChange={(e) => setSearchText(e.target.value)}
             />
-            {errors.other && (
-                    <span className="form-error">{errors.other}</span>
-            )}
-            <br></br> <br></br>
+            <br />
+            {errors.other && <span className="form-error">{errors.other}</span>}
+            <br />
             <button
               type="button"
               className="btn btn-add bi bi-search"
@@ -363,9 +361,9 @@ const SensorQuery = () => {
                   className="form-control"
                   onChange={(e) => setSearchTextLat1(e.target.value)}
                 />
-                   {errors.lat1 && (
-                    <span className="form-error">{errors.lat1}</span>
-            )}
+                {errors.lat1 && (
+                  <span className="form-error">{errors.lat1}</span>
+                )}
               </div>
               <div className="col">
                 <input
@@ -375,9 +373,9 @@ const SensorQuery = () => {
                   className="form-control"
                   onChange={(e) => setSearchTextLat2(e.target.value)}
                 />
-                   {errors.lat2 && (
-                    <span className="form-error">{errors.lat2}</span>
-            )}
+                {errors.lat2 && (
+                  <span className="form-error">{errors.lat2}</span>
+                )}
               </div>
             </div>
             <br></br>
@@ -392,9 +390,9 @@ const SensorQuery = () => {
                   className="form-control"
                   onChange={(e) => setSearchTextLong1(e.target.value)}
                 />
-                   {errors.long1 && (
-                    <span className="form-error">{errors.long1}</span>
-            )}
+                {errors.long1 && (
+                  <span className="form-error">{errors.long1}</span>
+                )}
               </div>
               <div className="col">
                 <input
@@ -404,17 +402,15 @@ const SensorQuery = () => {
                   className="form-control"
                   onChange={(e) => setSearchTextLong2(e.target.value)}
                 />
-                   {errors.long2 && (
-                    <span className="form-error">{errors.long2}</span>
-            )}
+                {errors.long2 && (
+                  <span className="form-error">{errors.long2}</span>
+                )}
               </div>
             </div>
             <br />
-            <br />
             {errors.location && (
-                    <span className="form-error">{errors.location}</span>
+              <span className="form-error">{errors.location}</span>
             )}
-            <br />
             <br />
             <button
               type="button"
@@ -440,46 +436,42 @@ const SensorQuery = () => {
   const handleSearch = (e) => {
     e.preventDefault();
     const validationErrors = {};
-    const latitudeRegex = /^(\+|-)?(?:90(?:(?:\.0{1,6})?)|(?:[0-9]|[1-8][0-9])(?:(?:\.[0-9]{1,6})?))$/; // Regex pattern for latitude
-    const longitudeRegex = /^(\+|-)?(?:180(?:(?:\.0{1,6})?)|(?:[0-9]|[1-9][0-9]|1[0-7][0-9])(?:(?:\.[0-9]{1,6})?))$/; // Regex pattern for longitude
+    const latitudeRegex =
+      /^(\+|-)?(?:90(?:(?:\.0{1,6})?)|(?:[0-9]|[1-8][0-9])(?:(?:\.[0-9]{1,6})?))$/; // Regex pattern for latitude
+    const longitudeRegex =
+      /^(\+|-)?(?:180(?:(?:\.0{1,6})?)|(?:[0-9]|[1-9][0-9]|1[0-7][0-9])(?:(?:\.[0-9]{1,6})?))$/; // Regex pattern for longitude
 
     // checking valid cordinates
     if (selectedOption == "Location") {
-      if(searchTextLat1 ==""||searchTextLat2 ==""||searchTextLong1==""||searchTextLong2==""){
-        console.log( "**Input fields cannot be empty !");
-        validationErrors.location ="Input fields cannot be empty!";
-      }else{
-
+      if (
+        searchTextLat1 == "" ||
+        searchTextLat2 == "" ||
+        searchTextLong1 == "" ||
+        searchTextLong2 == ""
+      ) {
+        console.log("Location Lat and Long cannot be empty!");
+        validationErrors.location = "Input fields cannot be empty!";
+      } else {
         if (!latitudeRegex.test(searchTextLat1)) {
-          console.log("Latitude 1 is not in valid format");
-          validationErrors.lat1 = "Latitude 1 is not in valid format"
-          setInvalidCordinates(true);
+          validationErrors.lat1 = "Latitude 1 is not in valid format";
         }
         if (!latitudeRegex.test(searchTextLat2)) {
-          console.log("Latitude 2 is not in valid format");
-          setInvalidCordinates(true);
-          validationErrors.lat2 = "Latitude 2 is not in valid format"
+          validationErrors.lat2 = "Latitude 2 is not in valid format";
         }
-        if (!latitudeRegex.test(searchTextLong1)) {
-          setInvalidCordinates(true);
-          console.log("Longitude 1 is not in valid format");
-          validationErrors.long1 = "Longitude 1 is not in valid format"
+        if (!longitudeRegex.test(searchTextLong1)) {
+          validationErrors.long1 = "Longitude 1 is not in valid format";
         }
-        if (!latitudeRegex.test(searchTextLong2)) {
-          setInvalidCordinates(true);
-          console.log("Longitude 2 is not in valid format");
-          validationErrors.long2 = "Longitude 2 is not in valid format"
+        if (!longitudeRegex.test(searchTextLong2)) {
+          validationErrors.long2 = "Longitude 2 is not in valid format";
         }
       }
-   
-    } 
-      // Check if the searchText is empty or not
+    }
+    // Check if the searchText is empty or not
     else if (searchText.trim() === "") {
       // Display an error message or perform any other action you'd like
-      validationErrors.other="**Input field cannot be empty!";
+      validationErrors.other = selectedOption + " cannot be empty!";
       console.log("Input fields cannot be empty");
     } else {
-      const file = e.target.value;
       const query = buildSparqlQuery(); // Pass the selected option
     }
 
