@@ -1,8 +1,10 @@
 import React, { useState, useEffect } from "react";
 import GeneralMenu from "../components/UI/SubMenu/GeneralMenu";
 import PublicKeyService from "../services/publicKey.service";
+import HashLoader from "react-spinners/HashLoader";
 
 const PublicKey = () => {
+  const [loading, setLoading] = useState(false);
   const [publicKeyFrom, setPublicKeyFrom] = useState(false);
   const [requestedPublicKey, setRequestedPublicKey] = useState(false);
   const [enteredPublicKey, setEnteredPublicKey] = useState("");
@@ -19,9 +21,13 @@ const PublicKey = () => {
 
   const getPublicKey = async () => {
     setPublicKeyFrom(false);
-
+    setLoading(true);
+    setTimeout(() => {
+      setLoading(false);
+    }, 8000);
     const response = await PublicKeyService.getPublicKey();
     if (response !== null) {
+      setLoading(false);
       setRequestedPublicKey(!requestedPublicKey);
       setEnteredPublicKey(response);
     }
@@ -56,9 +62,9 @@ const PublicKey = () => {
 
         <div className="col-12">
           <div className="title-heders">Public Key</div>
-            <div className="caption map">
-              View your own public key or request for a new one
-            </div>
+          <div className="caption map">
+            View your own public key or request for a new one
+          </div>
         </div>
       </div>
 
@@ -103,10 +109,17 @@ const PublicKey = () => {
               </div>
             </div>
             <br></br>
+            {loading && (
+              <div className="spinner">
+                <HashLoader color="#235165" size={100} speedMultiplier={1} />
+              </div>
+            )}
+
             {requestedPublicKey && (
               <div>
                 <div className="form-group pk-req">
                   <div className="page-title">Request a Public Key</div>
+
                   <label htmlFor="reqPublicKey">Public Key</label>
                   <input
                     type="text"

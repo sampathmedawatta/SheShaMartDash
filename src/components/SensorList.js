@@ -1,31 +1,40 @@
 import React, { useState, useEffect } from "react";
 import SensorService from "../services/sensor.service";
-import { Link } from "react-router-dom";
+import HashLoader from "react-spinners/HashLoader";
 import ProviderSubMenu from "../components/UI/SubMenu/ProviderSubMenu";
 import ValidatePublicKey from "../components/ValidatePublicKey";
 
 function SensorList() {
+  const [loading, setLoading] = useState(true);
+  const [showPopup, setShowPopup] = useState(false);
 
-   const [showPopup, setShowPopup] = useState(false);
-
-   useEffect(() => {
-     if (!localStorage.getItem("publicKey")) {
-       setShowPopup(true);
-     }
-   }, []);
+  useEffect(() => {
+    if (!localStorage.getItem("publicKey")) {
+      setShowPopup(true);
+    }
+    setLoading(true);
+    setTimeout(() => {
+      setLoading(false);
+    }, 8000);
+  }, []);
 
   const [registeredSensors, setRegisteredSensors] = useState(null);
 
   useEffect(() => {
-   
-     async function fetchSensorData() {
-       const registeredSensors = await SensorService.getSensors();
-       if (registeredSensors !== null) {
-        
-         setRegisteredSensors(registeredSensors);
-       }
-     }
-     fetchSensorData();
+    async function fetchSensorData() {
+      const registeredSensors = await SensorService.getSensors();
+      if (registeredSensors !== null) {
+        const filteredSensor = Object.values(registeredSensors).filter(
+          (sensor) => {
+           setLoading(false);
+            return sensor.input.includes(localStorage.getItem("publicKey"));
+          }
+        );
+
+        setRegisteredSensors(filteredSensor);
+      }
+    }
+    fetchSensorData();
   }, []);
 
   return (
@@ -48,7 +57,13 @@ function SensorList() {
             <br />
             <div className="col-10">
               <div className="page-title">Sensor List</div>
-            
+
+              {loading && (
+                <div className="spinner">
+                  <HashLoader color="#74cb97" size={100} speedMultiplier={1} />
+                </div>
+              )}
+
               {registeredSensors !== null && (
                 <div>
                   <table className="table table-light">
@@ -65,11 +80,12 @@ function SensorList() {
                       {Object.keys(registeredSensors).map((item, key) => (
                         <tr key={key}>
                           <td>
-                            <Link
+                            {registeredSensors[item].metadata.name}
+                            {/* <Link
                               to={`/sensorDetails/${registeredSensors[item].metadata.name}`}
                             >
                               {registeredSensors[item].metadata.name}
-                            </Link>
+                            </Link> */}
                           </td>
                           <td>
                             {registeredSensors[item].metadata.costPerMinute}
