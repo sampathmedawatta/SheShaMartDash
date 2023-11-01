@@ -99,7 +99,7 @@ function Integrate() {
 
               {sensorList.length == 0 && (
                 <div className="error-checkout">
-                  <div className="page-title">Checkout Error</div>
+                  <div className="page-title">Integrate Sensors</div>
                   <span>Please select sensor first.</span>
                 </div>
               )}
@@ -107,7 +107,7 @@ function Integrate() {
                 <form>
                   <table className="table table-light checkout">
                     <br></br>
-                    <div className="page-title checkout">Checkout Sensors</div>
+                    <div className="page-title checkout">Integrate Sensors</div>
                     <tbody>
                       <th>Sensor Name</th>
                       <th>Amount</th>
