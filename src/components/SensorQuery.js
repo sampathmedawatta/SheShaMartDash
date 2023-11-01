@@ -640,7 +640,7 @@ const SensorQuery = () => {
               </div>
               <br />
               {showNoResultFound && sensorData.length === 0 ? (
-                <div className="alert alert-warning" role="alert">
+                <div className="alert alert-danger" role="alert">
                   No results found.
                 </div>
               ) : (

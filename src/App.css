@@ -41,7 +41,6 @@ body{
   font-weight: 450;
   letter-spacing: 0;
 }
-
 label::after {
   font-weight: 200;
   font-size: 16px;
@@ -796,9 +795,13 @@ button {
   border: 0;
   border-radius: 12px;
   color: black;
+}
+.alert-danger{
   background-color: rgb(255, 194, 194);
 }
-
+.alert-success{
+  background-color: #bff3d3;
+}
 /* close popup */
 .closeButton{
   position: absolute;
