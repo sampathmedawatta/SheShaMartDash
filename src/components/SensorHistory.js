@@ -14,7 +14,7 @@ function SensorHistory() {
      setLoading(true);
      setTimeout(() => {
        setLoading(false);
-     }, 8000);
+     }, 15000);
 
     if (!localStorage.getItem("publicKey")) {
       setShowPopup(true);

@@ -14,7 +14,7 @@ function BrokerList() {
      setLoading(true);
      setTimeout(() => {
        setLoading(false);
-     }, 8000);
+     }, 15000);
 
     async function fetchData() {
       const getList = await BrokerService.getBrokers();

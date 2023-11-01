@@ -15,7 +15,7 @@ function SensorList() {
     setLoading(true);
     setTimeout(() => {
       setLoading(false);
-    }, 8000);
+    }, 15000);
   }, []);
 
   const [registeredSensors, setRegisteredSensors] = useState(null);
