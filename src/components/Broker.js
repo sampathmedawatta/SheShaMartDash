@@ -54,7 +54,7 @@ const Broker = () => {
       };
 
       BrokerService.registerBroker(params).then((response) => {
-         if (response.status === 200 && response.data.result === true) {
+         if (response.status === 200 && response.data) {
            setFormData({ rewardAmount: "", brokerName: "", endpoint: "" });
            setResponse({ status: true, error: false });
          } else {
