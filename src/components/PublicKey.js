@@ -111,7 +111,7 @@ const PublicKey = () => {
             <br></br>
             {loading && (
               <div className="spinner">
-                <HashLoader color="#235165" size={100} speedMultiplier={1} />
+                <HashLoader color="#235165" size={60} speedMultiplier={1} />
               </div>
             )}
 

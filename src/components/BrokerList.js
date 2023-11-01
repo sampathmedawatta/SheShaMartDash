@@ -48,7 +48,7 @@ function BrokerList() {
 
             {loading && (
               <div className="spinner">
-                <HashLoader color="#47c4df" size={100} speedMultiplier={1} />
+                <HashLoader color="#47c4df" size={60} speedMultiplier={1} />
               </div>
             )}
 

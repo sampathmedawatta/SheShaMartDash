@@ -60,7 +60,7 @@ function SensorList() {
 
               {loading && (
                 <div className="spinner">
-                  <HashLoader color="#74cb97" size={100} speedMultiplier={1} />
+                  <HashLoader color="#74cb97" size={60} speedMultiplier={1} />
                 </div>
               )}
 

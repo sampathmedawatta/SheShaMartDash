@@ -63,7 +63,7 @@ function SensorHistory() {
 
               {loading && (
                 <div className="spinner">
-                  <HashLoader color="#808fe1" size={100} speedMultiplier={1} />
+                  <HashLoader color="#808fe1" size={60} speedMultiplier={1} />
                 </div>
               )}
 
