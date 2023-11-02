@@ -3,14 +3,15 @@ import { Context } from "../context/context";
 import ClientSubMenu from "../components/UI/SubMenu/ClientSubMenu";
 import PaymentService from "../services/payment.service";
 import ValidatePublicKey from "../components/ValidatePublicKey";
+import HashLoader from "react-spinners/HashLoader";
 
 function Integrate() {
   const [response, setResponse] = useState({});
   const [rewAmount, setrewAmount] = useState(0);
   const { sensorList, setSensorList } = useContext(Context);
- const [errors, setErrors] = useState({});
-
-   const [showPopup, setShowPopup] = useState(false);
+  const [errors, setErrors] = useState({});
+  const [loading, setLoading] = useState(false);
+  const [showPopup, setShowPopup] = useState(false);
 
    useEffect(() => {
      if (!localStorage.getItem("publicKey")) {
@@ -45,6 +46,9 @@ function Integrate() {
   };
 
   const handleIntegrate = (e) => {
+
+    e.preventDefault();
+
     // TODO update amount for each sensor
     const params = {
       rewardAmount: +rewAmount,
@@ -58,14 +62,19 @@ function Integrate() {
     }
 
     setErrors(validationErrors);
+
+    setLoading(true);
+    setTimeout(() => {
+      setLoading(false);
+    }, 15000);
+
     PaymentService.Integration(params).then((response) => {
       if (response.status === 200 && response.data.result === true) {
-        setSensorList([]);
-
+       // setSensorList([]);
+        setLoading(false);
         setResponse({ status: "saved" });
-        console.log("Integration completed.");
       } else {
-        console.log("Integration failed.");
+        setLoading(false);
       }
     });
   };
@@ -104,7 +113,7 @@ function Integrate() {
                 </div>
               )}
               {sensorList.length > 0 && (
-                <form>
+                <form onSubmit={handleIntegrate}>
                   <table className="table table-light checkout">
                     <br></br>
                     <div className="page-title checkout">Integrate Sensors</div>
@@ -165,11 +174,22 @@ function Integrate() {
                   <div className="form-group">
                     <button
                       type="submit"
-                      onClick={handleIntegrate}
                       className="btn btn-add bi-plus-circle-fill"
                     >
                       &nbsp; Integrate
                     </button>
+
+                    <br></br>
+
+                    {loading && (
+                      <div className="spinner1">
+                        <HashLoader
+                          color="#808fe1"
+                          size={40}
+                          speedMultiplier={1}
+                        />
+                      </div>
+                    )}
                   </div>
                 </form>
               )}

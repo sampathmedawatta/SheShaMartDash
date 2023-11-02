@@ -2,10 +2,11 @@ import React, { useState, useEffect } from "react";
 import BrokerService from "../services/broker.service";
 import BrokerSubMenu from "../components/UI/SubMenu/BrokerSubMenu";
 import ValidatePublicKey from "../components/ValidatePublicKey";
+import HashLoader from "react-spinners/HashLoader";
 
 const Broker = () => {
   const [showPopup, setShowPopup] = useState(false);
-
+  const [loading, setLoading] = useState(false);
   useEffect(() => {
     if (!localStorage.getItem("publicKey")) {
       setShowPopup(true);
@@ -53,8 +54,15 @@ const Broker = () => {
         endpoint: formData.endpoint.trim(),
       };
 
+      setLoading(true);
+      setTimeout(() => {
+        setLoading(false);
+      }, 15000);
+
       BrokerService.registerBroker(params).then((response) => {
+
          if (response.status === 200 && response.data) {
+           setLoading(false);
            setFormData({ rewardAmount: "", brokerName: "", endpoint: "" });
            setResponse({ status: true, error: false });
          } else {
@@ -161,6 +169,18 @@ const Broker = () => {
                   >
                     &nbsp; Register
                   </button>
+
+                  <br></br>
+
+                  {loading && (
+                    <div className="spinner1">
+                      <HashLoader
+                        color="#47c4df"
+                        size={40}
+                        speedMultiplier={1}
+                      />
+                    </div>
+                  )}
                 </div>
               </form>
             </div>

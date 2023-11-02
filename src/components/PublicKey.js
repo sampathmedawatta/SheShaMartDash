@@ -24,7 +24,7 @@ const PublicKey = () => {
     setLoading(true);
     setTimeout(() => {
       setLoading(false);
-    }, 8000);
+    }, 15000);
     const response = await PublicKeyService.getPublicKey();
     if (response !== null) {
       setLoading(false);

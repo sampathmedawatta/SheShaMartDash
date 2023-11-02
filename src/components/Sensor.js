@@ -6,9 +6,11 @@ import DropDown from "../components/UI/DropDown";
 import TurtleFileReader from "../components/UI/TurtleFileReader";
 import N3 from "n3";
 import ValidatePublicKey from "../components/ValidatePublicKey";
+import HashLoader from "react-spinners/HashLoader";
 
 const Sensor = () => {
   const [showPopup, setShowPopup] = useState(false);
+  const [loading, setLoading] = useState(false);
 
   useEffect(() => {
     if (!localStorage.getItem("publicKey")) {
@@ -142,8 +144,14 @@ const Sensor = () => {
         params.extraNodeMetadata = dataExtraNodeMetadata;
       }
 
+      setLoading(true);
+      setTimeout(() => {
+        setLoading(false);
+      }, 15000);
+
       SensorService.registerSensor(params).then((response) => {
         if (response.status === 200 && response.data.result === true) {
+          setLoading(false);
           setFormData({
             rewardAmount: "",
             sensorName: "",
@@ -272,12 +280,26 @@ const Sensor = () => {
                   <label htmlFor="turtleFile">Extra Metadata</label>
                   <TurtleFileReader onChange={handleFileInput} />
                 </div>
+                <div className="form-group button">
                   <button
                     type="submit"
                     className="btn btn-add bi bi-plus-circle-fill"
                   >
                     &nbsp; Register
                   </button>
+
+                  <br></br>
+
+                  {loading && (
+                    <div className="spinner1">
+                      <HashLoader
+                        color="#74cb97"
+                        size={40}
+                        speedMultiplier={1}
+                      />
+                    </div>
+                  )}
+                </div>
               </form>
             </div>
           </div>

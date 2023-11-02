@@ -10,7 +10,7 @@ const headers = {
   //Authorization: "Bearer your-access-token", // Add any custom headers as needed
 };
 
-const getIntegrations = async() => {
+const getIntegrations = async () => {
   return await axiosInstance
     .get("/Integrations", headers)
     .then((response) => {
@@ -45,10 +45,7 @@ const prms = {
 };
 
 const Integration = async (params) => {
-
-  console.log(params);
   const response = await axiosInstance.post("/integration", params, headers);
-console.log(response);
   return response;
 };
 
