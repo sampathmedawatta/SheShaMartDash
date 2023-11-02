@@ -293,7 +293,7 @@ const Sensor = () => {
                   {loading && (
                     <div className="spinner1">
                       <HashLoader
-                        color="#47c4df"
+                        color="#74cb97"
                         size={40}
                         speedMultiplier={1}
                       />

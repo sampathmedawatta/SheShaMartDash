@@ -614,10 +614,13 @@ const SensorQuery = () => {
 
                       {loading && (
                         <div className="spinner1">
-                          <HashLoader color="#47c4df" size={40} speedMultiplier={1} />
+                          <HashLoader
+                            color="#808fe1"
+                            size={40}
+                            speedMultiplier={1}
+                          />
                         </div>
                       )}
-            
                     </div>
                   </div>
 
