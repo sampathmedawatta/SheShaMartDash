@@ -190,7 +190,7 @@ const MapComponent = () => {
            <button id="integrateSensor" class="map-button integrateSensor" style="display:${
              isSensorintegrated(sensor.sensor) ? "none" : "block"
            }" >Integrate</button>
-           ${isSensorintegrated(sensor.sensor) && "Integrated"} <br>`
+           ${isSensorintegrated(sensor.sensor) ? "Integrated" : ""} <br>`
         )
         .join("<br/>");
 

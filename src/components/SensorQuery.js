@@ -454,18 +454,20 @@ const SensorQuery = () => {
         console.log("Location Lat and Long cannot be empty!");
         validationErrors.location = "Input fields cannot be empty!";
       } else {
-        if (!latitudeRegex.test(searchTextLat1)) {
-          validationErrors.lat1 = "Latitude 1 is not in valid format";
-        }
-        if (!latitudeRegex.test(searchTextLat2)) {
-          validationErrors.lat2 = "Latitude 2 is not in valid format";
-        }
-        if (!longitudeRegex.test(searchTextLong1)) {
-          validationErrors.long1 = "Longitude 1 is not in valid format";
-        }
-        if (!longitudeRegex.test(searchTextLong2)) {
-          validationErrors.long2 = "Longitude 2 is not in valid format";
-        }
+
+        const query = buildSparqlQuery(); 
+        // if (!latitudeRegex.test(searchTextLat1)) {
+        //   validationErrors.lat1 = "Latitude 1 is not in valid format";
+        // }
+        // if (!latitudeRegex.test(searchTextLat2)) {
+        //   validationErrors.lat2 = "Latitude 2 is not in valid format";
+        // }
+        // if (!latitudeRegex.test(searchTextLong1)) {
+        //   validationErrors.long1 = "Longitude 1 is not in valid format";
+        // }
+        // if (!latitudeRegex.test(searchTextLong2)) {
+        //   validationErrors.long2 = "Longitude 2 is not in valid format";
+        // }
       }
     }
     // Check if the searchText is empty or not
@@ -501,7 +503,7 @@ const SensorQuery = () => {
     if (selectedOption === "Postcode")
       query += `?Postcode <http://rdfs.co/juso/Postcode> \"${searchText}"}`; // By Postcode
     if (selectedOption === "Location")
-      query += `FILTER(xsd:decimal(?long) > \"${searchTextLong1}" && xsd:decimal(?long) < \"${searchTextLong2}" && xsd:decimal(?lat) > \"${searchTextLat1}" && xsd:decimal(?lat) < \"${searchTextLat2}")}`; // By location
+      query += `FILTER(xsd:decimal(?long) > ${searchTextLong1} && xsd:decimal(?long) < ${searchTextLong2} && xsd:decimal(?lat) > ${searchTextLat1} && xsd:decimal(?lat) < ${searchTextLat2})}`; // By location
 
     SensorService.querySensor(query).then((response) => {
       if (response.status === 200 && response.data.result === true) {
