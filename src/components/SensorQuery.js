@@ -634,14 +634,17 @@ const SensorQuery = () => {
                 className="title-heders2 results"
                 style={{ display: shouldShowMapButton ? "block" : "none" }}
               >
-                Results
+                Search Results
               </div>
 
               <span
                 className="tabularview tabular"
                 style={{ display: shouldShowMapButton ? "block" : "none" }}
               >
-                Advanced Search Results
+                {isAdvanceSearchChecked
+                  ? " Advance Search Results"
+                  : " Basic Search Results"}
+                
                 <button
                   type="submit"
                   className="btn btn-map bi bi-geo-alt-fill"
