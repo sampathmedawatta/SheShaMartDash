@@ -3,14 +3,15 @@ import { Context } from "../context/context";
 import ClientSubMenu from "../components/UI/SubMenu/ClientSubMenu";
 import PaymentService from "../services/payment.service";
 import ValidatePublicKey from "../components/ValidatePublicKey";
+import HashLoader from "react-spinners/HashLoader";
 
 function Integrate() {
   const [response, setResponse] = useState({});
   const [rewAmount, setrewAmount] = useState(0);
   const { sensorList, setSensorList } = useContext(Context);
- const [errors, setErrors] = useState({});
-
-   const [showPopup, setShowPopup] = useState(false);
+  const [errors, setErrors] = useState({});
+  const [loading, setLoading] = useState(false);
+  const [showPopup, setShowPopup] = useState(false);
 
    useEffect(() => {
      if (!localStorage.getItem("publicKey")) {
@@ -58,14 +59,19 @@ function Integrate() {
     }
 
     setErrors(validationErrors);
+
+    setLoading(true);
+    setTimeout(() => {
+      setLoading(false);
+    }, 15000);
+
     PaymentService.Integration(params).then((response) => {
       if (response.status === 200 && response.data.result === true) {
         setSensorList([]);
-
+        setLoading(false);
         setResponse({ status: "saved" });
-        console.log("Integration completed.");
       } else {
-        console.log("Integration failed.");
+        setLoading(false);
       }
     });
   };
@@ -170,6 +176,19 @@ function Integrate() {
                     >
                       &nbsp; Integrate
                     </button>
+
+                    <br></br>
+
+                    {loading && (
+                      <div className="spinner1">
+                        <HashLoader
+                          color="#47c4df"
+                          size={40}
+                          speedMultiplier={1}
+                        />
+                      </div>
+                    )}
+
                   </div>
                 </form>
               )}

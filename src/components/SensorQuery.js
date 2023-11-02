@@ -8,6 +8,7 @@ import ClientSubMenu from "../components/UI/SubMenu/ClientSubMenu";
 import { Context } from "../context/context";
 import { useNavigate } from "react-router-dom";
 import MapComponent from "../components/MapComponent";
+import HashLoader from "react-spinners/HashLoader";
 
 const SensorQuery = () => {
   const [showAlert, setShowAlert] = useState(false);
@@ -21,6 +22,7 @@ const SensorQuery = () => {
   const [registeredSensors, setRegisteredSensors] = useState([]);
   const [registeredBrokers, setRegisteredBrokers] = useState([]);
   const [integratedSensors, setIntegratedSensors] = useState(null);
+  const [loading, setLoading] = useState(false);
 
   const [shouldShowMapButton, setShouldShowMapButton] = useState(false);
   const [shouldTabular, setShouldTabular] = useState(false);
@@ -247,7 +249,7 @@ const SensorQuery = () => {
     }
   };
 
-  const isSensorintegrated = (index) => {
+  const isSensorIntegrated = (index) => {
     const val = sensorData[index];
     const integratedSensor = Object.values(integratedSensors).filter(
       (sensor) => {
@@ -257,7 +259,7 @@ const SensorQuery = () => {
       }
     );
 
-    if (integratedSensor) {
+    if (integratedSensor.length > 0) {
       return true;
     } else {
       return false;
@@ -272,7 +274,7 @@ const SensorQuery = () => {
         ))}
 
         <td>
-          {!isSensorintegrated(index) ? (
+          {!isSensorIntegrated(index) ? (
             <input
               type="checkbox"
               id={`checkbox-${index}`}
@@ -412,13 +414,13 @@ const SensorQuery = () => {
               <span className="form-error">{errors.location}</span>
             )}
             <br />
-            <button
-              type="button"
-              className="btn btn-add bi bi-search"
-              onClick={handleSearch}
-            >
-              &nbsp; Search
-            </button>
+              <button
+                type="button"
+                className="btn btn-add bi bi-search"
+                onClick={handleSearch}
+              >
+                &nbsp; Search
+              </button>
           </div>
 
           {}
@@ -479,6 +481,12 @@ const SensorQuery = () => {
   };
 
   const buildSparqlQuery = () => {
+
+     setLoading(true);
+     setTimeout(() => {
+       setLoading(false);
+     }, 15000);
+
     // Base query
     let query = `SELECT ?sensor ?lat ?long ?measures WHERE { ?sensor <http://www.w3.org/ns/sosa/observes> ?observes. ?sensor <http://www.w3.org/ns/sosa/hasFeatureOfInterest> ?location. ?observes <http://www.w3.org/2000/01/rdf-schema#label> ?measures . ?location <http://www.w3.org/2003/01/geo/wgs84_pos#lat> ?lat . ?location <http://www.w3.org/2003/01/geo/wgs84_pos#long> ?long . `;
 
@@ -498,7 +506,7 @@ const SensorQuery = () => {
     SensorService.querySensor(query).then((response) => {
       if (response.status === 200 && response.data.result === true) {
         setSensorData(response.data.values);
-
+        setLoading(false);
         setShouldTabular(true);
 
         if (sensorData.length === 0) {
@@ -515,7 +523,7 @@ const SensorQuery = () => {
           setShouldShowMapButton(true);
         }
       } else {
-        console.log(response);
+        setLoading(false);
       }
     });
   };
@@ -602,6 +610,14 @@ const SensorQuery = () => {
                       </form>
 
                       {renderForm()}
+                      <br></br>
+
+                      {loading && (
+                        <div className="spinner1">
+                          <HashLoader color="#47c4df" size={40} speedMultiplier={1} />
+                        </div>
+                      )}
+            
                     </div>
                   </div>
 
