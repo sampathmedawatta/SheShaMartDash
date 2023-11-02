@@ -171,7 +171,7 @@ const MapComponent = () => {
          );
        });
 
-       if (integratedSensor) {
+       if (integratedSensor.length > 0) {
          return true;
        } else {
          return false;
