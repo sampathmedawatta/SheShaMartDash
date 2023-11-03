@@ -21,6 +21,24 @@ This responsive web application is built to integrate the SenShaMart IOT APIs us
 
 ### Public key
 
+## Technologies and  Libraries Used
+
+This web application utilizes the following libraries and technologies:
+
+- [React.js](https://reactjs.org/): A JavaScript library for building user interfaces.
+- [HTML5](https://developer.mozilla.org/en-US/docs/Web/Guide/HTML/HTML5): The latest version of the HTML markup language.
+- [CSS3](https://developer.mozilla.org/en-US/docs/Web/CSS/CSS3): The latest version of Cascading Style Sheets.
+- [Bootstrap](https://getbootstrap.com/): A popular CSS framework for building responsive and mobile-first web projects.
+
+- [Axios](https://axios-http.com/): A promise-based HTTP client for making HTTP requests in the browser and Node.js.
+- [YASGUI plugin (SPARQL)](https://yasgui.triply.cc/): A user-friendly interface to query and visualize SPARQL endpoints.
+- [React Router](https://reactrouter.com/): A library for routing in React applications.
+- React Hooks: Part of the React library for managing state and side effects in functional components.
+- [OpenLayers](https://openlayers.org/): An open-source JavaScript library for displaying maps and geospatial data.
+- [N3 (RDF File stream)](https://www.npmjs.com/package/n3): A library for parsing and serializing RDF data in N-Triples format.
+
+
+
 ## Installation and Setup Instructions
 
 Follow these steps to set up the SenShaMart IOT Integration Web Application on your local machine:
