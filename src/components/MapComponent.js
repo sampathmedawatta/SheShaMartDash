@@ -165,8 +165,8 @@ const MapComponent = () => {
      const isSensorintegrated = (sensor) => {
        const integratedSensor = Object.values(
          sensorLocationList.integratedSensors
-       ).filter((sensor) => {
-         return sensor.outputs.some((output) =>
+       ).filter((snr) => {
+         return snr.outputs.some((output) =>
            output.sensorName.includes(sensor)
          );
        });
