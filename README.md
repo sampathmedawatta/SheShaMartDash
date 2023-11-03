@@ -4,5 +4,5 @@ SenShaMart is an IoT sensor marketplace that allows for the seamless sharing of 
 The primary goal of this project is to design and build a web-based frontend dashboard to integrate the SenShaMart IOT APIs
 
 ### Project setup
-Download the code from git riposityry 
+Download the code from git ripository 
 run >> npm start
